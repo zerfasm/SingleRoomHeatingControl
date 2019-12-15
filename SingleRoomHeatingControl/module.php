@@ -1,7 +1,8 @@
 <?php
 	require_once __DIR__.'/../libs/traits.php';  // Allgemeine Funktionen
 
-	class SingleRoomHeatingControl extends IPSModule {
+	class SingleRoomHeatingControl extends IPSModule 
+	{
 		
 		use ProfileHelper, DebugHelper;
 
@@ -107,25 +108,6 @@
             			$this->SendDebug('UPDATE', 'AbsenkTemp not set!');
             			$state = false;
         			}
-			 
-			// Steuerung 
-			If ($HeizProg == 1) //IPS Betrieb
-			{
-				//Abwesend
-				If ($pres == false) 
-				{
-					If ($HeizAuto == true) //Hier muss die Temperatur < 16°C sein
-					{
-						HM_WriteValueFloat($HM_InstanzID, 'MANU_MODE',$AbsenkTemp);
-					}
-				}
-				//Anwesend
-				Else If ($anwesendV == true) 
-				{
-					SetValue($status_heizung_ID, true);
-					//Thermostate zurückstellen auf Heizprogramm
-					HM_WriteValueFloat($wt_0, 'MANU_MODE',GetValueFloat($temp_0));
-					IPS_Sleep(50);
 			
 		}
 
