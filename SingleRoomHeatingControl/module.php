@@ -65,19 +65,19 @@
        			 $state = true;
 			 
 			 // Heizungsprogramm 
-			$HeizProg = GetValue($this->ReadPropertyInteger('HeizProg'));
+			$HeizProg = $this->ReadPropertyInteger('HeizProg');
 			 
 			// Fensterkontakt 
 			$win = GetValue($this->ReadPropertyInteger('WindowID'));
 			 
 			 // Anwesenheit 
-			$pres = GetValue($this->ReadPropertyInteger('PresenceID'));
+			$pres = $this->ReadPropertyInteger('PresenceID');
 			 
 			 // Absenktemperatur
 			$AbsenkTemp = $this->ReadPropertyFloat('AbsenkTemp');
 			 
 			 // Heiztemperatur
-			$HeizTemp = GetValue($this->ReadPropertyFloat('HeizTemp'));
+			$HeizTemp = $this->ReadPropertyFloat('HeizTemp');
 
 			
 			 
