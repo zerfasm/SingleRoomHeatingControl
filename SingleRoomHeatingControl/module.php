@@ -81,10 +81,10 @@
 
 			
 			 
-			 If (($HeizProg == 1) and ($pres == true))
-			 {
-				RequestAction($this->ReadPropertyInteger('SetTempID'),23);
-			 }
+			// If (($HeizProg == 1) and ($pres == true))
+			 //{
+				RequestAction($this->ReadPropertyInteger('SetTempID'),$HeizTemp);
+			 //}
 		}
 
 	}
