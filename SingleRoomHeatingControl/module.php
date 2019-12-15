@@ -79,16 +79,16 @@
 			$win = GetValue($this->ReadPropertyInteger('WindowID'));
 			 
 			 // Anwesenheit 
-			$pres = $this->ReadPropertyBoolean('PresenceID');
+			$pres = GetValue($this->ReadPropertyInteger('PresenceID'));
 			 
 			 // Absenktemperatur
-			$AbsenkTemp = $this->ReadPropertyFloat('AbsenkTemp');
+			$AbsenkTemp = GetValue($this->ReadPropertyFloat('AbsenkTemp'));
 			 
 			 // Heiztemperatur
-			$HeizTemp = $this->ReadPropertyFloat('HeizTemp');
+			$HeizTemp = GetValue($this->ReadPropertyFloat('HeizTemp'));
 			 
 			 // Homematic Instance
-			$HM_InstanzID = $this->ReadPropertyInteger('HM_InstanzID');
+			$HM_InstanzID = GetValue($this->ReadPropertyInteger('HM_InstanzID'));
 			 
 			 // Steuerung 
 				//Abwesend
