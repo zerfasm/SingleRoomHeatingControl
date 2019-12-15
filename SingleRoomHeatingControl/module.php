@@ -41,11 +41,11 @@
 			
 			// Create Absent Set Temperature
         		//$create = $this->ReadPropertyBoolean('CreateAbsentSetTemp');
-			$this->MaintainVariable('AbsentSetTemp', 'Temperatur Abwesenheit', vtFloat, '~Temperature', 1, $create); 
+			$this->MaintainVariable('AbsentSetTemp', 'Temperatur Abwesenheit', vtFloat, '~Temperature', 1, true); 
 			
 			// Create Window Open Set Temperature
         		//$create = $this->ReadPropertyBoolean('CreateWindowSetTemp');
-			$this->MaintainVariable('WindowSetTemp', 'Temperatur Offenes Fenster', vtFloat, '~Temperature', 2, $create);
+			$this->MaintainVariable('WindowSetTemp', 'Temperatur Offenes Fenster', vtFloat, '~Temperature', 2, true);
 		}
 
 	}
