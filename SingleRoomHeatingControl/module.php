@@ -14,6 +14,7 @@
 			$this->RegisterPropertyInteger('ActTempID', 0);
 			$this->RegisterPropertyInteger('SetTempID', 0);
 			$this->RegisterPropertyFloat('AbsenkTemp', 19.0);
+			$this->RegisterPropertyBoolean('CreateAbsenkTemp', true);
 			$this->RegisterPropertyFloat('GrundTemp', 20.0);
 			$this->RegisterPropertyFloat('HeizTemp', 22.0);
 			$this->RegisterPropertyFloat('AntrAuf', 30.0);
@@ -40,7 +41,10 @@
 		public function ApplyChanges()
 		{
 			//Never delete this line!
-			parent::ApplyChanges();		
+			parent::ApplyChanges();	
+			
+			$create = $this->ReadPropertyBoolean('CreateAbsenkTemp');
+        		$this->MaintainVariable('AbsenkTemp', 'Absenktemperatur', vtFloat, '~Temperature', 5, $create);
 		}
 
 	}
