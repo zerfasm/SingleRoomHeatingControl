@@ -108,6 +108,33 @@
             			$this->SendDebug('UPDATE', 'AbsenkTemp not set!');
             			$state = false;
         			}
+			 
+			 // Absenktemperatur
+			$HeizTemp = $this->ReadPropertyInteger('HeizTemp');
+        		if ($HeizTemp != 0) {
+            			$win = GetValue($HeizTemp);
+        		} else {
+            			$this->SendDebug('UPDATE', 'HeizTemp not set!');
+            			$state = false;
+        			}
+			 
+			 // Steuerung 
+			If ($HeizProg == 1) //IPS Betrieb
+			{
+				//Abwesend
+				If ($pres == false) 
+				{
+					If ($HeizAuto == true) //Hier muss die Temperatur < 16°C sein
+					{
+						HM_WriteValueFloat($HM_InstanzID, 'MANU_MODE',$AbsenkTemp);
+					}
+				}
+				//Anwesend
+				Else If ($pres == true) 
+				{
+					HM_WriteValueFloat($HM_InstanzID, 'MANU_MODE',$HeizTemp);
+				}
+			}
 			
 		}
 
