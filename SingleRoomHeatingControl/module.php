@@ -40,11 +40,11 @@
 			parent::ApplyChanges();
 			
 			// Create Absent Set Temperature
-        		$create = $this->ReadPropertyBoolean('CreateAbsentSetTemp');
+        		//$create = $this->ReadPropertyBoolean('CreateAbsentSetTemp');
 			$this->MaintainVariable('AbsentSetTemp', 'Temperatur Abwesenheit', vtFloat, '~Temperature', 1, $create); 
 			
 			// Create Window Open Set Temperature
-        		$create = $this->ReadPropertyBoolean('CreateWindowSetTemp');
+        		//$create = $this->ReadPropertyBoolean('CreateWindowSetTemp');
 			$this->MaintainVariable('WindowSetTemp', 'Temperatur Offenes Fenster', vtFloat, '~Temperature', 2, $create);
 		}
 
