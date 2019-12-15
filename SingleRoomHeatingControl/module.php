@@ -15,14 +15,13 @@
 			$this->RegisterPropertyString('RoomName', "");
 			$this->RegisterPropertyInteger('ActTempID', 0);
 			$this->RegisterPropertyInteger('SetTempID', 0);
-			$this->RegisterPropertyInteger('HeatTempID', 0);
 			$this->RegisterPropertyFloat('AbsenkTemp', 19.0);
 			$this->RegisterPropertyFloat('GrundTemp', 20.0);
 			$this->RegisterPropertyFloat('AntrAuf', 30.0);
 			$this->RegisterPropertyFloat('AntrZu', 6.0);
 			
 			// Variablen
-			$this->RegisterPropertyInteger('HeizProg', 0);
+			//$this->RegisterPropertyInteger('HeizProg', 0);
 			//$this->RegisterPropertyFloat('HeizTemp', 0);
 					
 			// Time Schedule
