@@ -6,11 +6,10 @@
 	{"type": "SelectVariable", "name": "ActTempID", "caption": "Actual Temperature ID:" },
         {"type": "SelectVariable", "name": "SetTempID", "caption": "Set Temperature ID:" },
 	{"type": "ValidationTextBox", "name": "AbsenkTemp", "caption": "Absenktemperatur:" },
-	{"type": "CheckBox", "name": "CreateAbsenkTemp", "caption": "Create variable AbsenkTemp?" },
 	{"type": "ValidationTextBox", "name": "GrundTemp", "caption": "Grundwärme:" },
-	{"type": "ValidationTextBox", "name": "HeizTemp", "caption": "heizen:" },
 	{"type": "ValidationTextBox", "name": "AntrAuf", "caption": "Stellantrieb Auf:" },
-	{"type": "ValidationTextBox", "name": "AntrZu", "caption": "Stellantrieb Zu:" }    
+	{"type": "ValidationTextBox", "name": "AntrZu", "caption": "Stellantrieb Zu:" },
+	{"type": "CheckBox", "name": "CreateHeizTemp", "caption": "Create variable HeizTemp?" },
       ]
     },
 	
