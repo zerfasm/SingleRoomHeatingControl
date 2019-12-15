@@ -1,9 +1,16 @@
 {
     "translations": {
         "de": {
-            "Temperature": "Eingabe Temperaturen",
-            "Absence Set Temperature": "Solltemperatur Abwesenheit:",
-            "Window Open Set Temperature": "Solltemperatur Fenster Offen:"
+            "Temperature Values": "Eingabe Temperaturen",
+            "Actual Temperature ID:": "Ist-Temperatur ID:",
+            "Set Temperature ID:": "Soll-Temperatur ID:",
+            "Absent Set Temperature:": "Solltemperatur Abwesenheit:",
+            "Open Window Set Temperature:": "Solltemperatur Fenster Offen:",
+            "Time Schedule": "Wochenplan",
+            "Contacts": "Fensterkontakte",
+            "Window ID:": "Fensterkontakt ID:",
+            "Presence": "Anwesenheit",
+            "Presence ID:": "Anwesenheit ID:"
         }
     }
 }
