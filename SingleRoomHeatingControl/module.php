@@ -32,10 +32,10 @@
 			$this->RegisterPropertyInteger('DayUsedWhenHoliday',6);
 			
 			// Contacts
-			$this->RegisterPropertyInteger('WindowID', 0);
+			$this->RegisterPropertyBoolean('WindowID', 0);
 			
 			// Presence
-			$this->RegisterPropertyInteger('PresenceID', 0);
+			$this->RegisterPropertyBoolean('PresenceID', 0);
 			
 			// Update trigger
         		$this->RegisterTimer('UpdateTrigger', 0, "SRHC_Update(\$_IPS['TARGET']);");
