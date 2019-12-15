@@ -3,7 +3,7 @@
     {"type": "ExpansionPanel", "caption": "Temperature Values",
       "items": [
 	{"type": "ValidationTextBox", "name": "RoomName", "caption": "Room Name:" },
-	{"type": "ValidationTextBox", "name": "HM_InstanzID", "caption": "Homematic Instanz:" },      
+	{"type": "SelectInstance", "name": "HM_InstanzID", "caption": "Homematic Instanz:" },      
 	{"type": "SelectVariable", "name": "ActTempID", "caption": "Actual Temperature ID:" },
         {"type": "SelectVariable", "name": "SetTempID", "caption": "Set Temperature ID:" },
 	{"type": "ValidationTextBox", "name": "AbsenkTemp", "caption": "Absenktemperatur:" },
