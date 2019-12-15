@@ -5,6 +5,12 @@
 		{
 			//Never delete this line!
 			parent::Create();
+			
+			// Temperature Parameter
+			$this->RegisterPropertyInteger('Messenger_ID', 0);
+			$this->RegisterPropertyInteger('Messenger_ID', 0);
+			$this->RegisterPropertyString('IPAdress', "");
+			$this->RegisterPropertyString('Name', "Hikvision Cam");
 		}
 
 		public function Destroy()
