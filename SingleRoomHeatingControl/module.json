@@ -1,0 +1,14 @@
+{
+    "id": "{B7B3AC9E-9E54-D386-40C6-898290358410}",
+    "name": "SingleRoomHeatingControl",
+    "type": 3,
+    "vendor": "",
+    "aliases": [
+        "Einzelraumsteuerung_Heizung"
+    ],
+    "parentRequirements": [],
+    "childRequirements": [],
+    "implemented": [],
+    "prefix": "SRHC",
+    "url": ""
+}
