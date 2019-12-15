@@ -21,7 +21,7 @@
 			$this->RegisterPropertyFloat('AntrZu', 6.0);
 			
 			// Variablen
-			$this->RegisterPropertyInteger('HeizProg', 0);
+			//$this->RegisterPropertyInteger('HeizProg', 0);
 					
 			// Time Schedule
 			$this->RegisterPropertyInteger('WeeklyTimeTableEventID', 0);
