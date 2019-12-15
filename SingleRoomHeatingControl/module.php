@@ -43,8 +43,8 @@
 			parent::ApplyChanges();	
 			
 			// Create Heiztemperatur
-			$create = $this->ReadPropertyBoolean('CreateheizTemp');
-        		$this->MaintainVariable('AbsenkTemp', 'Heiztemperatur', vtFloat, '~Temperature', 5, $create);
+			$create = $this->ReadPropertyBoolean('CreateHeizTemp');
+        		$this->MaintainVariable('HeizTemp', 'Heiztemperatur', vtFloat, '~Temperature', 5, $create);
 		}
 
 	}
