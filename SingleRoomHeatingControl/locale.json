@@ -5,8 +5,6 @@
             "Room Name:": "Raum Name:",
             "Actual Temperature ID:": "Ist-Temperatur ID:",
             "Set Temperature ID:": "Soll-Temperatur ID:",
-            "Create variables for Absent Set Temperature?": "Soll die Variable für die Solltemperatur Abwesenheit erstellt werden?",
-            "Create variables for Open Window Set Temperature?": "Soll die Variable für die Solltemperatur Fenster Offen erstellt werden?",
             
             "Time Schedule": "Wochenplan",
             "Weekly Timetable Event ID": "Wochenplan ID",
