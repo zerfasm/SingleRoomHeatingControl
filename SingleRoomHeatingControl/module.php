@@ -81,6 +81,40 @@ class SingleRoomHeatingControl extends IPSModule
 
 		// Solltemperatur
 		$SetTemp = GetValue($this->ReadPropertyInteger('SetTempID')); 
+		 
+		 // Steuerungsautomatik
+		If ($HeizProg == 0) //Automatic => Steuerung durch CCU
+		{
+			HM_WriteValueBoolean(52525, 'AUTO_MODE',true);
+		} 
+		else if ($HeizProg == 1) // Manuelle Steuerung durch IPS 
+		{
+			If ($pres == false)
+			{
+				//Letzte Sollwert schreiben
+				$update = $this->SetValue('LastSetTemp', $SetTemp);
+
+				// Auf Absenktemperatur stellen 
+				HM_WriteValueFloat(52525, 'MANU_MODE',$AbsenkTemp);
+				IPS_Sleep(50);
+			}
+			Else if ($pres == true)
+			{
+				// Auf letzten Sollwert stellen
+				HM_WriteValueFloat(52525, 'MANU_MODE',$SetTemp);
+				IPS_Sleep(50);
+			}
+		} 
+		else if ($HeizProg == 2)
+		{
+			HM_WriteValueFloat(52525, 'MANU_MODE',$AntrAuf);
+			IPS_Sleep(50);
+		} 
+		else if ($HeizProg == 3)
+		{
+			HM_WriteValueFloat(52525, 'MANU_MODE',$AntrZu);
+			IPS_Sleep(50);
+		} 
 	}
 
 }
