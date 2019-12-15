@@ -76,7 +76,8 @@
 			$HeizProg = $this->ReadPropertyInteger('HeizProg');
 			 
 			// Fensterkontakt 
-			$win = GetValue($this->ReadPropertyBoolean('WindowID'));
+			$winID = $this->ReadPropertyBoolean('WindowID');
+			$win = GetValue($winID);
 			 
 			 // Anwesenheit 
 			$pres = $this->ReadPropertyBoolean('PresenceID');
