@@ -1,5 +1,6 @@
 <?php
 	require_once __DIR__.'/../libs/traits.php';  // Allgemeine Funktionen
+
 	class SingleRoomHeatingControl extends IPSModule {
 		
 		use ProfileHelper, DebugHelper;
