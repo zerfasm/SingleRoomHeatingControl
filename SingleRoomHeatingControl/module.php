@@ -13,8 +13,7 @@
 			$this->RegisterPropertyString('RoomName', "");
 			$this->RegisterPropertyInteger('ActTempID', 0);
 			$this->RegisterPropertyInteger('SetTempID', 0);
-			$this->RegisterPropertyFloat('AbsenkTemp', 19.0);
-			
+						
 			// Time Schedule
 			$this->RegisterPropertyInteger('WeeklyTimeTableEventID', 0);
 			$this->RegisterPropertyInteger('HolidayIndicatorID', 0);
