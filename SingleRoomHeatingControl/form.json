@@ -3,7 +3,9 @@
     {"type": "ExpansionPanel", "caption": "Temperature Values",
       "items": [
         {"type": "SelectVariable", "name": "ActTempID", "caption": "Actual Temperature ID:" },
-        {"type": "SelectVariable", "name": "SetTempID", "caption": "Set Temperature ID:" }
+        {"type": "SelectVariable", "name": "SetTempID", "caption": "Set Temperature ID:" },
+	{"type": "SelectVariable", "name": "AbsentTempID", "caption": "Absent Temperature ID:" },
+	{"type": "SelectVariable", "name": "WindowTempID", "caption": "Window Open Temperature ID:" }      
       ]
     },
 	
@@ -36,7 +38,13 @@
       "items": [
         {"type": "SelectVariable", "name": "WindowID", "caption": "Window ID:" }
       ]
-    }
+    },
+
+    {"type": "ExpansionPanel", "caption": "Presence",
+      "items": [
+        {"type": "SelectVariable", "name": "PresenceID", "caption": "Presence ID:" }
+      ]
+    },  
   ],
   "actions": [
     {"type": "Label", "caption": "Calculate values!" },
