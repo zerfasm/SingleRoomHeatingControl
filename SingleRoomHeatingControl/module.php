@@ -19,7 +19,7 @@
 			// Time Schedule
 			$this->RegisterPropertyInteger('WeeklyTimeTableEventID', 0);
 			$this->RegisterPropertyInteger('HolidayIndicatorID', 0);
-			$this->RegisterPropertyString('DayUsedWhenHoliday',"");
+			$this->RegisterPropertyInteger('DayUsedWhenHoliday',6);
 			
 			// Contacts
 			$this->RegisterPropertyInteger('WindowID', 0);
