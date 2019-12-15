@@ -4,8 +4,7 @@
       "items": [
 	{"type": "ValidationTextBox", "name": "RoomName", "caption": "Room Name:" },  
 	{"type": "SelectVariable", "name": "ActTempID", "caption": "Actual Temperature ID:" },
-        {"type": "SelectVariable", "name": "SetTempID", "caption": "Set Temperature ID:" },
-	{"type": "SelectVariable", "name": "HeatTempID", "caption": "Set Heat Temperature ID:" },     
+        {"type": "SelectVariable", "name": "SetTempID", "caption": "Set Temperature ID:" },   
 	{"type": "ValidationTextBox", "name": "AbsenkTemp", "caption": "Absenktemperatur:" },
 	{"type": "ValidationTextBox", "name": "GrundTemp", "caption": "Grundwärme:" },
 	{"type": "ValidationTextBox", "name": "AntrAuf", "caption": "Stellantrieb Auf:" },
