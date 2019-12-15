@@ -7,6 +7,7 @@
 			parent::Create();
 			
 			// Temperature Parameter
+			$this->RegisterPropertyString('RoomName', "");
 			$this->RegisterPropertyInteger('ActTempID', 0);
 			$this->RegisterPropertyInteger('SetTempID', 0);
 			$this->RegisterPropertyString('AbsentSetTemp', "19");
