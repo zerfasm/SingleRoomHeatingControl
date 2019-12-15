@@ -44,7 +44,7 @@
       "items": [
         {"type": "SelectVariable", "name": "PresenceID", "caption": "Presence ID:" }
       ]
-    },  
+    }  
   ],
   "actions": [
     {"type": "Label", "caption": "Calculate values!" },
