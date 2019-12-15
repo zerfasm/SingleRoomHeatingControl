@@ -75,7 +75,8 @@
 			// Solltemperatur
 			$SetTemp = GetValue($this->ReadPropertyInteger('SetTempID')); 
 
-			RequestAction($this->ReadPropertyInteger('SetTempID'),$SetTemp);
+			//RequestAction($this->ReadPropertyInteger('SetTempID'),$SetTemp);
+			 HM_WriteValueFloat(52525, 'MANU_MODE',$AbsenkTemp);
 			
 		}
 
