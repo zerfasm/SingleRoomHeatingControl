@@ -6,9 +6,16 @@
             "Set Temperature ID:": "Soll-Temperatur ID:",
             "Absent Set Temperature:": "Solltemperatur Abwesenheit:",
             "Open Window Set Temperature:": "Solltemperatur Fenster Offen:",
+            
             "Time Schedule": "Wochenplan",
+            "Weekly Timetable Event ID": "Wochenplan ID",
+            "Consider Holiday (optional)": "Berücksichtigung Feiertage",
+            "Holiday Indicator ID": "Feiertag ID",
+            "Used Weekday when Holiday": "Zu nutzender Wochentag bei Feiertag",
+            
             "Contacts": "Fensterkontakte",
             "Window ID:": "Fensterkontakt ID:",
+            
             "Presence": "Anwesenheit",
             "Presence ID:": "Anwesenheit ID:"
         }
