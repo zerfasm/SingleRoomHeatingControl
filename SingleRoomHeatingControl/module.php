@@ -70,7 +70,7 @@
        			 $state = true;
 			
 			// Heizungsautomatik 
-			$HeizAuto = $this->ReadPropertyInteger('HeizAuto');
+			$HeizAuto = $this->ReadPropertyBoolean('HeizAuto');
         		if ($HeizAuto != 0) {
             			$HeizAuto = GetValue($HeizAuto);
         		} else {
@@ -88,7 +88,7 @@
         			}
 			 
 			// Fensterkontakt 
-			$win = $this->ReadPropertyInteger('WindowID');
+			$win = $this->ReadPropertyBoolean('WindowID');
         		if ($win != 0) {
             			$win = GetValue($win);
         		} else {
@@ -97,7 +97,7 @@
         			}
 			 
 			 // Anwesenheit 
-			$pres = $this->ReadPropertyInteger('PresenceID');
+			$pres = $this->ReadPropertyBoolean('PresenceID');
         		if ($pres != 0) {
             			$win = GetValue($pres);
         		} else {
@@ -106,7 +106,7 @@
         			}
 			 
 			 // Absenktemperatur
-			$AbsenkTemp = $this->ReadPropertyInteger('AbsenkTemp');
+			$AbsenkTemp = $this->ReadPropertyFloat('AbsenkTemp');
         		if ($AbsenkTemp != 0) {
             			$win = GetValue($AbsenkTemp);
         		} else {
@@ -114,8 +114,8 @@
             			$state = false;
         			}
 			 
-			 // Absenktemperatur
-			$HeizTemp = $this->ReadPropertyInteger('HeizTemp');
+			 // Heiztemperatur
+			$HeizTemp = $this->ReadPropertyFloat('HeizTemp');
         		if ($HeizTemp != 0) {
             			$win = GetValue($HeizTemp);
         		} else {
