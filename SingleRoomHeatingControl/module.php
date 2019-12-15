@@ -86,21 +86,9 @@
 			 
 			 // Heiztemperatur
 			$HeizTemp = $this->ReadPropertyFloat('HeizTemp');
-			 
-			 // Homematic Instance
-			$HM_InstanzID = this->ReadPropertyInteger('HM_InstanzID');
-			 
-			 // Steuerung 
-				//Abwesend
-				If ($win == true) 
-				{
-					HM_WriteValueFloat($HM_InstanzID, 'MANU_MODE',6);
-				}
-				//Anwesend
-				Else If ($win == false) 
-				{
-					HM_WriteValueFloat($HM_InstanzID, 'MANU_MODE',23);
-				}
+
+			HM_WriteValueFloat(this->ReadPropertyInteger('HM_InstanzID'), 'MANU_MODE',6);
+
 			
 		}
 
