@@ -50,7 +50,7 @@
 			parent::ApplyChanges();	
 			
 			// Create Heizprogramm
-        		$this->MaintainVariable('HeizProg', 'Heizprogramm', vtInteger, 'Heizungsautomatik', 1, true);
+        		$this->MaintainVariable('CreateHeizProg', 'Heizprogramm', vtInteger, 'Heizungsautomatik', 1, true);
 			
 			// Create Letzet Solltemperatur
         		$this->MaintainVariable('LastSetTemp', 'Letzte Solltemperatur', vtFloat, '~Temperature', 2, true);
