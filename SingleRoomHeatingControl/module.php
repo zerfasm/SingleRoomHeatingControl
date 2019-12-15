@@ -122,7 +122,7 @@
 			If ($HeizProg == 1) //IPS Betrieb
 			{
 				//Abwesend
-				If ($pres == false) 
+				If ($win == true) 
 				{
 					If ($HeizAuto == true) //Hier muss die Temperatur < 16°C sein
 					{
@@ -130,7 +130,7 @@
 					}
 				}
 				//Anwesend
-				Else If ($pres == true) 
+				Else If ($win == false) 
 				{
 					HM_WriteValueFloat($HM_InstanzID, 'MANU_MODE',$HeizTemp);
 				}
