@@ -8,8 +8,7 @@
 	{"type": "ValidationTextBox", "name": "AbsenkTemp", "caption": "Absenktemperatur:" },
 	{"type": "ValidationTextBox", "name": "GrundTemp", "caption": "Grundwärme:" },
 	{"type": "ValidationTextBox", "name": "AntrAuf", "caption": "Stellantrieb Auf:" },
-	{"type": "ValidationTextBox", "name": "AntrZu", "caption": "Stellantrieb Zu:" },
-	{"type": "CheckBox", "name": "CreateHeizTemp", "caption": "Create variable Heat Temperature?" }
+	{"type": "ValidationTextBox", "name": "AntrZu", "caption": "Stellantrieb Zu:" }
       ]
     },
 	
