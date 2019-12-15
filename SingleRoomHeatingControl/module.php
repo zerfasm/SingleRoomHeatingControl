@@ -71,57 +71,21 @@
 			
 			// Heizungsautomatik 
 			$HeizAuto = $this->ReadPropertyBoolean('HeizAuto');
-        		if ($HeizAuto != 0) {
-            			$HeizAuto = GetValue($HeizAuto);
-        		} else {
-            			$this->SendDebug('UPDATE', 'HeizAuto not set!');
-            			$state = false;
-        			}
 			 
 			 // Heizungsprogramm 
 			$HeizProg = $this->ReadPropertyInteger('HeizProg');
-        		if ($HeizProg != 0) {
-            			$HeizProg = GetValue($HeizProg);
-        		} else {
-            			$this->SendDebug('UPDATE', 'HeizProg not set!');
-            			$state = false;
-        			}
 			 
 			// Fensterkontakt 
 			$win = $this->ReadPropertyBoolean('WindowID');
-        		if ($win != 0) {
-            			$win = GetValue($win);
-        		} else {
-            			$this->SendDebug('UPDATE', 'Window ID not set!');
-            			$state = false;
-        			}
 			 
 			 // Anwesenheit 
 			$pres = $this->ReadPropertyBoolean('PresenceID');
-        		if ($pres != 0) {
-            			$win = GetValue($pres);
-        		} else {
-            			$this->SendDebug('UPDATE', 'Presence ID not set!');
-            			$state = false;
-        			}
 			 
 			 // Absenktemperatur
 			$AbsenkTemp = $this->ReadPropertyFloat('AbsenkTemp');
-        		if ($AbsenkTemp != 0) {
-            			$win = GetValue($AbsenkTemp);
-        		} else {
-            			$this->SendDebug('UPDATE', 'AbsenkTemp not set!');
-            			$state = false;
-        			}
 			 
 			 // Heiztemperatur
 			$HeizTemp = $this->ReadPropertyFloat('HeizTemp');
-        		if ($HeizTemp != 0) {
-            			$win = GetValue($HeizTemp);
-        		} else {
-            			$this->SendDebug('UPDATE', 'HeizTemp not set!');
-            			$state = false;
-        			}
 
 			 
 			 // Steuerung 
