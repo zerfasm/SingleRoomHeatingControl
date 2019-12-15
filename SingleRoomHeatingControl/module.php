@@ -68,7 +68,7 @@
 			$win = GetValue($this->ReadPropertyInteger('WindowID'));
 			 
 			 // Anwesenheit 
-			$pres = $this->ReadPropertyInteger('PresenceID');
+			$pres = GetValue($this->ReadPropertyInteger('PresenceID'));
 			 
 			 // Absenktemperatur
 			$AbsenkTemp = $this->ReadPropertyFloat('AbsenkTemp');
@@ -81,9 +81,9 @@
 			//Letzte Sollwert schreiben
 			$update = $this->SetValue('LastSetTemp', $SetTemp);
 			 
-			 If ($HeizProg == 1)
+			 If ($pres == true)
 			 {
-			 HM_WriteValueFloat(52525, 'MANU_MODE',$AbsenkTemp);
+			 HM_WriteValueFloat(52525, 'MANU_MODE',22);
 			 }
 		}
 
