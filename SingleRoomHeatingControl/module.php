@@ -19,12 +19,7 @@
 			$this->RegisterPropertyFloat('GrundTemp', 20.0);
 			$this->RegisterPropertyFloat('AntrAuf', 30.0);
 			$this->RegisterPropertyFloat('AntrZu', 6.0);
-			
-			// Variablen
-			$this->RegisterPropertyBoolean('HeizAuto', true);
-			$this->RegisterPropertyInteger('HeizProg', 1);
-			$this->RegisterPropertyFloat('HeizTemp', 22.0);
-						
+					
 			// Time Schedule
 			$this->RegisterPropertyInteger('WeeklyTimeTableEventID', 0);
 			$this->RegisterPropertyInteger('HolidayIndicatorID', 0);
@@ -50,15 +45,12 @@
 		{
 			//Never delete this line!
 			parent::ApplyChanges();	
-			
-			// Create Heizautomatik
-			$this->MaintainVariable('HeizAuto', 'Heizautomatik', vtBoolean, 'Switch', 1, true);
-			
+				
 			// Create Heizprogramm
-        		$this->MaintainVariable('HeizProg', 'Heizprogramm', vtInteger, 'Heizungsautomatik', 2, true);
+        		$this->MaintainVariable('HeizProg', 'Heizprogramm', vtInteger, 'Heizungsautomatik', 1, true);
 							
 			// Create Heiztemperatur
-        		$this->MaintainVariable('HeizTemp', 'Heiztemperatur', vtFloat, '~Temperature', 3, true);
+        		$this->MaintainVariable('HeizTemp', 'Heiztemperatur', vtFloat, '~Temperature', 2, true);
 			
 		}
 		
