@@ -14,7 +14,6 @@
 			// Temperature Parameter
 			$this->RegisterPropertyString('RoomName', "");
 			$this->RegisterPropertyInteger('ActTempID', 0);
-			$this->RegisterPropertyInteger('HM_InstanzID',null);
 			$this->RegisterPropertyInteger('SetTempID', 0);
 			$this->RegisterPropertyFloat('AbsenkTemp', 19.0);
 			$this->RegisterPropertyFloat('GrundTemp', 20.0);
