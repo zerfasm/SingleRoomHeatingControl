@@ -46,9 +46,18 @@
 			//Never delete this line!
 			parent::ApplyChanges();	
 			
+			// Create Heizautomatik
+			$create = $this->ReadPropertyBoolean('CreateHeizAuto');
+        		$this->MaintainVariable('HeizAuto', 'Heizautomatik', vtFloat, 'Switch', 1, $create);
+			
+			// Create Heizprogramm
+			$create = $this->ReadPropertyBoolean('CreateHeizProg');
+        		$this->MaintainVariable('HeizProg', 'Heizprogramm', vtFloat, 'Heizungsautomatik', 2, $create);
+							
 			// Create Heiztemperatur
 			$create = $this->ReadPropertyBoolean('CreateHeizTemp');
-        		$this->MaintainVariable('HeizTemp', 'Heiztemperatur', vtFloat, '~Temperature', 5, $create);
+        		$this->MaintainVariable('HeizTemp', 'Heiztemperatur', vtFloat, '~Temperature', 3, $create);
+			
 		}
 		
 		 public function Update()
