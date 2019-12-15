@@ -46,10 +46,10 @@
 			parent::ApplyChanges();	
 			
 			// Create Heizautomatik
-			$this->MaintainVariable('HeizAuto', 'Heizautomatik', vtFloat, 'Switch', 1, true);
+			$this->MaintainVariable('HeizAuto', 'Heizautomatik', vtBoolean, 'Switch', 1, true);
 			
 			// Create Heizprogramm
-        		$this->MaintainVariable('HeizProg', 'Heizprogramm', vtFloat, 'Heizungsautomatik', 2, true);
+        		$this->MaintainVariable('HeizProg', 'Heizprogramm', vtInteger, 'Heizungsautomatik', 2, true);
 							
 			// Create Heiztemperatur
         		$this->MaintainVariable('HeizTemp', 'Heiztemperatur', vtFloat, '~Temperature', 3, true);
