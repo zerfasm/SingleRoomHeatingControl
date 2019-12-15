@@ -62,6 +62,24 @@
         		// Daten lesen
        			 $state = true;
 			
+			// Heizungsautomatik 
+			$HeizAuto = $this->ReadPropertyInteger('HeizAuto');
+        		if ($HeizAuto != 0) {
+            			$HeizAuto = GetValue($HeizAuto);
+        		} else {
+            			$this->SendDebug('UPDATE', 'HeizAuto not set!');
+            			$state = false;
+        			}
+			 
+			 // Heizungsprogramm 
+			$HeizProg = $this->ReadPropertyInteger('HeizProg');
+        		if ($HeizProg != 0) {
+            			$HeizProg = GetValue($HeizProg);
+        		} else {
+            			$this->SendDebug('UPDATE', 'HeizProg not set!');
+            			$state = false;
+        			}
+			 
 			// Fensterkontakt 
 			$win = $this->ReadPropertyInteger('WindowID');
         		if ($win != 0) {
@@ -79,6 +97,34 @@
             			$this->SendDebug('UPDATE', 'Presence ID not set!');
             			$state = false;
         			}
+			 
+			 // Absenktemperatur
+			$AbsenkTemp = $this->ReadPropertyInteger('AbsenkTemp');
+        		if ($AbsenkTemp != 0) {
+            			$win = GetValue($AbsenkTemp);
+        		} else {
+            			$this->SendDebug('UPDATE', 'AbsenkTemp not set!');
+            			$state = false;
+        			}
+			 
+			// Steuerung 
+			If ($HeizProg == 1) //IPS Betrieb
+			{
+				//Abwesend
+				If ($pres == false) 
+				{
+					If ($HeizAuto == true) //Hier muss die Temperatur < 16°C sein
+					{
+						HM_WriteValueFloat($HM_InstanzID, 'MANU_MODE',$AbsenkTemp);
+					}
+				}
+				//Anwesend
+				Else If ($anwesendV == true) 
+				{
+					SetValue($status_heizung_ID, true);
+					//Thermostate zurückstellen auf Heizprogramm
+					HM_WriteValueFloat($wt_0, 'MANU_MODE',GetValueFloat($temp_0));
+					IPS_Sleep(50);
 			
 		}
 
