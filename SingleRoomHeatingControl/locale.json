@@ -2,7 +2,6 @@
     "translations": {
         "de": {
             "Temperature Values": "Eingabe Temperaturen",
-            "Room Name:": "Raum Name:",
             "Actual Temperature ID:": "Ist-Temperatur ID:",
             "Set Temperature ID:": "Soll-Temperatur ID:",
             "Absent Set Temperature:": "Solltemperatur Abwesenheit:",
