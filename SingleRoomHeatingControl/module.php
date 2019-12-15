@@ -83,10 +83,7 @@
 			//Letzte Sollwert schreiben
 			$update = $this->SetValue('LastSetTemp', $SetTemp);
 			 
-			 If ($HeizProg == 0)
-			 {
 			 HM_WriteValueFloat(52525, 'MANU_MODE',$AbsenkTemp);
-			 }
 			
 		}
 
