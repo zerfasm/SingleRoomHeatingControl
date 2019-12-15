@@ -5,6 +5,7 @@
             "Room Name:": "Raum Name:",
             "Actual Temperature ID:": "Ist-Temperatur ID:",
             "Set Temperature ID:": "Soll-Temperatur ID:",
+            "Create variable Heat Temperature?": "Soll die Variable Heiztemperatur erstellt werden?",
             
             "Time Schedule": "Wochenplan",
             "Weekly Timetable Event ID": "Wochenplan ID",
