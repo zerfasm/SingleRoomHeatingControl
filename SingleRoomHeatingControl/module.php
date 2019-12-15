@@ -37,11 +37,21 @@
 			//Never delete this line!
 			parent::ApplyChanges();
 			
-			// Create Absent Set Temperature
-        		$this->MaintainVariable('AbsentSetTemp', 'Temperatur Abwesenheit', vtFloat, '~Temperature', 1, true); 
+			// Create Temperatur Absenken
+        		$this->MaintainVariable('AbsenkTemp', 'Absenken', vtFloat, '~Temperature', 1, true); 
 			
-			// Create Window Open Set Temperature
-        		$this->MaintainVariable('WindowSetTemp', 'Temperatur Offenes Fenster', vtFloat, '~Temperature', 2, true);
+			// Create Temperatur Grundwärme
+        		$this->MaintainVariable('GrundTemp', 'Grundwärme', vtFloat, '~Temperature', 2, true); 
+			
+			// Create Temperatur Heizen
+        		$this->MaintainVariable('HeizTemp', 'Heizen', vtFloat, '~Temperature', 3, true); 
+			
+			// Create Stellantrieb Auf
+        		$this->MaintainVariable('AntrAuf', 'Stellantrieb Auf', vtFloat, '~Temperature', 4, true);
+			
+			// Create Stellantrieb Zu
+        		$this->MaintainVariable('AntrZu', 'Stellantrieb Zu', vtFloat, '~Temperature', 5, true);			
+			
 		}
 
 	}
