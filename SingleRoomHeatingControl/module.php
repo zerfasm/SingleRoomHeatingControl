@@ -65,22 +65,26 @@
        			 $state = true;
 			 
 			 // Heizungsprogramm 
-			$HeizProg = $this->ReadPropertyInteger('HeizProg');
+			$HeizProg = GetValue($this->ReadPropertyInteger('HeizProg'));
 			 
 			// Fensterkontakt 
 			$win = GetValue($this->ReadPropertyInteger('WindowID'));
 			 
 			 // Anwesenheit 
-			$pres = $this->ReadPropertyInteger('PresenceID');
+			$pres = GetValue($this->ReadPropertyInteger('PresenceID'));
 			 
 			 // Absenktemperatur
 			$AbsenkTemp = $this->ReadPropertyFloat('AbsenkTemp');
 			 
 			 // Heiztemperatur
-			$HeizTemp = $this->ReadPropertyFloat('HeizTemp');
+			$HeizTemp = GetValue($this->ReadPropertyFloat('HeizTemp'));
 
-			RequestAction($this->ReadPropertyInteger('SetTempID'),$AbsenkTemp);
 			
+			 
+			 If (($HeizProg == 1) and ($pres == true))
+			 {
+				RequestAction($this->ReadPropertyInteger('SetTempID'),$HeizTemp);
+			 }
 		}
 
 	}
