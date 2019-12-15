@@ -5,8 +5,8 @@
 	{"type": "ValidationTextBox", "name": "RoomName", "caption": "Room Name:" },
 	{"type": "SelectVariable", "name": "ActTempID", "caption": "Actual Temperature ID:" },
         {"type": "SelectVariable", "name": "SetTempID", "caption": "Set Temperature ID:" },
-	{"type": "ValidationTextBox", "name": "AbsentSetTemp", "caption": "Absent Set Temperature:" },
-	{"type": "ValidationTextBox", "name": "WindowSetTemp", "caption": "Open Window Set Temperature:" }  
+	{"type": "CheckBox", "name": "CreateAbsentSetTemp", "caption": "Create variables for Absent Set Temperature?" },
+	{"type": "CheckBox", "name": "CreateWindowSetTemp", "caption": "Create variables for Open Window Set Temperature?" }
       ]
     },
 	
