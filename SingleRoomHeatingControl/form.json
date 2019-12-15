@@ -5,10 +5,11 @@
 	{"type": "ValidationTextBox", "name": "RoomName", "caption": "Room Name:" },
 	{"type": "SelectVariable", "name": "ActTempID", "caption": "Actual Temperature ID:" },
         {"type": "SelectVariable", "name": "SetTempID", "caption": "Set Temperature ID:" }
-	{"type": "ValidationTextBox", "name": "RoomName", "caption": "Room Name:" },
-	{"type": "ValidationTextBox", "name": "RoomName", "caption": "Room Name:" },
-	{"type": "ValidationTextBox", "name": "RoomName", "caption": "Room Name:" },
-	{"type": "ValidationTextBox", "name": "RoomName", "caption": "Room Name:" },
+	{"type": "ValidationTextBox", "name": "AbsenkTemp", "caption": "Absenktemperatur:" },
+	{"type": "ValidationTextBox", "name": "GrundTemp", "caption": "Grundwärme:" },
+	{"type": "ValidationTextBox", "name": "HeizTemp", "caption": "heizen:" },
+	{"type": "ValidationTextBox", "name": "AntrAuf", "caption": "Stellantrieb Auf:" },
+	{"type": "ValidationTextBox", "name": "AntrZu", "caption": "Stellantrieb Zu:" }    
       ]
     },
 	
