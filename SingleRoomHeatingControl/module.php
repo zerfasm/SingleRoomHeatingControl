@@ -87,8 +87,7 @@
 			 // Heiztemperatur
 			$HeizTemp = $this->ReadPropertyFloat('HeizTemp');
 
-			HM_WriteValueFloat(this->ReadPropertyInteger('HM_InstanzID'), 'MANU_MODE',6);
-
+			
 			
 		}
 
