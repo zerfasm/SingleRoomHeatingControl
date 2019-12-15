@@ -7,7 +7,7 @@
       ]
     },
 	
-	{
+    {
       "type":  "ExpansionPanel", "caption": "Time Schedule",
       "items": [
         {"type": "SelectEvent", "name": "WeeklyTimeTableEventID", "caption": "Weekly Timetable Event ID"},
@@ -28,7 +28,7 @@
             ]
             }
           ]
-        },
+        }
       ]
     },
 	
