@@ -52,7 +52,7 @@
   ],
 	
   "actions": [
-    {"type": "Label", "caption": "Calculate values!" },
-    {"type": "Button", "caption": "BERECHNEN", "onClick": "SRHC_Update($id);" }
+    {"type": "Label", "caption": "Update!" },
+    {"type": "Button", "caption": "UPDATE", "onClick": "SRHC_Update($id);" }
   ]
 }
