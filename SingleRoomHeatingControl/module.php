@@ -38,7 +38,8 @@
 			parent::ApplyChanges();
 			
 			// Create Temperatur Absenken
-        		$this->MaintainVariable('AbsenkTemp', 'Absenken', vtFloat, '~Temperature', 1, true); 
+        		$this->MaintainVariable('AbsenkTemp', 'Absenken', vtFloat, '~Temperature', 1, true);
+			$this->RegisterPropertyInteger('AbsenkTemp', 19);
 			
 			// Create Temperatur Grundwärme
         		$this->MaintainVariable('GrundTemp', 'Grundwärme', vtFloat, '~Temperature', 2, true); 
