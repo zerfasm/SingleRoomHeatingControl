@@ -86,7 +86,9 @@
 			 
 			 // Heiztemperatur
 			$HeizTemp = $this->ReadPropertyFloat('HeizTemp');
-
+			 
+			 // Homematic Instance
+			$HM_InstanzID = $this->ReadPropertyInteger('HM_InstanzID');
 			 
 			 // Steuerung 
 			If ($HeizProg == 1) //IPS Betrieb
