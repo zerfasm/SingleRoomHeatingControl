@@ -10,7 +10,8 @@
 			$this->RegisterPropertyString('RoomName', "");
 			$this->RegisterPropertyInteger('ActTempID', 0);
 			$this->RegisterPropertyInteger('SetTempID', 0);
-
+			$this->RegisterPropertyString('AbsentSetTemp', "19");
+			$this->RegisterPropertyString('WindowSetTemp', "6");
 			
 			// Time Schedule
 			$this->RegisterPropertyInteger('WeeklyTimeTableEventID', 0);
