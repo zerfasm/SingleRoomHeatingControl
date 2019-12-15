@@ -89,7 +89,7 @@
 			} 
 			else if ($HeizProg == 1) 
 			{
-				If (($pres == false) and (($win == false) or ($win == 0)))
+				If ($pres == false)
 				{
 					//Letzte Sollwert schreiben
 					$update = $this->SetValue('LastSetTemp', $SetTemp);
