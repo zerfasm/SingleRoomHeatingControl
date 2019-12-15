@@ -96,10 +96,7 @@
 				//Abwesend
 				If ($win == true) 
 				{
-					If ($HeizAuto == true) //Hier muss die Temperatur < 16°C sein
-					{
-						HM_WriteValueFloat($HM_InstanzID, 'MANU_MODE',$AbsenkTemp);
-					}
+					HM_WriteValueFloat($HM_InstanzID, 'MANU_MODE',$AbsenkTemp);
 				}
 				//Anwesend
 				Else If ($win == false) 
