@@ -13,7 +13,7 @@
 			$this->RegisterPropertyString('RoomName', "");
 			$this->RegisterPropertyInteger('ActTempID', 0);
 			$this->RegisterPropertyInteger('SetTempID', 0);
-			//$this->RegisterPropertyInteger('AbsenkTemp', 19);
+			$this->RegisterPropertyFloat('AbsenkTemp', 19.0);
 			//$this->RegisterPropertyInteger('GrundTemp', 20);
 			//$this->RegisterPropertyInteger('HeizTemp', 22);
 			//$this->RegisterPropertyInteger('AntrAuf', 30);
