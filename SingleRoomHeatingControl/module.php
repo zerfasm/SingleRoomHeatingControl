@@ -14,10 +14,10 @@
 			$this->RegisterPropertyInteger('ActTempID', 0);
 			$this->RegisterPropertyInteger('SetTempID', 0);
 			$this->RegisterPropertyFloat('AbsenkTemp', 19.0);
-			//$this->RegisterPropertyInteger('GrundTemp', 20);
-			//$this->RegisterPropertyInteger('HeizTemp', 22);
-			//$this->RegisterPropertyInteger('AntrAuf', 30);
-			//$this->RegisterPropertyInteger('AntrZu', 6);
+			$this->RegisterPropertyFloat('GrundTemp', 20.0);
+			$this->RegisterPropertyFloat('HeizTemp', 22.0);
+			$this->RegisterPropertyFloat('AntrAuf', 30.0);
+			$this->RegisterPropertyFloat('AntrZu', 6.0);
 						
 			// Time Schedule
 			$this->RegisterPropertyInteger('WeeklyTimeTableEventID', 0);
