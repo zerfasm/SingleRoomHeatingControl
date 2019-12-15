@@ -15,9 +15,9 @@
 			$this->RegisterPropertyInteger('SetTempID', 0);
 			$this->RegisterPropertyFloat('AbsenkTemp', 19.0);
 			$this->RegisterPropertyFloat('GrundTemp', 20.0);
-			$this->RegisterPropertyBoolean('CreateHeizTemp', true);
 			$this->RegisterPropertyFloat('AntrAuf', 30.0);
 			$this->RegisterPropertyFloat('AntrZu', 6.0);
+			$this->RegisterPropertyBoolean('CreateHeizTemp', true);
 						
 			// Time Schedule
 			$this->RegisterPropertyInteger('WeeklyTimeTableEventID', 0);
