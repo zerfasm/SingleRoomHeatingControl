@@ -77,14 +77,10 @@
 			$AbsenkTemp = $this->ReadPropertyFloat('AbsenkTemp');
 			 
 			 // Heiztemperatur
-			$HeizTemp = $this->ReadPropertyFloat('HeizTemp');
+			$HeizTemp = GetValue($this->ReadPropertyFloat('HeizTemp'));
 
+			RequestAction($this->ReadPropertyInteger('SetTempID'),$HeizTemp);
 			
-			 
-			// If (($HeizProg == 1) and ($pres == true))
-			 //{
-				RequestAction($this->ReadPropertyInteger('SetTempID'),$HeizTemp);
-			 //}
 		}
 
 	}
