@@ -15,6 +15,7 @@
 			$this->RegisterPropertyString('RoomName', "");
 			$this->RegisterPropertyInteger('ActTempID', 0);
 			$this->RegisterPropertyInteger('SetTempID', 0);
+			$this->RegisterPropertyInteger('HeatTempID', 19);
 			$this->RegisterPropertyFloat('AbsenkTemp', 19.0);
 			$this->RegisterPropertyFloat('GrundTemp', 20.0);
 			$this->RegisterPropertyFloat('AntrAuf', 30.0);
