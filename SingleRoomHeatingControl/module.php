@@ -96,20 +96,24 @@
 					
 					// Auf Absenktemperatur stellen 
 				 	HM_WriteValueFloat(52525, 'MANU_MODE',$AbsenkTemp);
+					IPS_Sleep(50);
 				}
 				Else if ($pres == true)
 				{
 					// Auf letzten Sollwert stellen
 					HM_WriteValueFloat(52525, 'MANU_MODE',$SetTemp);
+					IPS_Sleep(50);
 				}
 			} 
 			else if ($HeizProg == 2)
 			{
 				HM_WriteValueFloat(52525, 'MANU_MODE',$AntrAuf);
+				IPS_Sleep(50);
 			} 
 			else if ($HeizProg == 3)
 			{
 				HM_WriteValueFloat(52525, 'MANU_MODE',$AntrZu);
+				IPS_Sleep(50);
 			} 
 				 
 		}
