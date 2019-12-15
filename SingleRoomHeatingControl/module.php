@@ -87,7 +87,7 @@
 			 // Heiztemperatur
 			$HeizTemp = $this->ReadPropertyFloat('HeizTemp');
 
-			RequestAction($this->ReadPropertyInteger('SetTempID'),6);
+			RequestAction($this->ReadPropertyInteger('SetTempID'),23);
 			
 		}
 
