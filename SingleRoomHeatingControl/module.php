@@ -20,6 +20,11 @@
 			$this->RegisterPropertyFloat('GrundTemp', 20.0);
 			$this->RegisterPropertyFloat('AntrAuf', 30.0);
 			$this->RegisterPropertyFloat('AntrZu', 6.0);
+			
+			// Variablen
+			$this->RegisterPropertyBoolean('HeizAuto', true);
+			$this->RegisterPropertyInteger('HeizProg', 1);
+			$this->RegisterPropertyFloat('HeizTemp', 22.0);
 						
 			// Time Schedule
 			$this->RegisterPropertyInteger('WeeklyTimeTableEventID', 0);
