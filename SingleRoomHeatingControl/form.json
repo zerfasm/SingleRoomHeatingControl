@@ -38,13 +38,7 @@
       "items": [
         {"type": "SelectVariable", "name": "WindowID", "caption": "Window ID:" }
       ]
-    },
-
-    {"type": "ExpansionPanel", "caption": "Presence",
-      "items": [
-        {"type": "SelectVariable", "name": "PresenceID", "caption": "Presence ID:" }
-      ]
-    }  
+    } 
   ],
 	
   "actions": [
