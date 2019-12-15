@@ -29,6 +29,9 @@
 			
 			// Presence
 			$this->RegisterPropertyInteger('PresenceID', 0);
+			
+			// Update trigger
+        		$this->RegisterTimer('UpdateTrigger', 0, "SRHC_Update(\$_IPS['TARGET']);");
 		}
 
 		public function Destroy()
