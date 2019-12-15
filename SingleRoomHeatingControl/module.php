@@ -51,6 +51,9 @@
 			
 			// Create Heizprogramm
         		$this->MaintainVariable('HeizProg', 'Heizprogramm', vtInteger, 'Heizungsautomatik', 1, true);
+			
+			// Create Letzet Solltemperatur
+        		$this->MaintainVariable('LastSoll', 'Letzte Solltemperatur', vtFloat, '~Temperature', 2, true);
 											
 		}
 		
@@ -76,6 +79,10 @@
 			$SetTemp = GetValue($this->ReadPropertyInteger('SetTempID')); 
 
 			//RequestAction($this->ReadPropertyInteger('SetTempID'),$SetTemp);
+			 
+			//Letzte Sollwert schreiben
+			$update = $this->SetValue('LastSoll', $SetTemp);
+			 
 			 HM_WriteValueFloat(52525, 'MANU_MODE',$AbsenkTemp);
 			
 		}
