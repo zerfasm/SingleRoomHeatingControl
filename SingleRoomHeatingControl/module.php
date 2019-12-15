@@ -38,19 +38,19 @@
 			parent::ApplyChanges();
 			
 			// Create Temperatur Absenken
-        		$this->MaintainVariable('AbsenkTemp', 'Absenken', vtFloat, '~Temperature', 1, true);
+        		$this->MaintainVariable('AbsenkTemp', 'Absenken', vtFloat, '~Temperature.Room', 1, true);
 			
 			// Create Temperatur Grundwärme
-        		$this->MaintainVariable('GrundTemp', 'Grundwärme', vtFloat, '~Temperature', 2, true); 
+        		$this->MaintainVariable('GrundTemp', 'Grundwärme', vtFloat, '~Temperature.Room', 2, true); 
 			
 			// Create Temperatur Heizen
-        		$this->MaintainVariable('HeizTemp', 'Heizen', vtFloat, '~Temperature', 3, true); 
+        		$this->MaintainVariable('HeizTemp', 'Heizen', vtFloat, '~Temperature.Room', 3, true); 
 			
 			// Create Stellantrieb Auf
-        		$this->MaintainVariable('AntrAuf', 'Stellantrieb Auf', vtFloat, '~Temperature', 4, true);
+        		$this->MaintainVariable('AntrAuf', 'Stellantrieb Auf', vtFloat, '~Temperature.Room', 4, true);
 			
 			// Create Stellantrieb Zu
-        		$this->MaintainVariable('AntrZu', 'Stellantrieb Zu', vtFloat, '~Temperature', 5, true);			
+        		$this->MaintainVariable('AntrZu', 'Stellantrieb Zu', vtFloat, '~Temperature.Room', 5, true);			
 			
 		}
 
