@@ -59,9 +59,6 @@
         		$result = 'Ergebnis konnte nicht ermittelt werden!';
         		// Daten lesen
        			 $state = true;
-			
-			// Heizungsautomatik 
-			$HeizAuto = $this->ReadPropertyBoolean('HeizAuto');
 			 
 			 // Heizungsprogramm 
 			$HeizProg = $this->ReadPropertyInteger('HeizProg');
