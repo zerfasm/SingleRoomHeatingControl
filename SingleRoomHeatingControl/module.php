@@ -22,7 +22,6 @@
 			
 			// Variablen
 			$this->RegisterPropertyInteger('HeizProg', 0);
-			$this->RegisterPropertyFloat('HeizTemp', 0);
 					
 			// Time Schedule
 			$this->RegisterPropertyInteger('WeeklyTimeTableEventID', 0);
@@ -52,10 +51,7 @@
 			
 			// Create Heizprogramm
         		$this->MaintainVariable('HeizProg', 'Heizprogramm', vtInteger, 'Heizungsautomatik', 1, true);
-							
-			// Create Heiztemperatur
-        		$this->MaintainVariable('HeizTemp', 'Heiztemperatur', vtFloat, '~Temperature', 2, true);
-					
+											
 		}
 		
 		 public function Update()
@@ -76,10 +72,10 @@
 			 // Absenktemperatur
 			$AbsenkTemp = $this->ReadPropertyFloat('AbsenkTemp');
 			 
-			 // Heiztemperatur
-			$HeizTemp = $this->ReadPropertyFloat('HeizTemp');
+			// Solltemperatur
+			$SetTemp = $this->ReadPropertyFloat('SetTempID'); 
 
-			RequestAction($this->ReadPropertyInteger('SetTempID'),$HeizTemp);
+			RequestAction($this->ReadPropertyInteger('SetTempID'),$SetTemp);
 			
 		}
 
