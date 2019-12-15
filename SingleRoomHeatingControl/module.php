@@ -13,8 +13,6 @@
 			$this->RegisterPropertyString('RoomName', "");
 			$this->RegisterPropertyInteger('ActTempID', 0);
 			$this->RegisterPropertyInteger('SetTempID', 0);
-			$this->RegisterPropertyBoolean('CreateAbsentSetTemp', true);
-			$this->RegisterPropertyBoolean('CreateWindowSetTemp', true);
 			
 			// Time Schedule
 			$this->RegisterPropertyInteger('WeeklyTimeTableEventID', 0);
@@ -40,12 +38,10 @@
 			parent::ApplyChanges();
 			
 			// Create Absent Set Temperature
-        		//$create = $this->ReadPropertyBoolean('CreateAbsentSetTemp');
-			$this->MaintainVariable('AbsentSetTemp', 'Temperatur Abwesenheit', vtFloat, '~Temperature', 1, true); 
+        		$this->MaintainVariable('AbsentSetTemp', 'Temperatur Abwesenheit', vtFloat, '~Temperature', 1, true); 
 			
 			// Create Window Open Set Temperature
-        		//$create = $this->ReadPropertyBoolean('CreateWindowSetTemp');
-			$this->MaintainVariable('WindowSetTemp', 'Temperatur Offenes Fenster', vtFloat, '~Temperature', 2, true);
+        		$this->MaintainVariable('WindowSetTemp', 'Temperatur Offenes Fenster', vtFloat, '~Temperature', 2, true);
 		}
 
 	}
