@@ -70,21 +70,48 @@
 			 // Anwesenheit 
 			$pres = GetValue($this->ReadPropertyInteger('PresenceID'));
 			 
-			 // Absenktemperatur
-			$AbsenkTemp = $this->ReadPropertyFloat('AbsenkTemp');
-			 
+			 // Stellantrieb Auf
+			$AntrAuf = $this->ReadPropertyFloat('AntrAuf');
+			
+			// Stellantrieb Zu
+			$AntrZu = $this->ReadPropertyFloat('AntrZu') 
+			
+			// Absenktemperatur
+			$AbsenkTemp = $this->ReadPropertyFloat('AbsenkTemp')
+				
 			// Solltemperatur
 			$SetTemp = GetValue($this->ReadPropertyInteger('SetTempID')); 
 
-			//RequestAction($this->ReadPropertyInteger('SetTempID'),$SetTemp);
-			 
-			//Letzte Sollwert schreiben
-			$update = $this->SetValue('LastSetTemp', $SetTemp);
-			 
-			 If (($pres == true) and ($HeizProg == 1))
-			 {
-			 	HM_WriteValueFloat(52525, 'MANU_MODE',$AbsenkTemp);
-			 }
+			// Steuerungsautomatik
+			If ($HeizProg == 0) //Automatic => Steuerung durch CCU
+			{
+				HM_WriteValueBoolean(52525, 'AUTO_MODE',true);
+			} 
+			else if ($HeizProg == 1) 
+			{
+				If (($pres == false) and (($win == false) or ($win == 0)))
+				{
+					//Letzte Sollwert schreiben
+					$update = $this->SetValue('LastSetTemp', $SetTemp);
+					
+					// Auf Absenktemperatur stellen 
+				 	HM_WriteValueFloat(52525, 'MANU_MODE',$AbsenkTemp);
+				}
+				Else if ($pres == true)
+				{
+					// Auf letzten Sollwert stellen
+					HM_WriteValueFloat(52525, 'MANU_MODE',$SetTemp);
+				}
+			} 
+			else if ($HeizProg == 2)
+			{
+				HM_WriteValueFloat(52525, 'MANU_MODE',$AntrAuf);
+			} 
+			else if ($HeizProg == 3)
+			{
+				HM_WriteValueFloat(52525, 'MANU_MODE',$AntrZu);
+			} 
+				 
 		}
 
 	}
