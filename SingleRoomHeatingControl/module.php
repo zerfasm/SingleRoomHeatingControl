@@ -62,7 +62,7 @@
        			 $state = true;
 			 
 			 // Heizungsprogramm 
-			//$HeizProg = $this->ReadPropertyInteger('HeizProgID');
+			$HeizProg = GetValue($this->ReadPropertyInteger('HeizProgID'));
 			 
 			// Fensterkontakt 
 			$win = GetValue($this->ReadPropertyInteger('WindowID'));
@@ -81,8 +81,10 @@
 			//Letzte Sollwert schreiben
 			$update = $this->SetValue('LastSetTemp', $SetTemp);
 			 
+			 If ($HeizProg == 1)
+			 {
 			 HM_WriteValueFloat(52525, 'MANU_MODE',$AbsenkTemp);
-			
+			 }
 		}
 
 	}
