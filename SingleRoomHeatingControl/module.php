@@ -13,6 +13,11 @@
 			$this->RegisterPropertyString('RoomName', "");
 			$this->RegisterPropertyInteger('ActTempID', 0);
 			$this->RegisterPropertyInteger('SetTempID', 0);
+			$this->RegisterPropertyInteger('AbsenkTemp', 19);
+			$this->RegisterPropertyInteger('GrundTemp', 20);
+			$this->RegisterPropertyInteger('HeizTemp', 22);
+			$this->RegisterPropertyInteger('AntrAuf', 30);
+			$this->RegisterPropertyInteger('AntrZu', 6);
 						
 			// Time Schedule
 			$this->RegisterPropertyInteger('WeeklyTimeTableEventID', 0);
