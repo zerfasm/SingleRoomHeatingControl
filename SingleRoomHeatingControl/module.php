@@ -15,14 +15,12 @@
 			$this->RegisterPropertyString('RoomName', "");
 			$this->RegisterPropertyInteger('ActTempID', 0);
 			$this->RegisterPropertyInteger('SetTempID', 0);
+			$this->RegisterPropertyInteger('HeizProgID', 0);
 			$this->RegisterPropertyFloat('AbsenkTemp', 19.0);
 			$this->RegisterPropertyFloat('GrundTemp', 20.0);
 			$this->RegisterPropertyFloat('AntrAuf', 30.0);
 			$this->RegisterPropertyFloat('AntrZu', 6.0);
-			
-			// Variablen
-			//$this->RegisterPropertyInteger('HeizProg', 0);
-					
+							
 			// Time Schedule
 			$this->RegisterPropertyInteger('WeeklyTimeTableEventID', 0);
 			$this->RegisterPropertyInteger('HolidayIndicatorID', 0);
@@ -64,7 +62,7 @@
        			 $state = true;
 			 
 			 // Heizungsprogramm 
-			$HeizProg = $this->ReadPropertyInteger('HeizProg');
+			$HeizProg = $this->ReadPropertyInteger('HeizProgID');
 			 
 			// Fensterkontakt 
 			$win = GetValue($this->ReadPropertyInteger('WindowID'));
