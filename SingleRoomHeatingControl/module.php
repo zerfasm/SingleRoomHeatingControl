@@ -62,7 +62,7 @@
        			 $state = true;
 			 
 			 // Heizungsprogramm 
-			$HeizProg = $this->ReadPropertyInteger('HeizProgID');
+			//$HeizProg = $this->ReadPropertyInteger('HeizProgID');
 			 
 			// Fensterkontakt 
 			$win = GetValue($this->ReadPropertyInteger('WindowID'));
