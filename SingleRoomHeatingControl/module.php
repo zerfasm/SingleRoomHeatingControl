@@ -91,19 +91,16 @@
 			$HM_InstanzID = $this->ReadPropertyInteger('HM_InstanzID');
 			 
 			 // Steuerung 
-			If ($HeizProg == 1) //IPS Betrieb
-			{
 				//Abwesend
 				If ($win == true) 
 				{
-					HM_WriteValueFloat($HM_InstanzID, 'MANU_MODE',$AbsenkTemp);
+					HM_WriteValueFloat($HM_InstanzID, 'MANU_MODE',6);
 				}
 				//Anwesend
 				Else If ($win == false) 
 				{
-					HM_WriteValueFloat($HM_InstanzID, 'MANU_MODE',$HeizTemp);
+					HM_WriteValueFloat($HM_InstanzID, 'MANU_MODE',23);
 				}
-			}
 			
 		}
 
