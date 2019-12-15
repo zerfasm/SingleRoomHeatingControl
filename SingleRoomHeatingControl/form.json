@@ -32,12 +32,11 @@
       ]
     },
 	
-	{"type": "ExpansionPanel", "caption": "Contacts",
+    {"type": "ExpansionPanel", "caption": "Contacts",
       "items": [
-        {"type": "SelectVariable", "name": "ActTempID", "caption": "Actual Temperature ID:" },
-        {"type": "SelectVariable", "name": "SetTempID", "caption": "Set Temperature ID:" }
+        {"type": "SelectVariable", "name": "WindowID", "caption": "Window ID:" }
       ]
-    },
+    }
   ],
   "actions": [
     {"type": "Label", "caption": "Calculate values!" },
