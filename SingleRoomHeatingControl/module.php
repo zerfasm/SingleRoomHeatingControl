@@ -32,10 +32,10 @@
 			$this->RegisterPropertyInteger('DayUsedWhenHoliday',6);
 			
 			// Contacts
-			$this->RegisterPropertyBoolean('WindowID', 0);
+			$this->RegisterPropertyInteger('WindowID', 0);
 			
 			// Presence
-			$this->RegisterPropertyBoolean('PresenceID', 0);
+			$this->RegisterPropertyInteger('PresenceID', 0);
 			
 			// Update trigger
         		$this->RegisterTimer('UpdateTrigger', 0, "SRHC_Update(\$_IPS['TARGET']);");
@@ -76,7 +76,7 @@
 			$HeizProg = $this->ReadPropertyInteger('HeizProg');
 			 
 			// Fensterkontakt 
-			$winID = $this->ReadPropertyBoolean('WindowID');
+			$winID = $this->ReadPropertyInteger('WindowID');
 			$win = GetValue($winID);
 			 
 			 // Anwesenheit 
