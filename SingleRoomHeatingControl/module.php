@@ -11,6 +11,12 @@
 			//Never delete this line!
 			parent::Create();
 			
+			// Create Heizprogramm
+        		$this->MaintainVariable('HeizProg', 'Heizprogramm', vtInteger, 'Heizungsautomatik', 1, true);
+							
+			// Create Heiztemperatur
+        		$this->MaintainVariable('HeizTemp', 'Heiztemperatur', vtFloat, '~Temperature', 2, true);
+			
 			// Temperature Parameter
 			$this->RegisterPropertyString('RoomName', "");
 			$this->RegisterPropertyInteger('ActTempID', 0);
@@ -49,13 +55,7 @@
 		{
 			//Never delete this line!
 			parent::ApplyChanges();	
-				
-			// Create Heizprogramm
-        		$this->MaintainVariable('HeizProg', 'Heizprogramm', vtInteger, 'Heizungsautomatik', 1, true);
-							
-			// Create Heiztemperatur
-        		$this->MaintainVariable('HeizTemp', 'Heiztemperatur', vtFloat, '~Temperature', 2, true);
-			
+					
 		}
 		
 		 public function Update()
