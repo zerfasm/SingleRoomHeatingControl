@@ -75,7 +75,7 @@
 			// Solltemperatur
 			$SetTemp = $this->ReadPropertyInteger('SetTempID'); 
 
-			RequestAction($this->ReadPropertyInteger('SetTempID'),$SetTemp);
+			RequestAction($this->ReadPropertyInteger('SetTempID'),$AbsenkTemp);
 			
 		}
 
