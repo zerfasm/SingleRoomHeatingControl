@@ -45,6 +45,15 @@
 			// Create Heiztemperatur
 			$create = $this->ReadPropertyBoolean('CreateHeizTemp');
         		$this->MaintainVariable('HeizTemp', 'Heiztemperatur', vtFloat, '~Temperature', 5, $create);
+			
+			$win = $this->ReadPropertyInteger('WindowID');
+        		if ($win != 0) {
+            			$win = GetValue($win);
+        		} else {
+            			$this->SendDebug('UPDATE', 'Window not set!');
+            			$state = false;
+        			}
+			
 		}
 
 	}
