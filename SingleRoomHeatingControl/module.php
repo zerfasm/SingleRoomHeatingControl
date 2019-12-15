@@ -49,12 +49,29 @@
 			// Create Heiztemperatur
 			$create = $this->ReadPropertyBoolean('CreateHeizTemp');
         		$this->MaintainVariable('HeizTemp', 'Heiztemperatur', vtFloat, '~Temperature', 5, $create);
+		}
+		
+		 public function Update()
+    		{
+        		$result = 'Ergebnis konnte nicht ermittelt werden!';
+        		// Daten lesen
+       			 $state = true;
 			
+			// Fensterkontakt 
 			$win = $this->ReadPropertyInteger('WindowID');
         		if ($win != 0) {
             			$win = GetValue($win);
         		} else {
-            			$this->SendDebug('UPDATE', 'Window not set!');
+            			$this->SendDebug('UPDATE', 'Window ID not set!');
+            			$state = false;
+        			}
+			 
+			 // Anwesenheit 
+			$pres = $this->ReadPropertyInteger('PresenceID');
+        		if ($pres != 0) {
+            			$win = GetValue($pres);
+        		} else {
+            			$this->SendDebug('UPDATE', 'Presence ID not set!');
             			$state = false;
         			}
 			
