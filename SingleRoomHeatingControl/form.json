@@ -46,8 +46,9 @@
       ]
     }  
   ],
+	
   "actions": [
     {"type": "Label", "caption": "Calculate values!" },
-    {"type": "Button", "caption": "BERECHNEN", "onClick": "SCHB_Update($id);" }
+    {"type": "Button", "caption": "BERECHNEN", "onClick": "SRHC_Update($id);" }
   ]
 }
