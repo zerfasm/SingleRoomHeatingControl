@@ -91,7 +91,7 @@ class SingleRoomHeatingControl extends IPSModule
 			If ($pres == false)
 			{
 				//Letzte Sollwert schreiben
-				$update = $this->SetValue('LastSetTemp', $SetTemp);
+				$LastSetTemp = $this->SetValue('LastSetTemp', $SetTemp);
 
 				// Auf Absenktemperatur stellen 
 				HM_WriteValueFloat(52525, 'MANU_MODE',$AbsenkTemp);
