@@ -78,7 +78,8 @@ class SingleRoomHeatingControl extends IPSModule
 		// Daten lesen
 		 $state = true;
 
-		// Heizungsprogramm 
+		// Heizungsprogramm
+		$HeizProgID = $this->GetIDForIdent('HeizProg'); 
 		$HeizProg = GetValue($HeizProgID);
 
 		 // Solltemperatur
@@ -101,7 +102,8 @@ class SingleRoomHeatingControl extends IPSModule
 		$ModusID = $this->ReadPropertyInteger('ModID');
 		$Modus = GetValue($ModusID);
  		
-		// Fensterkontakt 
+		// Fensterkontakt
+		$WindowID =$this->ReadPropertyInteger('WindowID');
 		$Window = GetValue($WindowID);
 
 		 // Anwesenheit 
