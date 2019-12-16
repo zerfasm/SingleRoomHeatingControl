@@ -5,12 +5,10 @@
 	{"type": "ValidationTextBox", "name": "RoomName", "caption": "Room Name:" }, 
 	{"type": "SelectInstance", "name": "InstanceID", "caption": "Instance ID:" }, 
         {"type": "SelectVariable", "name": "SetTempID", "caption": "Set Temperature ID:" },   
-	{"type": "ValidationTextBox", "name": "AbsenkTemp", "caption": "Absenktemperatur:" },
-	{"type": "ValidationTextBox", "name": "GrundTemp", "caption": "Grundwärme:" },
-	{"type": "ValidationTextBox", "name": "AntrAuf", "caption": "Stellantrieb Auf:" },
-	{"type": "ValidationTextBox", "name": "AntrZu", "caption": "Stellantrieb Zu:" },
-	{"type": "SelectVariable", "name": "LastSetTempID", "caption": "Letzte Solltemperatur ID:" },      
-	{"type": "SelectVariable", "name": "HeizProgID", "caption": "Heizprogramm ID:" }
+	{"type": "ValidationTextBox", "name": "AbsenkTemp", "caption": "Setback Temperatue:" },
+	{"type": "ValidationTextBox", "name": "GrundTemp", "caption": "Basic Temperature:" },
+	{"type": "ValidationTextBox", "name": "AntrAuf", "caption": "Actuator Open:" },
+	{"type": "ValidationTextBox", "name": "AntrZu", "caption": "Actuator Close:" },
       ]
     },
 	
