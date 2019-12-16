@@ -3,8 +3,8 @@
     {"type": "ExpansionPanel", "caption": "Temperature Values",
       "items": [
 	{"type": "ValidationTextBox", "name": "RoomName", "caption": "Room Name:" }, 
-	{"type": "SelectVariable", "name": "SetTempID", "caption": "Set Temperature ID:" },
-	{"type": "SelectVariable", "name": "ModID", "caption": "Modus ID:" },     
+	{"type": "SelectVariable", "name": "ModID", "caption": "Modus ID:" }, 
+	{"type": "SelectVariable", "name": "SetTempID", "caption": "Set Temperature ID:" },    
 	{"type": "ValidationTextBox", "name": "AbsenkTemp", "caption": "Setback Temperatue:" },
 	{"type": "ValidationTextBox", "name": "GrundTemp", "caption": "Basic Temperature:" },
 	{"type": "ValidationTextBox", "name": "AntrAuf", "caption": "Actuator Open:" },
