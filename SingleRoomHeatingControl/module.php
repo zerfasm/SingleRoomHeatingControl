@@ -97,28 +97,36 @@ class SingleRoomHeatingControl extends IPSModule
 				$update = $this->SetValue('LastSetTemp', $SetTemp);
 
 				// Auf Absenktemperatur stellen
-				RequestAction($SetTempID,$AbsenkTemp);
-				//HM_WriteValueFloat(52525, 'MANU_MODE',$AbsenkTemp);
+				//RequestAction($SetTempID,$AbsenkTemp);
+				HM_WriteValueFloat(52525, 'MANU_MODE',$AbsenkTemp);
 				IPS_Sleep(50);
 			}
 			Else if ($pres == true)
 			{
 				// Auf letzten Sollwert stellen
-				RequestAction($SetTempID,$LastSetTemp);
-				//HM_WriteValueFloat(52525, 'MANU_MODE',$LastSetTemp);
+				//RequestAction($SetTempID,$LastSetTemp);
+				HM_WriteValueFloat(52525, 'MANU_MODE',$LastSetTemp);
 				IPS_Sleep(50);
 			}
 		} 
 		else if ($HeizProg == 2)
 		{
-			RequestAction($SetTempID,$AntrAuf);
-			//HM_WriteValueFloat(52525, 'MANU_MODE',$AntrAuf);
+			//Letzten Sollwert schreiben
+			$update = $this->SetValue('LastSetTemp', $SetTemp);
+			
+			// Stellantrieb Auf
+			//RequestAction($SetTempID,$AntrAuf);
+			HM_WriteValueFloat(52525, 'MANU_MODE',$AntrAuf);
 			IPS_Sleep(50);
 		} 
 		else if ($HeizProg == 3)
 		{
-			RequestAction($SetTempID,$AntrZu);
-			//HM_WriteValueFloat(52525, 'MANU_MODE',$AntrZu);
+			//Letzten Sollwert schreiben
+			$update = $this->SetValue('LastSetTemp', $SetTemp);
+			
+			// Stellantrieb Zu
+			//RequestAction($SetTempID,$AntrZu);
+			HM_WriteValueFloat(52525, 'MANU_MODE',$AntrZu);
 			IPS_Sleep(50);
 		} 
 	}
