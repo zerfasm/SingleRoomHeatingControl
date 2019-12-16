@@ -15,11 +15,6 @@ class SingleRoomHeatingControl extends IPSModule
 		$this->RegisterPropertyString('RoomName', "");
 		$this->RegisterPropertyInteger('ModID', 0);
 		$this->RegisterPropertyInteger('SetTempID', 0);
-		$this->RegisterPropertyFloat('AbsenkTemp', 19.0);
-		$this->RegisterPropertyFloat('GrundTemp', 20.0);
-		$this->RegisterPropertyFloat('HeizTemp', 22.0);
-		$this->RegisterPropertyFloat('AntrAuf', 30.0);
-		$this->RegisterPropertyFloat('AntrZu', 6.0);
 
 		// Wochenplan
 		$this->RegisterPropertyInteger('WeeklyTimeTableEventID', 0);
@@ -64,9 +59,18 @@ class SingleRoomHeatingControl extends IPSModule
 
 		// Variable Heizprogramm erstellen
 		$this->MaintainVariable('HeizProg', 'Heizprogramm', vtInteger, 'Heizungsautomatik', 1, true);
-
+		
+		// Variable Letze Absenktemperatur erstellen
+		$this->MaintainVariable('AbsenkTemp', 'Absenktemperatur', vtFloat, '~Temperature', 2, true);
+		
+		// Variable Grundwärme erstellen
+		$this->MaintainVariable('GrundTemp', 'Grundwärme', vtFloat, '~Temperature', 3, true);
+		
+		// Variable Heiztemperatur erstellen
+		$this->MaintainVariable('HeizTemp', 'Heiztemperatur', vtFloat, '~Temperature', 4, true);
+		
 		// Variable Letze Solltemperatur erstellen
-		$this->MaintainVariable('LastSetTemp', 'Letzte Solltemperatur', vtFloat, '~Temperature', 2, true);
+		$this->MaintainVariable('LastSetTemp', 'Letzte Solltemperatur', vtFloat, '~Temperature', 5, true);
 		
 		// ID Instanz
 		$Instance = $this->InstanceID;
@@ -89,7 +93,7 @@ class SingleRoomHeatingControl extends IPSModule
 	public function AbsenkTemp()
 	{
 		// Absenktemperatur
-		$AbsenkTemp = $this->ReadPropertyFloat('AbsenkTemp');
+		$AbsenkTemp = GetValue($this->GetIDForIdent('AbsenkTemp');
 		
 		 // Solltemperatur
 		$SetTempID = $this->ReadPropertyInteger('SetTempID'); 
@@ -100,7 +104,7 @@ class SingleRoomHeatingControl extends IPSModule
 	public function GrundTemp()
 	{
 		// Grundtemperatur
-		$GrundTemp = $this->ReadPropertyFloat('GrundTemp');
+		$GrundTemp = GetValue($this->GetIDForIdent('GrundTemp');
 		
 		 // Solltemperatur
 		$SetTempID = $this->ReadPropertyInteger('SetTempID'); 
@@ -110,8 +114,8 @@ class SingleRoomHeatingControl extends IPSModule
 	
 	public function HeizTemp()
 	{
-		// Grundtemperatur
-		$HeizTemp = $this->ReadPropertyFloat('HeizTemp');
+		// Heiztemperatur
+		$HeizTemp = GetValue($this->GetIDForIdent('HeizTemp');
 		
 		 // Solltemperatur
 		$SetTempID = $this->ReadPropertyInteger('SetTempID'); 
@@ -121,8 +125,8 @@ class SingleRoomHeatingControl extends IPSModule
 	
 	public function AntrAuf()
 	{
-		// Grundtemperatur
-		$AntrAuf = $this->ReadPropertyFloat('AntrAuf');
+		// Antrieb Auf
+		$AntrAuf = GetValue($this->GetIDForIdent('AntrAuf');
 		
 		 // Solltemperatur
 		$SetTempID = $this->ReadPropertyInteger('SetTempID'); 
@@ -132,8 +136,8 @@ class SingleRoomHeatingControl extends IPSModule
 	
 	public function AntrZu()
 	{
-		// Grundtemperatur
-		$AntrZu = $this->ReadPropertyFloat('AntrZu');
+		// Antrieb Zu
+		$AntrZu = GetValue($this->GetIDForIdent('AntrZu');
 		
 		 // Solltemperatur
 		$SetTempID = $this->ReadPropertyInteger('SetTempID'); 
@@ -152,27 +156,27 @@ class SingleRoomHeatingControl extends IPSModule
 		$HeizProg = GetValue($HeizProgID);
 
 		 // Solltemperatur
-		$SetTempID = $this->ReadPropertyInteger('SetTempID'); 
+		$SetTempID = GetValue($this->GetIDForIdent('SetTempID'); 
 		$SetTemp = GetValue($SetTempID);
 		 
 		// Letzte SollTemperatur 
 		$LastSetTemp = GetValue($this->GetIDForIdent('LastSetTemp'));
 		 
 		// Absenktemperatur
-		$AbsenkTemp = $this->ReadPropertyFloat('AbsenkTemp');
+		$AbsenkTemp = GetValue($this->GetIDForIdent('AbsenkTemp');
 		
 		// Stellantrieb Auf
-		$AntrAuf = $this->ReadPropertyFloat('AntrAuf');
+		$AntrAuf = GetValue($this->GetIDForIdent('AntrAuf');
 
 		// Stellantrieb Zu
-		$AntrZu = $this->ReadPropertyFloat('AntrZu'); 
+		$AntrZu = GetValue($this->GetIDForIdent('AntrZu'); 
 		 
 		// Modus
 		$ModusID = $this->ReadPropertyInteger('ModID');
 		$Modus = GetValue($ModusID);
  		
 		// Fensterkontakt
-		$WindowID =$this->ReadPropertyInteger('WindowID');
+		$WindowID = $this->ReadPropertyInteger('WindowID');
 		$Window = GetValue($WindowID);
 
 		 // Anwesenheit 
