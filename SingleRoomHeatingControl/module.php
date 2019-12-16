@@ -62,6 +62,7 @@ class SingleRoomHeatingControl extends IPSModule
 		
 		// Variable Letze Absenktemperatur erstellen
 		$this->MaintainVariable('AbsenkTemp', 'Absenktemperatur', vtFloat, '~Temperature', 2, true);
+		$this->SetValue('AbsenkTemp',25),
 		
 		// Variable Grundwärme erstellen
 		$this->MaintainVariable('GrundTemp', 'Grundwärme', vtFloat, '~Temperature', 3, true);
@@ -71,6 +72,12 @@ class SingleRoomHeatingControl extends IPSModule
 		
 		// Variable Letze Solltemperatur erstellen
 		$this->MaintainVariable('LastSetTemp', 'Letzte Solltemperatur', vtFloat, '~Temperature', 5, true);
+		
+		// Variable Stellantrieb Auf erstellen
+		$this->MaintainVariable('AntrAuf', 'STA-Auf', vtFloat, '~Temperature', 6, true);
+		
+		// Variable Stellantrieb Zu erstellen
+		$this->MaintainVariable('AntrZu', 'STA-Zu', vtFloat, '~Temperature', 7, true);	
 		
 		// ID Instanz
 		$Instance = $this->InstanceID;
