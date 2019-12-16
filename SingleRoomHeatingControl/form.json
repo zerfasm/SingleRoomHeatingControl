@@ -57,7 +57,7 @@
     {"type": "Button", "caption": "Absenken", "onClick": "SRHC_AbsenkTemp($id);" },
     {"type": "Button", "caption": "Grundwärme", "onClick": "SRHC_GrundTemp($id);" },	
     {"type": "Button", "caption": "Heizen", "onClick": "SRHC_HeizTemp($id);" },
-    {"type": "Button", "caption": "Antrieb Auf", "onClick": "SRHC_AntrAuf($id);" },
-    {"type": "Button", "caption": "Antrieb Zu", "onClick": "SRHC_AntrZu($id);" }	  
+    {"type": "Button", "caption": "Antrieb-Auf", "onClick": "SRHC_AntrAuf($id);" },
+    {"type": "Button", "caption": "Antrieb-Zu", "onClick": "SRHC_AntrZu($id);" }	  
   ]
 }
