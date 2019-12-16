@@ -17,6 +17,7 @@ class SingleRoomHeatingControl extends IPSModule
 		$this->RegisterPropertyInteger('SetTempID', 0);
 		$this->RegisterPropertyFloat('AbsenkTemp', 19.0);
 		$this->RegisterPropertyFloat('GrundTemp', 20.0);
+		$this->RegisterPropertyFloat('HeizTemp', 22.0);
 		$this->RegisterPropertyFloat('AntrAuf', 30.0);
 		$this->RegisterPropertyFloat('AntrZu', 6.0);
 
@@ -40,8 +41,8 @@ class SingleRoomHeatingControl extends IPSModule
 		// Grundtemperatur trigger
 		$this->RegisterTimer('GrundTempTrigger', 0, "SRHC_GrundTemp(\$_IPS['TARGET']);");
 		
-		// Solltemperatur trigger
-		$this->RegisterTimer('SollTempTrigger', 0, "SRHC_SollTemp(\$_IPS['TARGET']);");
+		// Heiztemperatur trigger
+		$this->RegisterTimer('HeizTempTrigger', 0, "SRHC_HeizTemp(\$_IPS['TARGET']);");
 	}
 
 	public function Destroy()
@@ -86,7 +87,6 @@ class SingleRoomHeatingControl extends IPSModule
 		
 		 // Solltemperatur
 		$SetTempID = $this->ReadPropertyInteger('SetTempID'); 
-		$SetTemp = GetValue($SetTempID);
 		
 		RequestAction($SetTempID,$AbsenkTemp);
 		IPS_Sleep(50);
@@ -99,22 +99,20 @@ class SingleRoomHeatingControl extends IPSModule
 		
 		 // Solltemperatur
 		$SetTempID = $this->ReadPropertyInteger('SetTempID'); 
-		$SetTemp = GetValue($SetTempID);
 		
 		RequestAction($SetTempID,$GrundTemp);
 		IPS_Sleep(50);
 	}
 	
-	public function SollTemp()
+	public function HeizTemp()
 	{
 		// Grundtemperatur
-		$GrundTemp = $this->ReadPropertyFloat('GrundTemp');
+		$HeizTemp = $this->ReadPropertyFloat('HeizTemp');
 		
 		 // Solltemperatur
 		$SetTempID = $this->ReadPropertyInteger('SetTempID'); 
-		$SetTemp = GetValue($SetTempID);
 		
-		RequestAction($SetTempID,$SetTemp);
+		RequestAction($SetTempID,$HeizTemp);
 		IPS_Sleep(50);
 	}
 	
