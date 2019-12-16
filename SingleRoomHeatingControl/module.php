@@ -14,8 +14,8 @@ class SingleRoomHeatingControl extends IPSModule
 		// Temperature Parameter
 		$this->RegisterPropertyString('RoomName', "");
 		$this->RegisterPropertyInteger('SetTempID', 0);
-		$this->RegisterPropertyInteger('HeizProgID', 0);
-		$this->RegisterPropertyInteger('LastSetTempID', 0);
+		//$this->RegisterPropertyInteger('HeizProgID', 0);
+		//$this->RegisterPropertyInteger('LastSetTempID', 0);
 		$this->RegisterPropertyFloat('AbsenkTemp', 19.0);
 		$this->RegisterPropertyFloat('GrundTemp', 20.0);
 		$this->RegisterPropertyFloat('AntrAuf', 30.0);
@@ -48,8 +48,8 @@ class SingleRoomHeatingControl extends IPSModule
 		parent::ApplyChanges();	
 
 		// Create Heizprogramm
-		$this->MaintainVariable('CreateHeizProg', 'Heizprogramm', vtInteger, 'Heizungsautomatik', 1, true);
-
+		//$this->MaintainVariable('CreateHeizProg', 'Heizprogramm', vtInteger, 'Heizungsautomatik', 1, true);
+		$this->MaintainVariable('HeizProg', 'Heizprogramm', vtInteger, 'Heizungsautomatik', 1, true);
 		// Create Letzet Solltemperatur
 		$this->MaintainVariable('LastSetTemp', 'Letzte Solltemperatur', vtFloat, '~Temperature', 2, true);
 
@@ -62,7 +62,8 @@ class SingleRoomHeatingControl extends IPSModule
 		 $state = true;
 		 
 		// Heizungsprogramm 
-		$HeizProg = GetValue($this->ReadPropertyInteger('HeizProgID'));
+		//$HeizProg = GetValue($this->ReadPropertyInteger('HeizProgID'));
+		$HeizProg = GetValue($this->GetIDForIdent('HeizProg'));
 		 
 		// Letzte SollTemperatur 
 		//$LastSetTemp = GetValue($this->ReadPropertyInteger('LastSetTempID'));
