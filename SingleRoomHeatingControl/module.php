@@ -35,7 +35,7 @@ class SingleRoomHeatingControl extends IPSModule
 		$this->RegisterTimer('UpdateTrigger', 0, "SRHC_Update(\$_IPS['TARGET']);");
 		
 		// Absenken trigger
-		$this->RegisterTimer('UpdateTrigger', 0, "SRHC_Absenken(\$_IPS['TARGET']);");
+		$this->RegisterTimer('AbsenkenTrigger', 0, "SRHC_Absenken(\$_IPS['TARGET']);");
 	}
 
 	public function Destroy()
