@@ -93,7 +93,7 @@ class SingleRoomHeatingControl extends IPSModule
 	public function AbsenkTemp()
 	{
 		// Absenktemperatur
-		$AbsenkTemp = GetValue($this->GetIDForIdent('AbsenkTemp');
+		$AbsenkTemp = GetValue($this->GetIDForIdent('AbsenkTemp'));
 		
 		 // Solltemperatur
 		$SetTempID = $this->ReadPropertyInteger('SetTempID'); 
@@ -104,7 +104,7 @@ class SingleRoomHeatingControl extends IPSModule
 	public function GrundTemp()
 	{
 		// Grundtemperatur
-		$GrundTemp = GetValue($this->GetIDForIdent('GrundTemp');
+		$GrundTemp = GetValue($this->GetIDForIdent('GrundTemp'));
 		
 		 // Solltemperatur
 		$SetTempID = $this->ReadPropertyInteger('SetTempID'); 
@@ -115,7 +115,7 @@ class SingleRoomHeatingControl extends IPSModule
 	public function HeizTemp()
 	{
 		// Heiztemperatur
-		$HeizTemp = GetValue($this->GetIDForIdent('HeizTemp');
+		$HeizTemp = GetValue($this->GetIDForIdent('HeizTemp'));
 		
 		 // Solltemperatur
 		$SetTempID = $this->ReadPropertyInteger('SetTempID'); 
@@ -126,7 +126,7 @@ class SingleRoomHeatingControl extends IPSModule
 	public function AntrAuf()
 	{
 		// Antrieb Auf
-		$AntrAuf = GetValue($this->GetIDForIdent('AntrAuf');
+		$AntrAuf = GetValue($this->GetIDForIdent('AntrAuf'));
 		
 		 // Solltemperatur
 		$SetTempID = $this->ReadPropertyInteger('SetTempID'); 
@@ -137,7 +137,7 @@ class SingleRoomHeatingControl extends IPSModule
 	public function AntrZu()
 	{
 		// Antrieb Zu
-		$AntrZu = GetValue($this->GetIDForIdent('AntrZu');
+		$AntrZu = GetValue($this->GetIDForIdent('AntrZu'));
 		
 		 // Solltemperatur
 		$SetTempID = $this->ReadPropertyInteger('SetTempID'); 
@@ -155,21 +155,21 @@ class SingleRoomHeatingControl extends IPSModule
 		$HeizProgID = $this->GetIDForIdent('HeizProg'); 
 		$HeizProg = GetValue($HeizProgID);
 
-		 // Solltemperatur
-		$SetTempID = GetValue($this->GetIDForIdent('SetTempID'); 
+		 // Letzte Solltemperatur
+		$SetTempID = $this->ReadPropertyInteger('SetTempID'); 
 		$SetTemp = GetValue($SetTempID);
 		 
 		// Letzte SollTemperatur 
 		$LastSetTemp = GetValue($this->GetIDForIdent('LastSetTemp'));
 		 
 		// Absenktemperatur
-		$AbsenkTemp = GetValue($this->GetIDForIdent('AbsenkTemp');
+		$AbsenkTemp = GetValue($this->GetIDForIdent('AbsenkTemp'));
 		
 		// Stellantrieb Auf
-		$AntrAuf = GetValue($this->GetIDForIdent('AntrAuf');
+		$AntrAuf = GetValue($this->GetIDForIdent('AntrAuf'));
 
 		// Stellantrieb Zu
-		$AntrZu = GetValue($this->GetIDForIdent('AntrZu'); 
+		$AntrZu = GetValue($this->GetIDForIdent('AntrZu')); 
 		 
 		// Modus
 		$ModusID = $this->ReadPropertyInteger('ModID');
