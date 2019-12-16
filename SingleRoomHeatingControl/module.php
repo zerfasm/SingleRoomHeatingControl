@@ -14,8 +14,6 @@ class SingleRoomHeatingControl extends IPSModule
 		// Temperature Parameter
 		$this->RegisterPropertyString('RoomName', "");
 		$this->RegisterPropertyInteger('SetTempID', 0);
-		//$this->RegisterPropertyInteger('HeizProgID', 0);
-		//$this->RegisterPropertyInteger('LastSetTempID', 0);
 		$this->RegisterPropertyFloat('AbsenkTemp', 19.0);
 		$this->RegisterPropertyFloat('GrundTemp', 20.0);
 		$this->RegisterPropertyFloat('AntrAuf', 30.0);
@@ -48,8 +46,8 @@ class SingleRoomHeatingControl extends IPSModule
 		parent::ApplyChanges();	
 
 		// Create Heizprogramm
-		//$this->MaintainVariable('CreateHeizProg', 'Heizprogramm', vtInteger, 'Heizungsautomatik', 1, true);
 		$this->MaintainVariable('HeizProg', 'Heizprogramm', vtInteger, 'Heizungsautomatik', 1, true);
+		
 		// Create Letzet Solltemperatur
 		$this->MaintainVariable('LastSetTemp', 'Letzte Solltemperatur', vtFloat, '~Temperature', 2, true);
 
@@ -62,11 +60,9 @@ class SingleRoomHeatingControl extends IPSModule
 		 $state = true;
 		 
 		// Heizungsprogramm 
-		//$HeizProg = GetValue($this->ReadPropertyInteger('HeizProgID'));
 		$HeizProg = GetValue($this->GetIDForIdent('HeizProg'));
 		 
 		// Letzte SollTemperatur 
-		//$LastSetTemp = GetValue($this->ReadPropertyInteger('LastSetTempID'));
 		$LastSetTemp = GetValue($this->GetIDForIdent('LastSetTemp'));
 		
 		 // Fensterkontakt 
@@ -85,7 +81,8 @@ class SingleRoomHeatingControl extends IPSModule
 		$AbsenkTemp = $this->ReadPropertyFloat('AbsenkTemp');
 
 		// Solltemperatur
-		$SetTemp = GetValue($this->ReadPropertyInteger('SetTempID')); 
+		$SetTemp = GetValue($this->ReadPropertyInteger('SetTempID'));
+		$SetTempID = $this->ReadPropertyInteger('SetTempID'); 
 		 
 		 // Steuerungsautomatik
 		If ($HeizProg == 0) //Automatic => Steuerung durch CCU
@@ -99,19 +96,22 @@ class SingleRoomHeatingControl extends IPSModule
 				//Letzte Sollwert schreiben
 				$update = $this->SetValue('LastSetTemp', $SetTemp);
 
-				// Auf Absenktemperatur stellen 
-				HM_WriteValueFloat(52525, 'MANU_MODE',$AbsenkTemp);
+				// Auf Absenktemperatur stellen
+				RequestAction($SetTempID,$AbsenkTemp);
+				//HM_WriteValueFloat(52525, 'MANU_MODE',$AbsenkTemp);
 				IPS_Sleep(50);
 			}
 			Else if ($pres == true)
 			{
 				// Auf letzten Sollwert stellen
-				HM_WriteValueFloat(52525, 'MANU_MODE',$LastSetTemp);
+				RequestAction($SetTempID,$LastSetTemp);
+				//HM_WriteValueFloat(52525, 'MANU_MODE',$LastSetTemp);
 				IPS_Sleep(50);
 			}
 		} 
 		else if ($HeizProg == 2)
 		{
+			
 			HM_WriteValueFloat(52525, 'MANU_MODE',$AntrAuf);
 			IPS_Sleep(50);
 		} 
