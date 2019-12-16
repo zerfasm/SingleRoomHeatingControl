@@ -30,11 +30,6 @@ class SingleRoomHeatingControl extends IPSModule
 
 		// Anwesenheit
 		$this->RegisterPropertyInteger('PresenceID', 0);
-		
-		$eid = IPS_CreateEvent(0);                  //Ausgelöstes Ereignis
-		IPS_SetEventTrigger($eid, 1, $WindowID);    //Bei Änderung von Variable $WindowID
-		IPS_SetParent($eid, 28187);         //Ereignis zuordnen
-		IPS_SetEventActive($eid, true); 	    //Ereignis aktiv setzen
 
 		// Update trigger
 		$this->RegisterTimer('UpdateTrigger', 0, "SRHC_Update(\$_IPS['TARGET']);");
@@ -60,6 +55,11 @@ class SingleRoomHeatingControl extends IPSModule
 		// Ausgelöstes Ereignis erstellen
 		$WindowID =$this->ReadPropertyInteger('WindowID');
 		$Window = GetValue($WindowID);
+		
+		$eid = IPS_CreateEvent(0);                  //Ausgelöstes Ereignis
+		IPS_SetEventTrigger($eid, 1, $WindowID);    //Bei Änderung von Variable $WindowID
+		IPS_SetParent($eid, 28187);         //Ereignis zuordnen
+		IPS_SetEventActive($eid, true); 	    //Ereignis aktiv setzen
 	}
 
 	 public function Update()
