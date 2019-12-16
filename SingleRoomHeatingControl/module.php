@@ -55,23 +55,23 @@ class SingleRoomHeatingControl extends IPSModule
 		// Variable Heizprogramm erstellen
 		$this->MaintainVariable('HeizProg', 'Heizprogramm', vtInteger, 'Heizungsautomatik', 1, true);
 		
-		// Variable Letze Absenktemperatur erstellen
-		$this->MaintainVariable('AbsenkTemp', 'Absenktemperatur', vtFloat, '~Temperature', 2, true);
+		// Variable Absenktemperatur erstellen
+		$this->MaintainVariable('AbsenkTemp', 'Absenktemperatur', vtFloat, '~Temperature.Room', 2, true);
 		
 		// Variable Grundwärme erstellen
-		$this->MaintainVariable('GrundTemp', 'Grundwärme', vtFloat, '~Temperature', 3, true);
+		$this->MaintainVariable('GrundTemp', 'Grundwärme', vtFloat, '~Temperature.Room', 3, true);
 		
 		// Variable Heiztemperatur erstellen
-		$this->MaintainVariable('HeizTemp', 'Heiztemperatur', vtFloat, '~Temperature', 4, true);
+		$this->MaintainVariable('HeizTemp', 'Heiztemperatur', vtFloat, '~Temperature.Room', 4, true);
 		
 		// Variable Letze Solltemperatur erstellen
-		$this->MaintainVariable('LastSetTemp', 'Letzte Solltemperatur', vtFloat, '~Temperature', 5, true);
+		$this->MaintainVariable('LastSetTemp', 'Letzte Solltemperatur', vtFloat, '~Temperature.Room', 5, true);
 		
 		// Variable Stellantrieb Auf erstellen
-		$this->MaintainVariable('AntrAuf', 'STA-Auf', vtFloat, '~Temperature', 6, true);
+		$this->MaintainVariable('AntrAuf', 'STA-Auf', vtFloat, '~Temperature.HM', 6, true);
 		
 		// Variable Stellantrieb Zu erstellen
-		$this->MaintainVariable('AntrZu', 'STA-Zu', vtFloat, '~Temperature', 7, true);	
+		$this->MaintainVariable('AntrZu', 'STA-Zu', vtFloat, '~Temperature.HM', 7, true);	
 		
 		// ID Instanz
 		$Instance = $this->InstanceID;
