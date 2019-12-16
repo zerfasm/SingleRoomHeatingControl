@@ -70,7 +70,7 @@ class SingleRoomHeatingControl extends IPSModule
 		//IPS_SetEventActive($eid, true); 	    				//Ereignis aktiv setzen
 	}
 
-	 public function Update()
+	public function Update()
 	{
 		$result = 'Ergebnis konnte nicht ermittelt werden!';
 		// Daten lesen
