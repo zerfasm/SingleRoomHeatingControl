@@ -93,7 +93,7 @@ class SingleRoomHeatingControl extends IPSModule
 		
 		 // Solltemperatur
 		$SetTempID = $this->ReadPropertyInteger('SetTempID'); 
-		
+		$SetTemp = GetValue($SetTempID);
 		RequestAction($SetTempID,$AbsenkTemp);
 		IPS_Sleep(50);
 	}
@@ -105,7 +105,7 @@ class SingleRoomHeatingControl extends IPSModule
 		
 		 // Solltemperatur
 		$SetTempID = $this->ReadPropertyInteger('SetTempID'); 
-		
+		$SetTemp = GetValue($SetTempID);
 		RequestAction($SetTempID,$GrundTemp);
 		IPS_Sleep(50);
 	}
@@ -117,7 +117,7 @@ class SingleRoomHeatingControl extends IPSModule
 		
 		 // Solltemperatur
 		$SetTempID = $this->ReadPropertyInteger('SetTempID'); 
-		
+		$SetTemp = GetValue($SetTempID);
 		RequestAction($SetTempID,$HeizTemp);
 		IPS_Sleep(50);
 	}
@@ -129,7 +129,7 @@ class SingleRoomHeatingControl extends IPSModule
 		
 		 // Solltemperatur
 		$SetTempID = $this->ReadPropertyInteger('SetTempID'); 
-		
+		$SetTemp = GetValue($SetTempID);
 		RequestAction($SetTempID,$AntrAuf);
 		IPS_Sleep(50);
 	}
@@ -141,7 +141,7 @@ class SingleRoomHeatingControl extends IPSModule
 		
 		 // Solltemperatur
 		$SetTempID = $this->ReadPropertyInteger('SetTempID'); 
-		
+		$SetTemp = GetValue($SetTempID);
 		RequestAction($SetTempID,$AntrZu);
 		IPS_Sleep(50);
 	}
