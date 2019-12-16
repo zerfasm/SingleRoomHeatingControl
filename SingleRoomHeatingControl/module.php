@@ -93,56 +93,66 @@ class SingleRoomHeatingControl extends IPSModule
 
 	public function AbsenkTemp()
 	{
+		//Letzten Sollwert speichern
+		$update = $this->SetValue('LastSetTemp', GetValue($this->ReadPropertyInteger('SetTempID')));
+		
 		// Absenktemperatur
 		$AbsenkTemp = GetValue($this->GetIDForIdent('AbsenkTemp'));
 		
-		 // Solltemperatur
-		$SetTempID = $this->ReadPropertyInteger('SetTempID'); 
-		RequestAction($SetTempID,$AbsenkTemp);
+		 // Absenktemperatur in Solltemperatur schreiben
+		RequestAction($this->ReadPropertyInteger('SetTempID'),$AbsenkTemp);
 		IPS_Sleep(50);
 	}
 	
 	public function GrundTemp()
 	{
+		//Letzten Sollwert speichern
+		$update = $this->SetValue('LastSetTemp', GetValue($this->ReadPropertyInteger('SetTempID')));
+		
 		// Grundtemperatur
 		$GrundTemp = GetValue($this->GetIDForIdent('GrundTemp'));
 		
-		 // Solltemperatur
-		$SetTempID = $this->ReadPropertyInteger('SetTempID'); 
-		RequestAction($SetTempID,$GrundTemp);
+		 // Grundtemperatur in Solltemperatur schreiben
+		RequestAction($this->ReadPropertyInteger('SetTempID'),$GrundTemp);
 		IPS_Sleep(50);
 	}
 	
 	public function HeizTemp()
 	{
+		//Letzten Sollwert speichern
+		$update = $this->SetValue('LastSetTemp', GetValue($this->ReadPropertyInteger('SetTempID')));
+		
 		// Heiztemperatur
 		$HeizTemp = GetValue($this->GetIDForIdent('HeizTemp'));
 		
-		 // Solltemperatur
-		$SetTempID = $this->ReadPropertyInteger('SetTempID'); 
-		RequestAction($SetTempID,$HeizTemp);
+		 // Heiztemperatur in Solltemperatur schreiben
+		RequestAction($this->ReadPropertyInteger('SetTempID'),$HeizTemp);
 		IPS_Sleep(50);
 	}
 	
 	public function AntrAuf()
 	{
+		//Letzten Sollwert speichern
+		$update = $this->SetValue('LastSetTemp', GetValue($this->ReadPropertyInteger('SetTempID')));
+		
 		// Antrieb Auf
 		$AntrAuf = GetValue($this->GetIDForIdent('AntrAuf'));
 		
-		 // Solltemperatur
-		$SetTempID = $this->ReadPropertyInteger('SetTempID'); 
-		RequestAction($SetTempID,$AntrAuf);
+		 // Antrieb Aufrin Solltemperatur schreiben
+		RequestAction($this->ReadPropertyInteger('SetTempID'),$AntrAuf);
 		IPS_Sleep(50);
 	}
 	
 	public function AntrZu()
 	{
-		// Antrieb Zu
+		//Letzten Sollwert speichern
+		$update = $this->SetValue('LastSetTemp', GetValue($this->ReadPropertyInteger('SetTempID')));
+		
+		// Antrieb Auf
 		$AntrZu = GetValue($this->GetIDForIdent('AntrZu'));
 		
-		 // Solltemperatur
-		$SetTempID = $this->ReadPropertyInteger('SetTempID'); 
-		RequestAction($SetTempID,$AntrZu);
+		 // Antrieb Aufrin Solltemperatur schreiben
+		RequestAction($this->ReadPropertyInteger('SetTempID'),$AntrZu);
 		IPS_Sleep(50);
 	}
 	
