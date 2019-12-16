@@ -94,27 +94,46 @@ class SingleRoomHeatingControl extends IPSModule
 		If ($HeizProg == 0) //Automatic => Steuerung durch CCU
 		{
 			RequestAction($ModusID,0);
-			//HM_WriteValueBoolean($HM_Inst, 'AUTO_MODE',true);
 		} 
 		else if ($HeizProg == 1) // Manuelle Steuerung durch IPS 
 		{
 			If ($Presence == false)
 			{
-				//Letzte Sollwert schreiben
+				//Letzten Sollwert speichern
 				$update = $this->SetValue('LastSetTemp', $SetTemp);
 
+				// Modus auf Manuell stellen
+				If ($Modus == 0)
+				{
+					RequestAction($ModusID,1);
+				}
+				
 				// Auf Absenktemperatur stellen
-				RequestAction($ModusID,1);
 				RequestAction($SetTempID,$AbsenkTemp);
-				//HM_WriteValueFloat($HM_Inst, 'MANU_MODE',$AbsenkTemp);
 				IPS_Sleep(50);
 			}
-			Else if ($Presence == true)
+			Else if (($Presence == true) and ($Window == false))
 			{
+				// Modus auf Manuell stellen
+				If ($Modus == 0)
+				{
+					RequestAction($ModusID,1);
+				}
+				
 				// Auf letzten Sollwert stellen
-				RequestAction($ModusID,1);
 				RequestAction($SetTempID,$LastSetTemp);
-				//HM_WriteValueFloat($HM_Inst, 'MANU_MODE',$LastSetTemp);
+				IPS_Sleep(50);
+			}
+			Else if (($Presence == true) and ($Window == true))
+			{
+				// Modus auf Manuell stellen
+				If ($Modus == 0)
+				{
+					RequestAction($ModusID,1);
+				}
+				
+				// Auf letzten Sollwert stellen
+				RequestAction($SetTempID,$AntrZu);
 				IPS_Sleep(50);
 			}
 		} 
@@ -123,10 +142,14 @@ class SingleRoomHeatingControl extends IPSModule
 			//Letzten Sollwert schreiben
 			$update = $this->SetValue('LastSetTemp', $SetTemp);
 			
+			// Modus auf Manuell stellen
+			If ($Modus == 0)
+			{
+				RequestAction($ModusID,1);
+			}
+			
 			// Stellantrieb Auf
-			RequestAction($ModusID,1);
 			RequestAction($SetTempID,$AntrAuf);
-			//HM_WriteValueFloat($HM_Inst, 'MANU_MODE',$AntrAuf);
 			IPS_Sleep(50);
 		} 
 		else if ($HeizProg == 3)
@@ -134,10 +157,13 @@ class SingleRoomHeatingControl extends IPSModule
 			//Letzten Sollwert schreiben
 			$update = $this->SetValue('LastSetTemp', $SetTemp);
 			
+			// Modus auf Manuell stellen
+			If ($Modus == 0)
+			{
+				RequestAction($ModusID,1);
+			}
 			// Stellantrieb Zu
-			RequestAction($ModusID,1);
 			RequestAction($SetTempID,$AntrZu);
-			//HM_WriteValueFloat($HM_Inst, 'MANU_MODE',$AntrZu);
 			IPS_Sleep(50);
 		} 
 	}
