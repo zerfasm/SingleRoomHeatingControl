@@ -16,11 +16,6 @@ class SingleRoomHeatingControl extends IPSModule
 		$this->RegisterPropertyInteger('ModID', 0);
 		$this->RegisterPropertyInteger('SetTempID', 0);
 
-		// Wochenplan
-		$this->RegisterPropertyInteger('WeeklyTimeTableEventID', 0);
-		$this->RegisterPropertyInteger('HolidayIndicatorID', 0);
-		$this->RegisterPropertyInteger('DayUsedWhenHoliday',6);
-
 		// Fensterkontakt
 		$this->RegisterPropertyInteger('WindowID', 0);
 
