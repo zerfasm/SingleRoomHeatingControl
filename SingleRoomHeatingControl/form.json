@@ -2,7 +2,8 @@
   "elements": [
     {"type": "ExpansionPanel", "caption": "Temperature Values",
       "items": [
-	{"type": "ValidationTextBox", "name": "RoomName", "caption": "Room Name:" },  
+	{"type": "ValidationTextBox", "name": "RoomName", "caption": "Room Name:" }, 
+	{"type": "SelectInstance", "name": "InstanceID", "caption": "Instance ID:" }, 
         {"type": "SelectVariable", "name": "SetTempID", "caption": "Set Temperature ID:" },   
 	{"type": "ValidationTextBox", "name": "AbsenkTemp", "caption": "Absenktemperatur:" },
 	{"type": "ValidationTextBox", "name": "GrundTemp", "caption": "Grundwärme:" },
