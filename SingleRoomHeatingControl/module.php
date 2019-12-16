@@ -43,6 +43,12 @@ class SingleRoomHeatingControl extends IPSModule
 		
 		// Heiztemperatur trigger
 		$this->RegisterTimer('HeizTempTrigger', 0, "SRHC_HeizTemp(\$_IPS['TARGET']);");
+		
+		// Antrieb Auf trigger
+		$this->RegisterTimer('AntrAufTrigger', 0, "SRHC_AntrAuf(\$_IPS['TARGET']);");
+		
+		// Antrieb Zu trigger
+		$this->RegisterTimer('AntrZuTrigger', 0, "SRHC_AntrZu(\$_IPS['TARGET']);");
 	}
 
 	public function Destroy()
@@ -113,6 +119,30 @@ class SingleRoomHeatingControl extends IPSModule
 		$SetTempID = $this->ReadPropertyInteger('SetTempID'); 
 		
 		RequestAction($SetTempID,$HeizTemp);
+		IPS_Sleep(50);
+	}
+	
+	public function AntrAuf()
+	{
+		// Grundtemperatur
+		$AntrAuf = $this->ReadPropertyFloat('AntrAuf');
+		
+		 // Solltemperatur
+		$SetTempID = $this->ReadPropertyInteger('SetTempID'); 
+		
+		RequestAction($SetTempID,$AntrAuf);
+		IPS_Sleep(50);
+	}
+	
+	public function AntrZu()
+	{
+		// Grundtemperatur
+		$AntrZu = $this->ReadPropertyFloat('AntrZu');
+		
+		 // Solltemperatur
+		$SetTempID = $this->ReadPropertyInteger('SetTempID'); 
+		
+		RequestAction($SetTempID,$AntrZu);
 		IPS_Sleep(50);
 	}
 	
