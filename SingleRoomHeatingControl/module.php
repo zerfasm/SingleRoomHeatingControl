@@ -65,7 +65,7 @@ class SingleRoomHeatingControl extends IPSModule
 		$HeizProg = GetValue($this->ReadPropertyInteger('HeizProgID'));
 		 
 		// Letzte SollTemperatur 
-		$LastSetTemp = GetValue($this->ReadPropertyInteger('LastSetTempID'));
+		$LastSetTemp = GetValue($this->ReadPropertyInteger('LastSetTemp'));
 
 		// Fensterkontakt 
 		$win = GetValue($this->ReadPropertyInteger('WindowID'));
@@ -104,7 +104,8 @@ class SingleRoomHeatingControl extends IPSModule
 			Else if ($pres == true)
 			{
 				// Auf letzten Sollwert stellen
-				HM_WriteValueFloat(52525, 'MANU_MODE',$update);
+				
+				HM_WriteValueFloat(52525, 'MANU_MODE',$LastSetTemp);
 				IPS_Sleep(50);
 			}
 		} 
