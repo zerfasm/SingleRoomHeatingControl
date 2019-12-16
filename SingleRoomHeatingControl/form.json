@@ -8,7 +8,7 @@
 	{"type": "ValidationTextBox", "name": "AbsenkTemp", "caption": "Setback Temperatue:" },
 	{"type": "ValidationTextBox", "name": "GrundTemp", "caption": "Basic Temperature:" },
 	{"type": "ValidationTextBox", "name": "AntrAuf", "caption": "Actuator Open:" },
-	{"type": "ValidationTextBox", "name": "AntrZu", "caption": "Actuator Close:" },
+	{"type": "ValidationTextBox", "name": "AntrZu", "caption": "Actuator Close:" }
       ]
     },
 	
