@@ -3,8 +3,12 @@
         "de": {
             "Temperature Values": "Eingabe Temperaturen",
             "Room Name:": "Raum Name:",
+            "Instance ID:": "Instanz ID:",
             "Set Temperature ID:": "Soll-Temperatur ID:",
-            
+            "Setback Temperature:": "Absenktemperatur:",
+            "Basic Temperature:": "Grundwärme:",
+            "Actuator Open:": "Stellantrieb Auf:",
+            "Actuator Close:": "Stellantrieb Zu:",
             "Time Schedule": "Wochenplan",
             "Weekly Timetable Event ID": "Wochenplan ID",
             "Consider Holiday (optional)": "Berücksichtigung Feiertage",
