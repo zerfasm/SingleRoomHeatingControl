@@ -15,6 +15,7 @@ class SingleRoomHeatingControl extends IPSModule
 		$this->RegisterPropertyString('RoomName', "");
 		$this->RegisterPropertyInteger('SetTempID', 0);
 		$this->RegisterPropertyInteger('HeizProgID', 0);
+		$this->RegisterPropertyInteger('LastSetTempID', 0);
 		$this->RegisterPropertyFloat('AbsenkTemp', 19.0);
 		$this->RegisterPropertyFloat('GrundTemp', 20.0);
 		$this->RegisterPropertyFloat('AntrAuf', 30.0);
@@ -62,6 +63,9 @@ class SingleRoomHeatingControl extends IPSModule
 		 
 		// Heizungsprogramm 
 		$HeizProg = GetValue($this->ReadPropertyInteger('HeizProgID'));
+		 
+		// Letzte SollTemperatur 
+		$LastSetTemp = GetValue($this->ReadPropertyInteger('LastSetTempID'));
 
 		// Fensterkontakt 
 		$win = GetValue($this->ReadPropertyInteger('WindowID'));
