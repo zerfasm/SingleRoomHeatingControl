@@ -53,10 +53,10 @@
 	
   "actions": [
     {"type": "Label", "caption": "Kommandos" },
-    {"type": "Button", "caption": "UPDATE", "onClick": "SRHC_Update($id);" },    
-    {"type": "Button", "caption": "ABSENKEN", "onClick": "SRHC_AbsenkTemp($id);" },
-    {"type": "Button", "caption": "GRUNDWÄRME", "onClick": "SRHC_GrundTemp($id);" },	
-    {"type": "Button", "caption": "SOLL-TEMPERATUR", "onClick": "SRHC_SollTemp($id);" },
+    {"type": "Button", "caption": "Upadate", "onClick": "SRHC_Update($id);" },    
+    {"type": "Button", "caption": "Absenken", "onClick": "SRHC_AbsenkTemp($id);" },
+    {"type": "Button", "caption": "Grundwärme", "onClick": "SRHC_GrundTemp($id);" },	
+    {"type": "Button", "caption": "Heizen", "onClick": "SRHC_HeizTemp($id);" },
     {"type": "Button", "caption": "STA-Auf", "onClick": "SRHC_STAAuf($id);" },
     {"type": "Button", "caption": "STA-Zu", "onClick": "SRHC_STAZu($id);" }	  
   ]
