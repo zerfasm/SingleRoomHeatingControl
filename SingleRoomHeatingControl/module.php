@@ -11,7 +11,7 @@ class SingleRoomHeatingControl extends IPSModule
 		//Never delete this line!
 		parent::Create();
 
-		// Temperature Parameter
+		// Temperatur Parameter
 		$this->RegisterPropertyString('RoomName', "");
 		$this->RegisterPropertyInteger('ModID', 0);
 		$this->RegisterPropertyInteger('SetTempID', 0);
@@ -20,15 +20,15 @@ class SingleRoomHeatingControl extends IPSModule
 		$this->RegisterPropertyFloat('AntrAuf', 30.0);
 		$this->RegisterPropertyFloat('AntrZu', 6.0);
 
-		// Time Schedule
+		// Wochenplan
 		$this->RegisterPropertyInteger('WeeklyTimeTableEventID', 0);
 		$this->RegisterPropertyInteger('HolidayIndicatorID', 0);
 		$this->RegisterPropertyInteger('DayUsedWhenHoliday',6);
 
-		// Contacts
+		// Fensterkontakt
 		$this->RegisterPropertyInteger('WindowID', 0);
 
-		// Presence
+		// Anwesenheit
 		$this->RegisterPropertyInteger('PresenceID', 0);
 
 		// Update trigger
@@ -46,12 +46,11 @@ class SingleRoomHeatingControl extends IPSModule
 		//Never delete this line!
 		parent::ApplyChanges();	
 
-		// Create Heizprogramm
+		// Variable Heizprogramm erstellen
 		$this->MaintainVariable('HeizProg', 'Heizprogramm', vtInteger, 'Heizungsautomatik', 1, true);
-		
-		// Create Letzet Solltemperatur
-		$this->MaintainVariable('LastSetTemp', 'Letzte Solltemperatur', vtFloat, '~Temperature', 2, true);
 
+		// Variable Letze Solltemperatur erstellen
+		$this->MaintainVariable('LastSetTemp', 'Letzte Solltemperatur', vtFloat, '~Temperature', 2, true);
 	}
 
 	 public function Update()
@@ -59,37 +58,36 @@ class SingleRoomHeatingControl extends IPSModule
 		$result = 'Ergebnis konnte nicht ermittelt werden!';
 		// Daten lesen
 		 $state = true;
-		 
+
 		// Heizungsprogramm 
 		$HeizProg = GetValue($this->GetIDForIdent('HeizProg'));
+
+		 // Solltemperatur
+		$SetTempID = $this->ReadPropertyInteger('SetTempID'); 
+		$SetTemp = GetValue($SetTempID);
 		 
 		// Letzte SollTemperatur 
 		$LastSetTemp = GetValue($this->GetIDForIdent('LastSetTemp'));
+		 
+		// Absenktemperatur
+		$AbsenkTemp = $this->ReadPropertyFloat('AbsenkTemp');
 		
-		 // Fensterkontakt 
+		// Stellantrieb Auf
+		$AntrAuf = $this->ReadPropertyFloat('AntrAuf');
+
+		// Stellantrieb Zu
+		$AntrZu = $this->ReadPropertyFloat('AntrZu'); 
+		 
+		// Modus
+		$ModusID = $this->ReadPropertyInteger('ModID');
+		$Modus = GetValue($ModusID);
+ 		
+		// Fensterkontakt 
 		$Window = GetValue($this->ReadPropertyInteger('WindowID'));
 
 		 // Anwesenheit 
 		$Presence = GetValue($this->ReadPropertyInteger('PresenceID'));
 
-		 // Stellantrieb Auf
-		$AntrAuf = $this->ReadPropertyFloat('AntrAuf');
-
-		// Stellantrieb Zu
-		$AntrZu = $this->ReadPropertyFloat('AntrZu'); 
-
-		// Absenktemperatur
-		$AbsenkTemp = $this->ReadPropertyFloat('AbsenkTemp');
-
-		// Solltemperatur
-		$SetTempID = $this->ReadPropertyInteger('SetTempID'); 
-		$SetTemp = GetValue($SetTempID);
-		
-		 
-		 // Modus
-		 $ModusID = $this->ReadPropertyInteger('ModID');
-		 $Modus = GetValue($ModusID);
-		 
 		 // Steuerungsautomatik
 		If ($HeizProg == 0) //Automatic => Steuerung durch CCU
 		{
@@ -107,7 +105,7 @@ class SingleRoomHeatingControl extends IPSModule
 				{
 					RequestAction($ModusID,1);
 				}
-				
+
 				// Auf Absenktemperatur stellen
 				RequestAction($SetTempID,$AbsenkTemp);
 				IPS_Sleep(50);
@@ -119,7 +117,7 @@ class SingleRoomHeatingControl extends IPSModule
 				{
 					RequestAction($ModusID,1);
 				}
-				
+
 				// Auf letzten Sollwert stellen
 				RequestAction($SetTempID,$LastSetTemp);
 				IPS_Sleep(50);
@@ -131,7 +129,7 @@ class SingleRoomHeatingControl extends IPSModule
 				{
 					RequestAction($ModusID,1);
 				}
-				
+
 				// Auf letzten Sollwert stellen
 				RequestAction($SetTempID,$AntrZu);
 				IPS_Sleep(50);
@@ -141,13 +139,13 @@ class SingleRoomHeatingControl extends IPSModule
 		{
 			//Letzten Sollwert schreiben
 			$update = $this->SetValue('LastSetTemp', $SetTemp);
-			
+
 			// Modus auf Manuell stellen
 			If ($Modus == 0)
 			{
 				RequestAction($ModusID,1);
 			}
-			
+
 			// Stellantrieb Auf
 			RequestAction($SetTempID,$AntrAuf);
 			IPS_Sleep(50);
@@ -156,7 +154,7 @@ class SingleRoomHeatingControl extends IPSModule
 		{
 			//Letzten Sollwert schreiben
 			$update = $this->SetValue('LastSetTemp', $SetTemp);
-			
+
 			// Modus auf Manuell stellen
 			If ($Modus == 0)
 			{
