@@ -13,7 +13,7 @@ class SingleRoomHeatingControl extends IPSModule
 
 		// Temperature Parameter
 		$this->RegisterPropertyString('RoomName', "");
-		$this->RegisterPropertyInteger('InstanceID', NULL);
+		$this->RegisterPropertyInteger('InstanceID', null);
 		$this->RegisterPropertyInteger('SetTempID', 0);
 		$this->RegisterPropertyFloat('AbsenkTemp', 19.0);
 		$this->RegisterPropertyFloat('GrundTemp', 20.0);
@@ -85,10 +85,13 @@ class SingleRoomHeatingControl extends IPSModule
 		$SetTemp = GetValue($this->ReadPropertyInteger('SetTempID'));
 		$SetTempID = $this->ReadPropertyInteger('SetTempID'); 
 		 
+		 // Instanz ID
+		 $HM_Inst = $this->ReadPropertyInteger('InstanceID');
+		 
 		 // Steuerungsautomatik
 		If ($HeizProg == 0) //Automatic => Steuerung durch CCU
 		{
-			HM_WriteValueBoolean(52525, 'AUTO_MODE',true);
+			HM_WriteValueBoolean($HM_Inst, 'AUTO_MODE',true);
 		} 
 		else if ($HeizProg == 1) // Manuelle Steuerung durch IPS 
 		{
@@ -99,14 +102,14 @@ class SingleRoomHeatingControl extends IPSModule
 
 				// Auf Absenktemperatur stellen
 				//RequestAction($SetTempID,$AbsenkTemp);
-				HM_WriteValueFloat(52525, 'MANU_MODE',$AbsenkTemp);
+				HM_WriteValueFloat($HM_Inst, 'MANU_MODE',$AbsenkTemp);
 				IPS_Sleep(50);
 			}
 			Else if ($pres == true)
 			{
 				// Auf letzten Sollwert stellen
 				//RequestAction($SetTempID,$LastSetTemp);
-				HM_WriteValueFloat(52525, 'MANU_MODE',$LastSetTemp);
+				HM_WriteValueFloat($HM_Inst, 'MANU_MODE',$LastSetTemp);
 				IPS_Sleep(50);
 			}
 		} 
@@ -117,7 +120,7 @@ class SingleRoomHeatingControl extends IPSModule
 			
 			// Stellantrieb Auf
 			//RequestAction($SetTempID,$AntrAuf);
-			HM_WriteValueFloat(52525, 'MANU_MODE',$AntrAuf);
+			HM_WriteValueFloat($HM_Inst, 'MANU_MODE',$AntrAuf);
 			IPS_Sleep(50);
 		} 
 		else if ($HeizProg == 3)
@@ -127,7 +130,7 @@ class SingleRoomHeatingControl extends IPSModule
 			
 			// Stellantrieb Zu
 			//RequestAction($SetTempID,$AntrZu);
-			HM_WriteValueFloat(52525, 'MANU_MODE',$AntrZu);
+			HM_WriteValueFloat($HM_Inst, 'MANU_MODE',$AntrZu);
 			IPS_Sleep(50);
 		} 
 	}
