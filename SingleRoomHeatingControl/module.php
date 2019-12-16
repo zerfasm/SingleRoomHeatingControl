@@ -70,6 +70,19 @@ class SingleRoomHeatingControl extends IPSModule
 		//IPS_SetEventActive($eid, true); 	    				//Ereignis aktiv setzen
 	}
 
+	public function Absenken()
+	{
+		// Absenktemperatur
+		$AbsenkTemp = $this->ReadPropertyFloat('AbsenkTemp');
+		
+		 // Solltemperatur
+		$SetTempID = $this->ReadPropertyInteger('SetTempID'); 
+		$SetTemp = GetValue($SetTempID);
+		
+		RequestAction($SetTempID,$AbsenkTemp);
+		IPS_Sleep(50);
+	}
+	
 	public function Update()
 	{
 		$result = 'Ergebnis konnte nicht ermittelt werden!';
