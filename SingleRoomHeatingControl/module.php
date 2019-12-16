@@ -57,7 +57,7 @@ class SingleRoomHeatingControl extends IPSModule
 		
 		// Ausgelöstes Ereignis durch Fensterkontakt erstellen
 		$WindowID =$this->ReadPropertyInteger('WindowID');
-		$Window = GetValue($WindowID);
+		
 		$eid = IPS_CreateEvent(0);                  	//Ausgelöstes Ereignis
 		IPS_SetEventTrigger($eid, 1, $WindowID);    	//Bei Änderung von Variable $WindowID
 		IPS_SetParent($eid, $Instance);         	//Ereignis zuordnen
@@ -65,7 +65,7 @@ class SingleRoomHeatingControl extends IPSModule
 		
 		// Ausgelöstes Ereignis durch Heiprogramm erstellen
 		$HeizProgID = $this->GetIDForIdent('HeizProg');
-		$HeizProg = GetValue($HeizProgID);
+		
 		$eid = IPS_CreateEvent(0);                  	//Ausgelöstes Ereignis
 		IPS_SetEventTrigger($eid, 1, $HeizProgID);    	//Bei Änderung von Variable $HeizProgID
 		IPS_SetParent($eid, $Instance);         	//Ereignis zuordnen
@@ -79,7 +79,6 @@ class SingleRoomHeatingControl extends IPSModule
 		 $state = true;
 
 		// Heizungsprogramm 
-		$HeizProgID = $this->GetIDForIdent('HeizProg');
 		$HeizProg = GetValue($HeizProgID);
 
 		 // Solltemperatur
@@ -103,7 +102,7 @@ class SingleRoomHeatingControl extends IPSModule
 		$Modus = GetValue($ModusID);
  		
 		// Fensterkontakt 
-		$Window = GetValue($this->ReadPropertyInteger('WindowID'));
+		$Window = GetValue($WindowID);
 
 		 // Anwesenheit 
 		$Presence = GetValue($this->ReadPropertyInteger('PresenceID'));
