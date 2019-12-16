@@ -111,13 +111,14 @@ class SingleRoomHeatingControl extends IPSModule
 		} 
 		else if ($HeizProg == 2)
 		{
-			
-			HM_WriteValueFloat(52525, 'MANU_MODE',$AntrAuf);
+			RequestAction($SetTempID,$AntrAuf);
+			//HM_WriteValueFloat(52525, 'MANU_MODE',$AntrAuf);
 			IPS_Sleep(50);
 		} 
 		else if ($HeizProg == 3)
 		{
-			HM_WriteValueFloat(52525, 'MANU_MODE',$AntrZu);
+			RequestAction($SetTempID,$AntrZu);
+			//HM_WriteValueFloat(52525, 'MANU_MODE',$AntrZu);
 			IPS_Sleep(50);
 		} 
 	}
