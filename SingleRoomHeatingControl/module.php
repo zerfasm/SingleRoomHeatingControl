@@ -133,7 +133,7 @@ class SingleRoomHeatingControl extends IPSModule
 	public function AntrZu()
 	{
 		// Grundtemperatur
-		$AntrZuf = $this->ReadPropertyFloat('AntrZu');
+		$AntrZu = $this->ReadPropertyFloat('AntrZu');
 		
 		 // Solltemperatur
 		$SetTempID = $this->ReadPropertyInteger('SetTempID'); 
