@@ -30,15 +30,6 @@ class SingleRoomHeatingControl extends IPSModule
 
 		// Anwesenheit
 		$this->RegisterPropertyInteger('PresenceID', 0);
-		
-		// Ausgelöstes Ereignis erstellen
-		$WindowID =$this->ReadPropertyInteger('WindowID');
-		$Window = GetValue($WindowID);
-		
-		$eid = IPS_CreateEvent(0);                  //Ausgelöstes Ereignis
-		IPS_SetEventTrigger($eid, 1, $WindowID);      //Bei Änderung von Variable $WindowID
-		IPS_SetParent($eid, $_IPS['SELF']);         //Ereignis zuordnen
-		IPS_SetEventActive($eid, true); 	    //Ereignis aktiv setzen
 
 		// Update trigger
 		$this->RegisterTimer('UpdateTrigger', 0, "SRHC_Update(\$_IPS['TARGET']);");
@@ -60,6 +51,15 @@ class SingleRoomHeatingControl extends IPSModule
 
 		// Variable Letze Solltemperatur erstellen
 		$this->MaintainVariable('LastSetTemp', 'Letzte Solltemperatur', vtFloat, '~Temperature', 2, true);
+		
+		// Ausgelöstes Ereignis erstellen
+		$WindowID =$this->ReadPropertyInteger('WindowID');
+		$Window = GetValue($WindowID);
+		
+		$eid = IPS_CreateEvent(0);                  //Ausgelöstes Ereignis
+		IPS_SetEventTrigger($eid, 1, $WindowID);    //Bei Änderung von Variable $WindowID
+		IPS_SetParent($eid, $_IPS['SELF']);         //Ereignis zuordnen
+		IPS_SetEventActive($eid, true); 	    //Ereignis aktiv setzen
 	}
 
 	 public function Update()
