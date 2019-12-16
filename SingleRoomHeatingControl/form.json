@@ -51,7 +51,10 @@
   ],
 	
   "actions": [
-    {"type": "Label", "caption": "Update!" },
-    {"type": "Button", "caption": "UPDATE", "onClick": "SRHC_Update($id);" }
+    {"type": "Label", "caption": "Kommandos" },
+    {"type": "Button", "caption": "UPDATE", "onClick": "SRHC_Update($id);" },
+	    
+    {"type": "Button", "caption": "ABSENKEN", "onClick": "SRHC_Update($id);" },  
+	  
   ]
 }
