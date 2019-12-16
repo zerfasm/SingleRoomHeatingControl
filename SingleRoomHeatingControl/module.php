@@ -104,7 +104,7 @@ class SingleRoomHeatingControl extends IPSModule
 			Else if ($pres == true)
 			{
 				// Auf letzten Sollwert stellen
-				HM_WriteValueFloat(52525, 'MANU_MODE',$LastSetTemp);
+				HM_WriteValueFloat(52525, 'MANU_MODE',$update);
 				IPS_Sleep(50);
 			}
 		} 
