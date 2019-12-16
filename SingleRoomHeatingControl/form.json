@@ -8,7 +8,7 @@
 	{"type": "ValidationTextBox", "name": "GrundTemp", "caption": "Grundwärme:" },
 	{"type": "ValidationTextBox", "name": "AntrAuf", "caption": "Stellantrieb Auf:" },
 	{"type": "ValidationTextBox", "name": "AntrZu", "caption": "Stellantrieb Zu:" },
-	      
+	{"type": "SelectVariable", "name": "LastSetTemp", "caption": "Letzte Solltemperatur:" },      
 	{"type": "SelectVariable", "name": "HeizProgID", "caption": "Heizprogramm ID:" }
       ]
     },
