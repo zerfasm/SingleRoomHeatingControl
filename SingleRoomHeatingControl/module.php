@@ -52,13 +52,22 @@ class SingleRoomHeatingControl extends IPSModule
 		// Variable Letze Solltemperatur erstellen
 		$this->MaintainVariable('LastSetTemp', 'Letzte Solltemperatur', vtFloat, '~Temperature', 2, true);
 		
+		// ID Instanz
+		$Instance = $this->InstanceID;
+		
 		// Ausgelöstes Ereignis durch Fensterkontakt erstellen
 		$WindowID =$this->ReadPropertyInteger('WindowID');
 		$Window = GetValue($WindowID);
-		$Instance = $this->InstanceID;
-		
 		$eid = IPS_CreateEvent(0);                  	//Ausgelöstes Ereignis
 		IPS_SetEventTrigger($eid, 1, $WindowID);    	//Bei Änderung von Variable $WindowID
+		IPS_SetParent($eid, $Instance);         	//Ereignis zuordnen
+		IPS_SetEventActive($eid, true); 	    	//Ereignis aktiv setzen
+		
+		// Ausgelöstes Ereignis durch Heiprogramm erstellen
+		$HeizProgID = $this->GetIDForIdent('HeizProg');
+		$HeizProg = GetValue($HeizProgID);
+		$eid = IPS_CreateEvent(0);                  	//Ausgelöstes Ereignis
+		IPS_SetEventTrigger($eid, 1, $HeizProgID);    	//Bei Änderung von Variable $HeizProgID
 		IPS_SetParent($eid, $Instance);         	//Ereignis zuordnen
 		IPS_SetEventActive($eid, true); 	    	//Ereignis aktiv setzen
 	}
@@ -70,7 +79,8 @@ class SingleRoomHeatingControl extends IPSModule
 		 $state = true;
 
 		// Heizungsprogramm 
-		$HeizProg = GetValue($this->GetIDForIdent('HeizProg'));
+		$HeizProgID = $this->GetIDForIdent('HeizProg');
+		$HeizProg = GetValue($HeizProgID);
 
 		 // Solltemperatur
 		$SetTempID = $this->ReadPropertyInteger('SetTempID'); 
