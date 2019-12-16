@@ -13,6 +13,7 @@ class SingleRoomHeatingControl extends IPSModule
 
 		// Temperature Parameter
 		$this->RegisterPropertyString('RoomName', "");
+		$this->RegisterPropertyInteger('InstanceID', NULL);
 		$this->RegisterPropertyInteger('SetTempID', 0);
 		$this->RegisterPropertyFloat('AbsenkTemp', 19.0);
 		$this->RegisterPropertyFloat('GrundTemp', 20.0);
