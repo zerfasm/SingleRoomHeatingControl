@@ -51,6 +51,14 @@ class SingleRoomHeatingControl extends IPSModule
 
 		// Variable Letze Solltemperatur erstellen
 		$this->MaintainVariable('LastSetTemp', 'Letzte Solltemperatur', vtFloat, '~Temperature', 2, true);
+		
+		// Ausgelöstes Ereignis erstellen
+		$Window = GetValue($this->ReadPropertyInteger('WindowID'));
+		
+		$eid = IPS_CreateEvent(0);                  //Ausgelöstes Ereignis
+		IPS_SetEventTrigger($eid, 1, $Window);      //Bei Änderung von Variable $Window
+		IPS_SetParent($eid, $_IPS['SELF']);         //Ereignis zuordnen
+		IPS_SetEventActive($eid, true); 	    //Ereignis aktiv setzen
 	}
 
 	 public function Update()
