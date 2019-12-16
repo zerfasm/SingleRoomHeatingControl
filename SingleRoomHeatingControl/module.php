@@ -122,29 +122,7 @@ class SingleRoomHeatingControl extends IPSModule
 		IPS_Sleep(50);
 	}
 	
-	public function AntrAuf()
-	{
-		// Grundtemperatur
-		$AntrAuf = $this->ReadPropertyFloat('AntrAuf');
-		
-		 // Solltemperatur
-		$SetTempID = $this->ReadPropertyInteger('SetTempID'); 
-		$SetTemp = GetValue($SetTempID);
-		RequestAction($SetTempID,$AntrAuf);
-		IPS_Sleep(50);
-	}
-	
-	public function AntrZu()
-	{
-		// Grundtemperatur
-		$AntrZu = $this->ReadPropertyFloat('AntrZu');
-		
-		 // Solltemperatur
-		$SetTempID = $this->ReadPropertyInteger('SetTempID'); 
-		$SetTemp = GetValue($SetTempID);
-		RequestAction($SetTempID,$AntrZu);
-		IPS_Sleep(50);
-	}
+
 	
 	public function Update()
 	{
