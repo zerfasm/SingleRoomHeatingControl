@@ -62,7 +62,7 @@ class SingleRoomHeatingControl extends IPSModule
 		
 		// Variable Letze Absenktemperatur erstellen
 		$this->MaintainVariable('AbsenkTemp', 'Absenktemperatur', vtFloat, '~Temperature', 2, true);
-		$this->SetValue('AbsenkTemp',25),
+		$this->SetValue('AbsenkTemp',25);
 		
 		// Variable Grundwärme erstellen
 		$this->MaintainVariable('GrundTemp', 'Grundwärme', vtFloat, '~Temperature', 3, true);
