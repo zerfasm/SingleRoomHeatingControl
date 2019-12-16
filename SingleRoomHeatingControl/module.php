@@ -65,9 +65,10 @@ class SingleRoomHeatingControl extends IPSModule
 		$HeizProg = GetValue($this->ReadPropertyInteger('HeizProgID'));
 		 
 		// Letzte SollTemperatur 
-		$LastSetTemp = GetValue($this->ReadPropertyInteger('LastSetTempID'));
-
-		// Fensterkontakt 
+		//$LastSetTemp = GetValue($this->ReadPropertyInteger('LastSetTempID'));
+		$LastSetTemp = GetValue($this->GetIDForIdent('LastSetTemp'));
+		
+		 // Fensterkontakt 
 		$win = GetValue($this->ReadPropertyInteger('WindowID'));
 
 		 // Anwesenheit 
