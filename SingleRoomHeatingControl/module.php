@@ -76,6 +76,15 @@ class SingleRoomHeatingControl extends IPSModule
 		// ID Instanz
 		$Instance = $this->InstanceID;
 		
+		//Wochenplan erstellen
+		$this->RegisterEvent("Wochenplan", "Wochenplan_".$this->InstanceID, 2, $this->InstanceID, 30);
+        	// Anlegen der Daten für den Wochenplan
+        	for ($i = 0; $i <= 6; $i++) {
+            	IPS_SetEventScheduleGroup($this->GetIDForIdent("Wochenplan_".$this->InstanceID), $i, pow(2, $i));
+        	}
+		IPS_SetEventScheduleAction($this->GetIDForIdent("Wochenplan_".$this->InstanceID), 1, "Absenken", 0x40FF00, "Wochenplan_SetState(\$_IPS['TARGET'], 1);");    
+        	IPS_SetEventScheduleAction($this->GetIDForIdent("Wochenplan_".$this->InstanceID), 2, "Grundwärme", 0xFF0040, "Wochenplan_SetState(\$_IPS['TARGET'], 1);");  
+        	IPS_SetEventScheduleAction($this->GetIDForIdent("Wochenplan_".$this->InstanceID), 3, "Heizen", 0xFF0040, "Wochenplan_SetState(\$_IPS['TARGET'], 1);"); 		
 		// Ausgelöstes Ereignis durch Fensterkontakt erstellen
 		//$eid = IPS_CreateEvent(0);                  				//Ausgelöstes Ereignis
 		//IPS_SetEventTrigger($eid, 1, $this->ReadPropertyInteger('WindowID'));   //Bei Änderung von Variable $WindowID
@@ -91,6 +100,51 @@ class SingleRoomHeatingControl extends IPSModule
 		//IPS_SetEventActive($eid, true); 	    				//Ereignis aktiv setzen
 	}
 
+	private function RegisterEvent($Name, $Ident, $Typ, $Parent, $Position)
+	{
+		$eid = @$this->GetIDForIdent($Ident);
+		if($eid === false) {
+			$eid = 0;
+		} elseif(IPS_GetEvent($eid)['EventType'] <> $Typ) {
+			IPS_DeleteEvent($eid);
+			$eid = 0;
+		}
+		
+		//we need to create one
+		if ($eid == 0) {
+		    $EventID = IPS_CreateEvent($Typ);
+			IPS_SetParent($EventID, $Parent);
+			IPS_SetIdent($EventID, $Ident);
+			IPS_SetName($EventID, $Name);
+			IPS_SetPosition($EventID, $Position);
+			IPS_SetEventActive($EventID, true);  
+		}
+	 }  
+	
+	public function GetWeekplanState()
+	{
+		$this->SendDebug("GetWeekplanState", "Wochenplan Status einlesen", 0);
+		$e = IPS_GetEvent($this->GetIDForIdent("Wochenplan_".$this->InstanceID));
+		$actionID = false;
+		//Durch alle Gruppen gehen
+		foreach($e['ScheduleGroups'] as $g) {
+		    //Überprüfen ob die Gruppe für heute zuständig ist
+		    if(($g['Days'] & pow(2,date("N",time())-1)) > 0) {
+		    //Aktuellen Schaltpunkt suchen. Wir nutzen die Eigenschaft, dass die Schaltpunkte immer aufsteigend sortiert sind.
+		    foreach($g['Points'] as $p) {
+		       if(date("H") * 3600 + date("i") * 60 + date("s") >= $p['Start']['Hour'] * 3600 + $p['Start']['Minute'] * 60 + $p['Start']['Second']) {
+			  $actionID = $p['ActionID'];
+		       } else {
+			  break; //Sobald wir drüber sind, können wir abbrechen.
+		       }
+		       }
+		    break; //Sobald wir unseren Tag gefunden haben, können wir die Schleife abbrechen. Jeder Tag darf nur in genau einer Gruppe sein.
+		    }
+		}
+		$this->SendDebug("GetWeekplanState", "Ergebnis: ".intval($actionID), 0);
+		SetValueInteger($this->GetIDForIdent("WeekplanState"),  intval($actionID));
+	}  
+	
 	public function AbsenkTemp()
 	{
 		//Letzten Sollwert speichern
