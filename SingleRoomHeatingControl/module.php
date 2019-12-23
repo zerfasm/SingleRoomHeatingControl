@@ -119,30 +119,6 @@ class SingleRoomHeatingControl extends IPSModule
 		}
 	}  
 	
-	public function GetWeekplanState()
-	{
-		$this->SendDebug("GetWeekplanState", "Wochenplan Status einlesen", 0);
-		$e = IPS_GetEvent($this->GetIDForIdent("IPS2Watering_Event_".$this->InstanceID));
-		$actionID = false;
-		//Durch alle Gruppen gehen
-		foreach($e['ScheduleGroups'] as $g) {
-		    //Überprüfen ob die Gruppe für heute zuständig ist
-		    if($g['Days'] & date("N") > 0) {
-		    //Aktuellen Schaltpunkt suchen. Wir nutzen die Eigenschaft, dass die Schaltpunkte immer aufsteigend sortiert sind.
-		    foreach($g['Points'] as $p) {
-		       if(date("H") * 3600 + date("i") * 60 + date("s") >= $p['Start']['Hour'] * 3600 + $p['Start']['Minute'] * 60 + $p['Start']['Second']) {
-			  $actionID = $p['ActionID'];
-		       } else {
-			  break; //Sobald wir drüber sind, können wir abbrechen.
-		       }
-		       }
-		    break; //Sobald wir unseren Tag gefunden haben, können wir die Schleife abbrechen. Jeder Tag darf nur in genau einer Gruppe sein.
-		    }
-		}
-		$this->SendDebug("GetWeekplanState", "Ergebnis: ".intval($actionID), 0);
-		SetValueInteger(29196,  intval($actionID));
-	}  
-	
 	public function AbsenkTemp()
 	{
 		//Letzten Sollwert speichern
@@ -214,9 +190,6 @@ class SingleRoomHeatingControl extends IPSModule
 		// Daten lesen
 		 $state = true;
 		
-		// Wochenplan
-		$test = GetWeekplanState(59441);
-
 		// Heizungsprogramm
 		$HeizProgID = $this->GetIDForIdent('HeizProg'); 
 		$HeizProg = GetValue($HeizProgID);
