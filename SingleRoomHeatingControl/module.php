@@ -124,6 +124,7 @@ class SingleRoomHeatingControl extends IPSModule
 		$this->SendDebug("GetWeekplanState", "Wochenplan Status einlesen", 0);
 		$e = IPS_GetEvent($this->GetIDForIdent("Wochenplan_Feiertag_".$this->InstanceID));
 		$actionID = false;
+		
 		//Durch alle Gruppen gehen
 		foreach($e['ScheduleGroups'] as $g) {
 		    //Überprüfen ob die Gruppe für heute zuständig ist
@@ -139,7 +140,8 @@ class SingleRoomHeatingControl extends IPSModule
 		    break; //Sobald wir unseren Tag gefunden haben, können wir die Schleife abbrechen. Jeder Tag darf nur in genau einer Gruppe sein.
 		    }
 		}
-		SetValueInteger($this->GetIDForIdent("WeekplanState"),  intval($actionID));
+		//SetValueInteger($this->GetIDForIdent("WeekplanState"),  intval($actionID));
+		SetValueInteger(29196,  intval($actionID));
 	}  
 	
 	public function AbsenkTemp()
@@ -241,7 +243,7 @@ class SingleRoomHeatingControl extends IPSModule
 		// Fensterkontakt
 		$WindowID = $this->ReadPropertyInteger('WindowID');
 		$Window = GetValue($WindowID);
-
+	
 		 // Anwesenheit 
 		$Presence = GetValue($this->ReadPropertyInteger('PresenceID'));
 
