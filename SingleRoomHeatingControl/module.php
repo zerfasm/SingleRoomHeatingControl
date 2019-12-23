@@ -215,7 +215,7 @@ class SingleRoomHeatingControl extends IPSModule
 		 $state = true;
 		
 		// Wochenplan
-		$test = GetWeekplanState(59441);
+		$test = SetValue(29196,GetWeekplanState(59441));
 
 		// Heizungsprogramm
 		$HeizProgID = $this->GetIDForIdent('HeizProg'); 
