@@ -82,8 +82,7 @@ class SingleRoomHeatingControl extends IPSModule
 		$this->RegisterEvent("Wochenplan Feiertag", "Wochenplan_Feiertag_".$this->InstanceID, 2, $this->InstanceID, 30);
         	
 		// Anlegen der Daten für den Wochenplan
-        	IPS_SetEventScheduleGroup($this->GetIDForIdent("Wochenplan_".$this->InstanceID), 0, 31); //Mo - Fr (1 + 2 + 4 + 8 + 16)
-		IPS_SetEventScheduleGroup($this->GetIDForIdent("Wochenplan_".$this->InstanceID), 1, 96); //Sa + So (32 + 64)
+        	IPS_SetEventScheduleGroup($this->GetIDForIdent("Wochenplan_".$this->InstanceID), 0, 127); //Mo - Fr (1 + 2 + 4 + 8 + 16)
 		
 		//Wochenplan Feiertag erstellen
 		IPS_SetEventScheduleGroup($this->GetIDForIdent("Wochenplan_Feiertag_".$this->InstanceID), 0, 31); //Mo - Fr (1 + 2 + 4 + 8 + 16)
