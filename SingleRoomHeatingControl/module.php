@@ -107,7 +107,6 @@ class SingleRoomHeatingControl extends IPSModule
 			IPS_SetIdent($EventID, $Ident);
 			IPS_SetName($EventID, $Name);
 			IPS_SetPosition($EventID, $Position);
-			IPS_SetEventConditionVariableRule($EventID, 0, 2, 55890, 0, false);
 			IPS_SetEventActive($EventID, true);  
 		}
 	 }  
