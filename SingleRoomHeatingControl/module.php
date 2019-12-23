@@ -171,7 +171,8 @@ class SingleRoomHeatingControl extends IPSModule
 		$SetTemp = GetValue($SetTempID);
 		 
 		// Letzte SollTemperatur 
-		$LastSetTemp = GetValue($this->GetIDForIdent('LastSetTemp'));
+		$LastSetTempID = $this->GetIDForIdent('LastSetTemp');
+		$LastSetTemp = GetValue($LastSetTempID);
 		 
 		// Absenktemperatur
 		$AbsenkTemp = GetValue($this->GetIDForIdent('AbsenkTemp'));
@@ -215,6 +216,21 @@ class SingleRoomHeatingControl extends IPSModule
 				RequestAction($SetTempID,$AbsenkTemp);
 				IPS_Sleep(50);
 			}
+			Else if (($Presence == true) and ($Window == true))
+			{
+				// Modus auf Manuell stellen
+				If ($Modus == 0)
+				{
+					RequestAction($ModusID,1);
+				}
+				//Letzten Sollwert speichern
+				$update = $this->SetValue('LastSetTemp', $SetTemp);
+				IPS_Sleep(50);
+				
+				// Auf Sollwert Antrieb Zu stellen
+				RequestAction($SetTempID,$AntrZu);
+				IPS_Sleep(50);
+			}
 			Else if (($Presence == true) and ($Window == false))
 			{
 				// Modus auf Manuell stellen
@@ -225,18 +241,6 @@ class SingleRoomHeatingControl extends IPSModule
 
 				// Auf letzten Sollwert stellen
 				RequestAction($SetTempID,$LastSetTemp);
-				IPS_Sleep(50);
-			}
-			Else if (($Presence == true) and ($Window == true))
-			{
-				// Modus auf Manuell stellen
-				If ($Modus == 0)
-				{
-					RequestAction($ModusID,1);
-				}
-
-				// Auf letzten Sollwert stellen
-				RequestAction($SetTempID,$AntrZu);
 				IPS_Sleep(50);
 			}
 		} 
