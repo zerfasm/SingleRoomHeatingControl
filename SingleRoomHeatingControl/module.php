@@ -97,8 +97,6 @@ class SingleRoomHeatingControl extends IPSModule
 		IPS_SetEventScheduleAction($this->GetIDForIdent("Wochenplan_Feiertag_".$this->InstanceID), 1, "Absenken", 0x000FF, "SRHC_AbsenkTemp(\$_IPS['TARGET']");  
         	IPS_SetEventScheduleAction($this->GetIDForIdent("Wochenplan_Feiertag_".$this->InstanceID), 2, "Grundwärme", 0xFF9900 , "SRHC_GrundTemp(\$_IPS['TARGET']");  
         	IPS_SetEventScheduleAction($this->GetIDForIdent("Wochenplan_Feiertag_".$this->InstanceID), 3, "Heizen", 0xFF0000, "SRHC_HeizTemp(\$_IPS['TARGET']"); 
-		IPS_SetEventConditionVariableRule(11852,11852,1,55890,0,false);
-		
 	}
 
 	private function RegisterEvent($Name, $Ident, $Typ, $Parent, $Position)
