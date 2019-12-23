@@ -86,7 +86,7 @@ class SingleRoomHeatingControl extends IPSModule
             	
 		// Anlegen Aktionen für Wochenplan
 		IPS_SetEventScheduleAction($this->GetIDForIdent("Wochenplan_".$this->InstanceID), 1, "Absenken", 0x000FF, "SRHC_AbsenkTemp(\$_IPS['TARGET']");  
-        	IPS_SetEventScheduleAction($this->GetIDForIdent("Wochenplan_".$this->InstanceID), 2, "Grundwärme", 0xcd8040 , "SRHC_GrundTemp(\$_IPS['TARGET']");  
+        	IPS_SetEventScheduleAction($this->GetIDForIdent("Wochenplan_".$this->InstanceID), 2, "Grundwärme", 0xFF9900 , "SRHC_GrundTemp(\$_IPS['TARGET']");  
         	IPS_SetEventScheduleAction($this->GetIDForIdent("Wochenplan_".$this->InstanceID), 3, "Heizen", 0xFF0000, "SRHC_HeizTemp(\$_IPS['TARGET']"); 		
 	}
 
