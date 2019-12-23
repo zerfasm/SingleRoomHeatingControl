@@ -76,7 +76,6 @@ class SingleRoomHeatingControl extends IPSModule
 		// ID Instanz
 		$Instance = $this->InstanceID;
 		
-		
 		//Wochenplan erstellen
 		$this->RegisterEvent("Wochenplan Normal", "Wochenplan_".$this->InstanceID, 2, $this->InstanceID, 8);
 		$this->RegisterEvent("Wochenplan Feiertag", "Wochenplan_Feiertag_".$this->InstanceID, 2, $this->InstanceID, 9);
