@@ -6,9 +6,7 @@
 	  
         {"type": "SelectVariable", "name": "WindowID", "caption": "Window ID:" },
 	  
-        {"type": "SelectVariable", "name": "PresenceID", "caption": "Presence ID:" },
-	  
-	{"type": "SelectVariable", "name": "FeiertagID", "caption": "Puplic Holiday ID:" }  
+        {"type": "SelectVariable", "name": "PresenceID", "caption": "Presence ID:" }
   ],
 	
   "actions": [
