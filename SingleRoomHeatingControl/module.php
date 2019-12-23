@@ -77,7 +77,7 @@ class SingleRoomHeatingControl extends IPSModule
 		$Instance = $this->InstanceID;
 		
 		
-		//Wochenplan Normal erstellen
+		//Wochenplan erstellen
 		$this->RegisterEvent("Wochenplan Normal", "Wochenplan_".$this->InstanceID, 2, $this->InstanceID, 30);
 		$this->RegisterEvent("Wochenplan Feiertag", "Wochenplan_Feiertag_".$this->InstanceID, 2, $this->InstanceID, 31);
         	
@@ -87,8 +87,7 @@ class SingleRoomHeatingControl extends IPSModule
 		
 		// Anlegen der Daten für den Wochenplan Feiertag
 		IPS_SetEventScheduleGroup($this->GetIDForIdent("Wochenplan_Feiertag_".$this->InstanceID), 0, 127); //Mo - So (1 + 2 + 4 + 8 + 16 + 32 + 64)
-		
-            			
+			
 		// Anlegen Aktionen für Wochenplan Normal
 		IPS_SetEventScheduleAction($this->GetIDForIdent("Wochenplan_".$this->InstanceID), 1, "Absenken", 0x000FF, "SRHC_AbsenkTemp(\$_IPS['TARGET']");  
         	IPS_SetEventScheduleAction($this->GetIDForIdent("Wochenplan_".$this->InstanceID), 2, "Grundwärme", 0xFF9900 , "SRHC_GrundTemp(\$_IPS['TARGET']");  
@@ -98,6 +97,8 @@ class SingleRoomHeatingControl extends IPSModule
 		IPS_SetEventScheduleAction($this->GetIDForIdent("Wochenplan_Feiertag_".$this->InstanceID), 1, "Absenken", 0x000FF, "SRHC_AbsenkTemp(\$_IPS['TARGET']");  
         	IPS_SetEventScheduleAction($this->GetIDForIdent("Wochenplan_Feiertag_".$this->InstanceID), 2, "Grundwärme", 0xFF9900 , "SRHC_GrundTemp(\$_IPS['TARGET']");  
         	IPS_SetEventScheduleAction($this->GetIDForIdent("Wochenplan_Feiertag_".$this->InstanceID), 3, "Heizen", 0xFF0000, "SRHC_HeizTemp(\$_IPS['TARGET']"); 
+		IPS_SetEventConditionVariableRule(11852,0,1,55890,0,false);
+		
 	}
 
 	private function RegisterEvent($Name, $Ident, $Typ, $Parent, $Position)
