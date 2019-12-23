@@ -77,7 +77,9 @@ class SingleRoomHeatingControl extends IPSModule
 		$Instance = $this->InstanceID;
 		
 		// Trigger erstellen
-		$this->RegisterTrigger("Zustand2", "Zustand2_".$this->InstanceID, 0, $this->InstanceID, 0);
+		//$this->RegisterTriggerWindow("Fenster", "Fenster_".$this->InstanceID, 0, $this->InstanceID, 0);
+		//$this->RegisterTriggerPresence("Anwesenheit", "Anwesenheit_".$this->InstanceID, 0, $this->InstanceID, 0);
+		//$this->RegisterTriggerHeatProgram("Heizprogramm", "Heizprogramm_".$this->InstanceID, 0, $this->InstanceID, 0);
 		
 		//Wochenplan erstellen
 		$this->RegisterEvent("Wochenplan Normal", "Wochenplan_".$this->InstanceID, 2, $this->InstanceID, 8);
@@ -121,8 +123,8 @@ class SingleRoomHeatingControl extends IPSModule
 			IPS_SetEventActive($EventID, true);  
 		}
 	} 
-	
-	private function RegisterTrigger($Name, $Ident, $Typ, $Parent, $Position)
+	/*
+	private function RegisterTriggerWindow($Name, $Ident, $Typ, $Parent, $Position)
 	{
 		$eid = @$this->GetIDForIdent($Ident);
 		if($eid === false) {
@@ -142,7 +144,53 @@ class SingleRoomHeatingControl extends IPSModule
 			IPS_SetPosition($EventID, $Position);
 			IPS_SetEventActive($EventID, true);  
 		}
-	}  
+	}
+	
+	private function RegisterTriggerPrecence($Name, $Ident, $Typ, $Parent, $Position)
+	{
+		$eid = @$this->GetIDForIdent($Ident);
+		if($eid === false) {
+			$eid = 0;
+		} elseif(IPS_GetEvent($eid)['EventType'] <> $Typ) {
+			IPS_DeleteEvent($eid);
+			$eid = 0;
+		}
+		
+		//we need to create one
+		if ($eid == 0) {
+		    $EventID = IPS_CreateEvent($Typ);
+			IPS_SetEventTrigger($EventID, 1, $this->ReadPropertyInteger('PresenceID'));
+			IPS_SetParent($EventID, $Parent);
+			IPS_SetIdent($EventID, $Ident);
+			IPS_SetName($EventID, $Name);
+			IPS_SetPosition($EventID, $Position);
+			IPS_SetEventActive($EventID, true);  
+		}
+	}
+	
+	private function RegisterTriggerHeatProgram($Name, $Ident, $Typ, $Parent, $Position)
+	{
+		$eid = @$this->GetIDForIdent($Ident);
+		if($eid === false) {
+			$eid = 0;
+		} elseif(IPS_GetEvent($eid)['EventType'] <> $Typ) {
+			IPS_DeleteEvent($eid);
+			$eid = 0;
+		}
+		
+		//we need to create one
+		if ($eid == 0) {
+		    $EventID = IPS_CreateEvent($Typ);
+			IPS_SetEventTrigger($EventID, 1, $this->ReadPropertyInteger('ModID'));
+			IPS_SetParent($EventID, $Parent);
+			IPS_SetIdent($EventID, $Ident);
+			IPS_SetName($EventID, $Name);
+			IPS_SetPosition($EventID, $Position);
+			IPS_SetEventActive($EventID, true);  
+		}
+	}
+	
+	*/
 	
 	public function AbsenkTemp()
 	{
