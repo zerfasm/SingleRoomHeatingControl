@@ -21,7 +21,10 @@ class SingleRoomHeatingControl extends IPSModule
 
 		// Anwesenheit
 		$this->RegisterPropertyInteger('PresenceID', 0);
-
+		
+		// Feiertag
+		$this->RegisterPropertyInteger('FeiertagID', 0);
+		
 		// Update trigger
 		$this->RegisterTimer('UpdateTrigger', 0, "SRHC_Update(\$_IPS['TARGET']);");
 		
@@ -82,7 +85,8 @@ class SingleRoomHeatingControl extends IPSModule
         	
 		// Anlegen der Daten für den Wochenplan
         	IPS_SetEventScheduleGroup($this->GetIDForIdent("Wochenplan_".$this->InstanceID), 0, 31); //Mo - Fr (1 + 2 + 4 + 8 + 16)
-		IPS_SetEventScheduleGroup($this->GetIDForIdent("Wochenplan_".$this->InstanceID), 1, 96); //Sa + So (32 + 64)	
+		IPS_SetEventScheduleGroup($this->GetIDForIdent("Wochenplan_".$this->InstanceID), 1, 96); //Sa + So (32 + 64)
+		//IPS_SetEventCondition(
             	
 		// Anlegen Aktionen für Wochenplan
 		IPS_SetEventScheduleAction($this->GetIDForIdent("Wochenplan_".$this->InstanceID), 1, "Absenken", 0x000FF, "SRHC_AbsenkTemp(\$_IPS['TARGET']");  
