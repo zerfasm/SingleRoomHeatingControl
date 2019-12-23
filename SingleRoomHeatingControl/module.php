@@ -117,31 +117,7 @@ class SingleRoomHeatingControl extends IPSModule
 			IPS_SetPosition($EventID, $Position);
 			IPS_SetEventActive($EventID, true);  
 		}
-	 }  
-	
-	public function GetWeekplanState()
-	{
-		$this->SendDebug("GetWeekplanState", "Wochenplan Status einlesen", 0);
-		$e = IPS_GetEvent($this->GetIDForIdent("Wochenplan_Feiertag_".$this->InstanceID));
-		$actionID = false;
-		
-		//Durch alle Gruppen gehen
-		foreach($e['ScheduleGroups'] as $g) {
-		    //Überprüfen ob die Gruppe für heute zuständig ist
-		    if(($g['Days'] & pow(2,date("N",time())-1)) > 0) {
-		    //Aktuellen Schaltpunkt suchen. Wir nutzen die Eigenschaft, dass die Schaltpunkte immer aufsteigend sortiert sind.
-		    foreach($g['Points'] as $p) {
-		       if(date("H") * 3600 + date("i") * 60 + date("s") >= $p['Start']['Hour'] * 3600 + $p['Start']['Minute'] * 60 + $p['Start']['Second']) {
-			  $actionID = $p['ActionID'];
-		       } else {
-			  break; //Sobald wir drüber sind, können wir abbrechen.
-		       }
-		       }
-		    break; //Sobald wir unseren Tag gefunden haben, können wir die Schleife abbrechen. Jeder Tag darf nur in genau einer Gruppe sein.
-		    }
-		}
-		SetValueInteger($this->GetIDForIdent("WeekplanState"),  intval($actionID));
-	}  
+	 }    
 	
 	public function AbsenkTemp()
 	{
@@ -210,8 +186,6 @@ class SingleRoomHeatingControl extends IPSModule
 	
 	public function Update()
 	{
-		SetValueInteger(29196,  intval($actionID));
-		
 		$result = 'Ergebnis konnte nicht ermittelt werden!';
 		// Daten lesen
 		 $state = true;
