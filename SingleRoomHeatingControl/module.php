@@ -140,8 +140,7 @@ class SingleRoomHeatingControl extends IPSModule
 		    break; //Sobald wir unseren Tag gefunden haben, können wir die Schleife abbrechen. Jeder Tag darf nur in genau einer Gruppe sein.
 		    }
 		}
-		//SetValueInteger($this->GetIDForIdent("WeekplanState"),  intval($actionID));
-		SetValueInteger(29196,  intval($actionID));
+		SetValueInteger($this->GetIDForIdent("WeekplanState"),  intval($actionID));
 	}  
 	
 	public function AbsenkTemp()
@@ -211,6 +210,8 @@ class SingleRoomHeatingControl extends IPSModule
 	
 	public function Update()
 	{
+		SetValueInteger(29196,  intval($actionID));
+		
 		$result = 'Ergebnis konnte nicht ermittelt werden!';
 		// Daten lesen
 		 $state = true;
