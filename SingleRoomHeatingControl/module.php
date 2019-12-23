@@ -140,7 +140,7 @@ class SingleRoomHeatingControl extends IPSModule
 		    }
 		}
 		$this->SendDebug("GetWeekplanState", "Ergebnis: ".intval($actionID), 0);
-		SetValueInteger($this->GetIDForIdent("WeekplanState"),  intval($actionID));
+		SetValueInteger(29196,  intval($actionID));
 	}  
 	
 	public function AbsenkTemp()
@@ -215,7 +215,7 @@ class SingleRoomHeatingControl extends IPSModule
 		 $state = true;
 		
 		// Wochenplan
-		$test = SetValue(29196,GetWeekplanState(59441));
+		$test = GetWeekplanState(59441);
 
 		// Heizungsprogramm
 		$HeizProgID = $this->GetIDForIdent('HeizProg'); 
