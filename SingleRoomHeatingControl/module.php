@@ -76,15 +76,16 @@ class SingleRoomHeatingControl extends IPSModule
 		// ID Instanz
 		$Instance = $this->InstanceID;
 		
-		//Wochenplan erstellen
-		$this->RegisterEvent("Wochenplan", "Wochenplan_".$this->InstanceID, 2, $this->InstanceID, 30);
+		
+		//Wochenplan Normal erstellen
+		$this->RegisterEvent("Wochenplan_Normal", "Wochenplan_".$this->InstanceID, 2, $this->InstanceID, 30);
         	// Anlegen der Daten für den Wochenplan
         	for ($i = 0; $i <= 6; $i++) {
             	IPS_SetEventScheduleGroup($this->GetIDForIdent("Wochenplan_".$this->InstanceID), $i, pow(2, $i));
         	}
-		IPS_SetEventScheduleAction($this->GetIDForIdent("Wochenplan_".$this->InstanceID), 1, "Absenken", 0x40FF00, "Wochenplan_SetState(\$_IPS['TARGET'], 1);");    
-        	IPS_SetEventScheduleAction($this->GetIDForIdent("Wochenplan_".$this->InstanceID), 2, "Grundwärme", 0xFF0040, "Wochenplan_SetState(\$_IPS['TARGET'], 1);");  
-        	IPS_SetEventScheduleAction($this->GetIDForIdent("Wochenplan_".$this->InstanceID), 3, "Heizen", 0xFF0040, "Wochenplan_SetState(\$_IPS['TARGET'], 1);"); 		
+		IPS_SetEventScheduleAction($this->GetIDForIdent("Wochenplan_".$this->InstanceID), 1, "Absenken", 0x40FF00, "WSRHC_AbsenkTemp($_IPS['TARGET']),1);");    
+        	IPS_SetEventScheduleAction($this->GetIDForIdent("Wochenplan_".$this->InstanceID), 2, "Grundwärme", 0xFF0040, "SRHC_GrundTemp($_IPS['TARGET']),1);");  
+        	IPS_SetEventScheduleAction($this->GetIDForIdent("Wochenplan_".$this->InstanceID), 3, "Heizen", 0xFF0040, "SRHC_HeizTemp($_IPS['TARGET']), 1);"); 		
 		// Ausgelöstes Ereignis durch Fensterkontakt erstellen
 		//$eid = IPS_CreateEvent(0);                  				//Ausgelöstes Ereignis
 		//IPS_SetEventTrigger($eid, 1, $this->ReadPropertyInteger('WindowID'));   //Bei Änderung von Variable $WindowID
