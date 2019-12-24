@@ -21,7 +21,7 @@ class SingleRoomHeatingControl extends IPSModule
 
 		// Anwesenheit
 		$this->RegisterPropertyInteger('PresenceID', 0);
-			
+
 		// Update trigger
 		$this->RegisterTimer('UpdateTrigger', 0, "SRHC_Update(\$_IPS['TARGET']);");
 		
@@ -76,126 +76,25 @@ class SingleRoomHeatingControl extends IPSModule
 		// ID Instanz
 		$Instance = $this->InstanceID;
 		
-		// Trigger erstellen
-		//$this->RegisterTriggerWindow("Fenster", "Fenster_".$this->InstanceID, 0, $this->InstanceID, 0);
-		//$this->RegisterTriggerPresence("Anwesenheit", "Anwesenheit_".$this->InstanceID, 0, $this->InstanceID, 0);
-		//$this->RegisterTriggerHeatProgram("Heizprogramm", "Heizprogramm_".$this->InstanceID, 0, $this->InstanceID, 0);
+		// Ausgelöstes Ereignis durch Fensterkontakt erstellen
+		//$eid = IPS_CreateEvent(0);                  				//Ausgelöstes Ereignis
+		//IPS_SetEventTrigger($eid, 1, $this->ReadPropertyInteger('WindowID'));   //Bei Änderung von Variable $WindowID
+		//IPS_SetParent($eid, $Instance);         				//Ereignis zuordnen
+		//IPS_SetEventActive($eid, true); 	    				//Ereignis aktiv setzen
 		
-		//Wochenplan erstellen
-		$this->RegisterEvent("Wochenplan Normal", "Wochenplan_".$this->InstanceID, 2, $this->InstanceID, 8);
-		$this->RegisterEvent("Wochenplan Feiertag", "Wochenplan_Feiertag_".$this->InstanceID, 2, $this->InstanceID, 9);
-        	
-		// Anlegen der Daten für den Wochenplan Normal
-        	IPS_SetEventScheduleGroup($this->GetIDForIdent("Wochenplan_".$this->InstanceID), 0, 31); //Mo - Fr (1 + 2 + 4 + 8 + 16)
-		IPS_SetEventScheduleGroup($this->GetIDForIdent("Wochenplan_".$this->InstanceID), 1, 96); //Sa + So (32 + 64)
+		// Ausgelöstes Ereignis durch Heiprogramm erstellen
+		//$HeizProgID = $this->GetIDForIdent('HeizProg');
 		
-		// Anlegen der Daten für den Wochenplan Feiertag
-		IPS_SetEventScheduleGroup($this->GetIDForIdent("Wochenplan_Feiertag_".$this->InstanceID), 0, 127); //Mo - So (1 + 2 + 4 + 8 + 16 + 32 + 64)
-			
-		// Anlegen Aktionen für Wochenplan Normal
-		IPS_SetEventScheduleAction($this->GetIDForIdent("Wochenplan_".$this->InstanceID), 1, "Absenken", 0x000FF, "SRHC_AbsenkTemp(\$_IPS['TARGET']");  
-        	IPS_SetEventScheduleAction($this->GetIDForIdent("Wochenplan_".$this->InstanceID), 2, "Grundwärme", 0xFF9900 , "SRHC_GrundTemp(\$_IPS['TARGET']");  
-        	IPS_SetEventScheduleAction($this->GetIDForIdent("Wochenplan_".$this->InstanceID), 3, "Heizen", 0xFF0000, "SRHC_HeizTemp(\$_IPS['TARGET']");
-		
-		// Anlegen Aktionen für Wochenplan Feiertag
-		IPS_SetEventScheduleAction($this->GetIDForIdent("Wochenplan_Feiertag_".$this->InstanceID), 1, "Absenken", 0x000FF, "SRHC_AbsenkTemp(\$_IPS['TARGET']");  
-        	IPS_SetEventScheduleAction($this->GetIDForIdent("Wochenplan_Feiertag_".$this->InstanceID), 2, "Grundwärme", 0xFF9900 , "SRHC_GrundTemp(\$_IPS['TARGET']");  
-        	IPS_SetEventScheduleAction($this->GetIDForIdent("Wochenplan_Feiertag_".$this->InstanceID), 3, "Heizen", 0xFF0000, "SRHC_HeizTemp(\$_IPS['TARGET']"); 
+		//$eid = IPS_CreateEvent(0);                  				//Ausgelöstes Ereignis
+		//IPS_SetEventTrigger($eid, 1, $this->GetIDForIdent('HeizProg'));    	//Bei Änderung von Variable $HeizProgID
+		//IPS_SetParent($eid, $Instance);         				//Ereignis zuordnen
+		//IPS_SetEventActive($eid, true); 	    				//Ereignis aktiv setzen
 	}
 
-	private function RegisterEvent($Name, $Ident, $Typ, $Parent, $Position)
-	{
-		$eid = @$this->GetIDForIdent($Ident);
-		if($eid === false) {
-			$eid = 0;
-		} elseif(IPS_GetEvent($eid)['EventType'] <> $Typ) {
-			IPS_DeleteEvent($eid);
-			$eid = 0;
-		}
-		
-		//we need to create one
-		if ($eid == 0) {
-		    $EventID = IPS_CreateEvent($Typ);
-			IPS_SetParent($EventID, $Parent);
-			IPS_SetIdent($EventID, $Ident);
-			IPS_SetName($EventID, $Name);
-			IPS_SetPosition($EventID, $Position);
-			IPS_SetEventActive($EventID, true);  
-		}
-	} 
-	/*
-	private function RegisterTriggerWindow($Name, $Ident, $Typ, $Parent, $Position)
-	{
-		$eid = @$this->GetIDForIdent($Ident);
-		if($eid === false) {
-			$eid = 0;
-		} elseif(IPS_GetEvent($eid)['EventType'] <> $Typ) {
-			IPS_DeleteEvent($eid);
-			$eid = 0;
-		}
-		
-		//we need to create one
-		if ($eid == 0) {
-		    $EventID = IPS_CreateEvent($Typ);
-			IPS_SetEventTrigger($EventID, 1, $this->ReadPropertyInteger('WindowID'));
-			IPS_SetParent($EventID, $Parent);
-			IPS_SetIdent($EventID, $Ident);
-			IPS_SetName($EventID, $Name);
-			IPS_SetPosition($EventID, $Position);
-			IPS_SetEventActive($EventID, true);  
-		}
-	}
-	
-	private function RegisterTriggerPrecence($Name, $Ident, $Typ, $Parent, $Position)
-	{
-		$eid = @$this->GetIDForIdent($Ident);
-		if($eid === false) {
-			$eid = 0;
-		} elseif(IPS_GetEvent($eid)['EventType'] <> $Typ) {
-			IPS_DeleteEvent($eid);
-			$eid = 0;
-		}
-		
-		//we need to create one
-		if ($eid == 0) {
-		    $EventID = IPS_CreateEvent($Typ);
-			IPS_SetEventTrigger($EventID, 1, $this->ReadPropertyInteger('PresenceID'));
-			IPS_SetParent($EventID, $Parent);
-			IPS_SetIdent($EventID, $Ident);
-			IPS_SetName($EventID, $Name);
-			IPS_SetPosition($EventID, $Position);
-			IPS_SetEventActive($EventID, true);  
-		}
-	}
-	
-	private function RegisterTriggerHeatProgram($Name, $Ident, $Typ, $Parent, $Position)
-	{
-		$eid = @$this->GetIDForIdent($Ident);
-		if($eid === false) {
-			$eid = 0;
-		} elseif(IPS_GetEvent($eid)['EventType'] <> $Typ) {
-			IPS_DeleteEvent($eid);
-			$eid = 0;
-		}
-		
-		//we need to create one
-		if ($eid == 0) {
-		    $EventID = IPS_CreateEvent($Typ);
-			IPS_SetEventTrigger($EventID, 1, $this->ReadPropertyInteger('ModID'));
-			IPS_SetParent($EventID, $Parent);
-			IPS_SetIdent($EventID, $Ident);
-			IPS_SetName($EventID, $Name);
-			IPS_SetPosition($EventID, $Position);
-			IPS_SetEventActive($EventID, true);  
-		}
-	}
-	
-	*/
-	
 	public function AbsenkTemp()
 	{
 		//Letzten Sollwert speichern
-		//$update = $this->SetValue('LastSetTemp', GetValue($this->ReadPropertyInteger('SetTempID')));
+		$update = $this->SetValue('LastSetTemp', GetValue($this->ReadPropertyInteger('SetTempID')));
 		
 		// Absenktemperatur
 		$AbsenkTemp = GetValue($this->GetIDForIdent('AbsenkTemp'));
@@ -208,7 +107,7 @@ class SingleRoomHeatingControl extends IPSModule
 	public function GrundTemp()
 	{
 		//Letzten Sollwert speichern
-		//$update = $this->SetValue('LastSetTemp', GetValue($this->ReadPropertyInteger('SetTempID')));
+		$update = $this->SetValue('LastSetTemp', GetValue($this->ReadPropertyInteger('SetTempID')));
 		
 		// Grundtemperatur
 		$GrundTemp = GetValue($this->GetIDForIdent('GrundTemp'));
@@ -221,7 +120,7 @@ class SingleRoomHeatingControl extends IPSModule
 	public function HeizTemp()
 	{
 		//Letzten Sollwert speichern
-		//$update = $this->SetValue('LastSetTemp', GetValue($this->ReadPropertyInteger('SetTempID')));
+		$update = $this->SetValue('LastSetTemp', GetValue($this->ReadPropertyInteger('SetTempID')));
 		
 		// Heiztemperatur
 		$HeizTemp = GetValue($this->GetIDForIdent('HeizTemp'));
@@ -262,7 +161,7 @@ class SingleRoomHeatingControl extends IPSModule
 		$result = 'Ergebnis konnte nicht ermittelt werden!';
 		// Daten lesen
 		 $state = true;
-		
+
 		// Heizungsprogramm
 		$HeizProgID = $this->GetIDForIdent('HeizProg'); 
 		$HeizProg = GetValue($HeizProgID);
@@ -291,7 +190,7 @@ class SingleRoomHeatingControl extends IPSModule
 		// Fensterkontakt
 		$WindowID = $this->ReadPropertyInteger('WindowID');
 		$Window = GetValue($WindowID);
-	
+
 		 // Anwesenheit 
 		$Presence = GetValue($this->ReadPropertyInteger('PresenceID'));
 
