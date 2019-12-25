@@ -46,6 +46,19 @@ class SingleRoomHeatingControl extends IPSModule
 		//Never delete this line!
 		parent::Destroy();
 	}
+	
+	public function AbsenkTemp()
+	{
+		//Letzten Sollwert speichern
+		//$update = $this->SetValue('LastSetTemp', GetValue($this->ReadPropertyInteger('SetTempID')));
+		
+		// Absenktemperatur
+		$AbsenkTemp = GetValue($this->GetIDForIdent('AbsenkTemp'));
+		
+		 // Absenktemperatur in Solltemperatur schreiben
+		RequestAction($this->ReadPropertyInteger('SetTempID'),$AbsenkTemp);
+		IPS_Sleep(50);
+	}
 
 	public function ApplyChanges()
 	{
@@ -106,18 +119,6 @@ class SingleRoomHeatingControl extends IPSModule
 		}
 	}
 	
-	public function AbsenkTemp()
-	{
-		//Letzten Sollwert speichern
-		//$update = $this->SetValue('LastSetTemp', GetValue($this->ReadPropertyInteger('SetTempID')));
-		
-		// Absenktemperatur
-		$AbsenkTemp = GetValue($this->GetIDForIdent('AbsenkTemp'));
-		
-		 // Absenktemperatur in Solltemperatur schreiben
-		RequestAction($this->ReadPropertyInteger('SetTempID'),$AbsenkTemp);
-		IPS_Sleep(50);
-	}
 	
 	public function GrundTemp()
 	{
