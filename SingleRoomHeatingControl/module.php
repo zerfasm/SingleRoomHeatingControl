@@ -86,7 +86,7 @@ class SingleRoomHeatingControl extends IPSModule
 		$this->RegisterTriggerPresence("Anwesenheit", "TriggerAnwesenheit", 0, $Instance, 0,"SRHC_Update(\$_IPS['TARGET']);");
 		
 		// Trigger Modus
-		$this->RegisterTriggerModus("Modus", "TriggerModus", 0, $Instance, 0,"SRHC_Update(\$_IPS['TARGET']);");
+		$this->RegisterTriggerMod("Betriebsmodus", "TriggerMod", 0, $Instance, 0,"SRHC_Update(\$_IPS['TARGET']);");
 	}
 	
 	public function AbsenkTemp()
@@ -152,75 +152,6 @@ class SingleRoomHeatingControl extends IPSModule
 		 // Antrieb Aufrin Solltemperatur schreiben
 		RequestAction($this->ReadPropertyInteger('SetTempID'),$AntrZu);
 		IPS_Sleep(50);
-	}
-	
-	private function RegisterTriggerWindow($Name, $Ident, $Typ, $Parent, $Position, $Skript)
-	{
-		$eid = @$this->GetIDForIdent($Ident);
-		if($eid === false) {
-			$eid = 0;
-		} elseif(IPS_GetEvent($eid)['EventType'] <> $Typ) {
-			IPS_DeleteEvent($eid);
-			$eid = 0;
-		}
-		
-		//we need to create one
-		if ($eid == 0) {
-		    $EventID = IPS_CreateEvent($Typ);
-			IPS_SetEventTrigger($EventID, 1, $this->ReadPropertyInteger('WindowID'));
-			IPS_SetParent($EventID, $Parent);
-			IPS_SetIdent($EventID, $Ident);
-			IPS_SetName($EventID, $Name);
-			IPS_SetPosition($EventID, $Position);
-			IPS_SetEventScript($EventID, $Skript); 
-			IPS_SetEventActive($EventID, true);  
-		}
-	}
-	
-	private function RegisterTriggerPresence($Name, $Ident, $Typ, $Parent, $Position, $Skript)
-	{
-		$eid = @$this->GetIDForIdent($Ident);
-		if($eid === false) {
-			$eid = 0;
-		} elseif(IPS_GetEvent($eid)['EventType'] <> $Typ) {
-			IPS_DeleteEvent($eid);
-			$eid = 0;
-		}
-		
-		//we need to create one
-		if ($eid == 0) {
-		    $EventID = IPS_CreateEvent($Typ);
-			IPS_SetEventTrigger($EventID, 1, $this->ReadPropertyInteger('PresenceID'));
-			IPS_SetParent($EventID, $Parent);
-			IPS_SetIdent($EventID, $Ident);
-			IPS_SetName($EventID, $Name);
-			IPS_SetPosition($EventID, $Position);
-			IPS_SetEventScript($EventID, $Skript); 
-			IPS_SetEventActive($EventID, true);  
-		}
-	}
-	
-	private function RegisterTriggerModus($Name, $Ident, $Typ, $Parent, $Position, $Skript)
-	{
-		$eid = @$this->GetIDForIdent($Ident);
-		if($eid === false) {
-			$eid = 0;
-		} elseif(IPS_GetEvent($eid)['EventType'] <> $Typ) {
-			IPS_DeleteEvent($eid);
-			$eid = 0;
-		}
-		
-		//we need to create one
-		if ($eid == 0) {
-		    $EventID = IPS_CreateEvent($Typ);
-			IPS_SetEventTrigger($EventID, 1, $this->ReadPropertyInteger('ModID'));
-			IPS_SetParent($EventID, $Parent);
-			IPS_SetIdent($EventID, $Ident);
-			IPS_SetName($EventID, $Name);
-			IPS_SetPosition($EventID, $Position);
-			IPS_SetEventScript($EventID, $Skript); 
-			IPS_SetEventActive($EventID, true);  
-		}
 	}
 		
 	public function Update()
@@ -340,6 +271,75 @@ class SingleRoomHeatingControl extends IPSModule
 			RequestAction($SetTempID,$AntrZu);
 			IPS_Sleep(50);
 		} 
+	}
+	
+	private function RegisterTriggerWindow($Name, $Ident, $Typ, $Parent, $Position, $Skript)
+	{
+		$eid = @$this->GetIDForIdent($Ident);
+		if($eid === false) {
+			$eid = 0;
+		} elseif(IPS_GetEvent($eid)['EventType'] <> $Typ) {
+			IPS_DeleteEvent($eid);
+			$eid = 0;
+		}
+		
+		//we need to create one
+		if ($eid == 0) {
+		    $EventID = IPS_CreateEvent($Typ);
+			IPS_SetEventTrigger($EventID, 1, $this->ReadPropertyInteger('WindowID'));
+			IPS_SetParent($EventID, $Parent);
+			IPS_SetIdent($EventID, $Ident);
+			IPS_SetName($EventID, $Name);
+			IPS_SetPosition($EventID, $Position);
+			IPS_SetEventScript($EventID, $Skript); 
+			IPS_SetEventActive($EventID, true);  
+		}
+	}
+	
+	private function RegisterTriggerPresence($Name, $Ident, $Typ, $Parent, $Position, $Skript)
+	{
+		$eid = @$this->GetIDForIdent($Ident);
+		if($eid === false) {
+			$eid = 0;
+		} elseif(IPS_GetEvent($eid)['EventType'] <> $Typ) {
+			IPS_DeleteEvent($eid);
+			$eid = 0;
+		}
+		
+		//we need to create one
+		if ($eid == 0) {
+		    $EventID = IPS_CreateEvent($Typ);
+			IPS_SetEventTrigger($EventID, 1, $this->ReadPropertyInteger('PresenceID'));
+			IPS_SetParent($EventID, $Parent);
+			IPS_SetIdent($EventID, $Ident);
+			IPS_SetName($EventID, $Name);
+			IPS_SetPosition($EventID, $Position);
+			IPS_SetEventScript($EventID, $Skript); 
+			IPS_SetEventActive($EventID, true);  
+		}
+	}
+	
+	private function RegisterTriggerMod($Name, $Ident, $Typ, $Parent, $Position, $Skript)
+	{
+		$eid = @$this->GetIDForIdent($Ident);
+		if($eid === false) {
+			$eid = 0;
+		} elseif(IPS_GetEvent($eid)['EventType'] <> $Typ) {
+			IPS_DeleteEvent($eid);
+			$eid = 0;
+		}
+		
+		//we need to create one
+		if ($eid == 0) {
+		    $EventID = IPS_CreateEvent($Typ);
+			IPS_SetEventTrigger($EventID, 1, $this->ReadPropertyInteger('ModID'));
+			IPS_SetParent($EventID, $Parent);
+			IPS_SetIdent($EventID, $Ident);
+			IPS_SetName($EventID, $Name);
+			IPS_SetPosition($EventID, $Position);
+			IPS_SetEventScript($EventID, $Skript); 
+			IPS_SetEventActive($EventID, true);  
+		}
 	}
 }
 ?>
