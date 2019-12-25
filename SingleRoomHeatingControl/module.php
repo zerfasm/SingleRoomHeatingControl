@@ -263,4 +263,3 @@ class SingleRoomHeatingControl extends IPSModule
 
 }
 ?>
-
