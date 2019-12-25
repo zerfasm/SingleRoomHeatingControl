@@ -86,10 +86,10 @@ class SingleRoomHeatingControl extends IPSModule
 		$this->RegisterTriggerPresence("Anwesenheit", "TriggerAnwesenheit", 0, $Instance, 0,"SRHC_Update(\$_IPS['TARGET']);");
 		
 		// Trigger Modus
-		$this->RegisterTriggerModus("Heizprogramm", "TriggerHeizprogramm", 0, $Instance, 0,"SRHC_Update(\$_IPS['TARGET']);");
+		$this->RegisterTriggerModus("Modus", "TriggerModus", 0, $Instance, 0,"SRHC_Update(\$_IPS['TARGET']);");
 	}
 	
-		public function AbsenkTemp()
+	public function AbsenkTemp()
 	{
 		//Letzten Sollwert speichern
 		//$update = $this->SetValue('LastSetTemp', GetValue($this->ReadPropertyInteger('SetTempID')));
