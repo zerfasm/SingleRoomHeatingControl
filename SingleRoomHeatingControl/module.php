@@ -27,12 +27,15 @@ class SingleRoomHeatingControl extends IPSModule
 		
 		// Absenkentemperatur trigger
 		$this->RegisterTimer('AbsenkTempTrigger', 0, "SRHC_AbsenkTemp(\$_IPS['TARGET']);");
+		$this->RegisterTimer('Absenken', 0, "SRHC_AbsenkTemp(\$_IPS['TARGET']);");
 		
 		// Grundtemperatur trigger
 		$this->RegisterTimer('GrundTempTrigger', 0, "SRHC_GrundTemp(\$_IPS['TARGET']);");
+		$this->RegisterTimer('Grundwärme', 0, "SRHC_GrundTemp(\$_IPS['TARGET']);");
 		
 		// Heiztemperatur trigger
 		$this->RegisterTimer('HeizTempTrigger', 0, "SRHC_HeizTemp(\$_IPS['TARGET']);");
+		$this->RegisterTimer('Heizen', 0, "SRHC_HeizTemp(\$_IPS['TARGET']);");
 		
 		// Antrieb Auf trigger
 		$this->RegisterTimer('AntrAufTrigger', 0, "SRHC_AntrAuf(\$_IPS['TARGET']);");
