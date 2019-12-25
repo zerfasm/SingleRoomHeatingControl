@@ -44,7 +44,7 @@ class SingleRoomHeatingControl extends IPSModule
 	public function Destroy()
 	{
 		//Never delete this line!
-		parent::Destroy();
+		parent::Destroy()
 	}
 	
 	public function ApplyChanges()
