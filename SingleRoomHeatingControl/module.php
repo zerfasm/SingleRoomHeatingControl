@@ -76,11 +76,15 @@ class SingleRoomHeatingControl extends IPSModule
 		// ID Instanz
 		$Instance = $this->InstanceID;
 		
-		// Trigger erstellen
+		// Trigger Fenster erstellen
 		If ($this->ReadPropertyInteger('WindowID') > 0)
 		{
 			$this->RegisterTriggerWindow("Fenster", "TriggerFenster", 0, $Instance, 0,"SRHC_Update(\$_IPS['TARGET']);");
 		};
+		
+		// Trigger Anwesenheit erstellen
+		$this->RegisterTriggerPresence("Anwesenheit", "TriggerAnwesenheit", 0, $Instance, 0,"SRHC_Update(\$_IPS['TARGET']);");
+		
 	}
 	
 		public function AbsenkTemp()
@@ -281,6 +285,29 @@ class SingleRoomHeatingControl extends IPSModule
 		if ($eid == 0) {
 		    $EventID = IPS_CreateEvent($Typ);
 			IPS_SetEventTrigger($EventID, 1, $this->ReadPropertyInteger('WindowID'));
+			IPS_SetParent($EventID, $Parent);
+			IPS_SetIdent($EventID, $Ident);
+			IPS_SetName($EventID, $Name);
+			IPS_SetPosition($EventID, $Position);
+			IPS_SetEventScript($EventID, $Skript); 
+			IPS_SetEventActive($EventID, true);  
+		}
+	}
+	
+	private function RegisterTriggerPresence($Name, $Ident, $Typ, $Parent, $Position, $Skript)
+	{
+		$eid = @$this->GetIDForIdent($Ident);
+		if($eid === false) {
+			$eid = 0;
+		} elseif(IPS_GetEvent($eid)['EventType'] <> $Typ) {
+			IPS_DeleteEvent($eid);
+			$eid = 0;
+		}
+		
+		//we need to create one
+		if ($eid == 0) {
+		    $EventID = IPS_CreateEvent($Typ);
+			IPS_SetEventTrigger($EventID, 1, $this->ReadPropertyInteger('PresenceID'));
 			IPS_SetParent($EventID, $Parent);
 			IPS_SetIdent($EventID, $Ident);
 			IPS_SetName($EventID, $Name);
