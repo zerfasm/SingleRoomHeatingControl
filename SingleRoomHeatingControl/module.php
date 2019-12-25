@@ -292,7 +292,7 @@ class SingleRoomHeatingControl extends IPSModule
 			IPS_SetEventScript($EventID, $Skript); 
 			IPS_SetEventActive($EventID, true);  
 		}
-	};
+	}
 	
 	private function RegisterTriggerPresence($Name, $Ident, $Typ, $Parent, $Position, $Skript)
 	{
