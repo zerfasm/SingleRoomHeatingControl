@@ -39,6 +39,9 @@ class SingleRoomHeatingControl extends IPSModule
 		
 		// Antrieb Zu trigger
 		$this->RegisterTimer('AntrZuTrigger', 0, "SRHC_AntrZu(\$_IPS['TARGET']);");
+		
+		// Fenster trigger
+		$this->RegisterTimer('TriggerFenster', 0, "SRHC_AntrZu(\$_IPS['TARGET']);");
 	}
 
 	public function Destroy()
@@ -75,6 +78,31 @@ class SingleRoomHeatingControl extends IPSModule
 		
 		// ID Instanz
 		$Instance = $this->InstanceID;
+		
+		// Trigger erstellen
+		$this->RegisterTriggerWindow("Fenster", "TriggerFenster", 0, $Instance, 0);
+	}
+	
+	private function RegisterTriggerWindow($Name, $Ident, $Typ, $Parent, $Position)
+	{
+		$eid = @$this->GetIDForIdent($Ident);
+		if($eid === false) {
+			$eid = 0;
+		} elseif(IPS_GetEvent($eid)['EventType'] <> $Typ) {
+			IPS_DeleteEvent($eid);
+			$eid = 0;
+		}
+		
+		//we need to create one
+		if ($eid == 0) {
+		    $EventID = IPS_CreateEvent($Typ);
+			IPS_SetEventTrigger($EventID, 1, $this->ReadPropertyInteger('WindowID'));
+			IPS_SetParent($EventID, $Parent);
+			IPS_SetIdent($EventID, $Ident);
+			IPS_SetName($EventID, $Name);
+			IPS_SetPosition($EventID, $Position);
+			IPS_SetEventActive($EventID, true);  
+		}
 	}
 	
 	public function AbsenkTemp()
