@@ -96,6 +96,7 @@ class SingleRoomHeatingControl extends IPSModule
 				case 3:
                         		SetValue($this->GetIDForIdent($Ident), 3);
                         	break;
+			    }
 		default:
 		    throw new Exception("Invalid Ident");
 	    }
