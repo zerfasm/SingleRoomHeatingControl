@@ -76,6 +76,31 @@ class SingleRoomHeatingControl extends IPSModule
 		// ID Instanz
 		$Instance = $this->InstanceID;
 	}
+	
+	public function RequestAction($Ident, $Value) 
+	{
+
+	    switch($Ident) {
+		case "HeizProg":
+			    switch ($Value) 
+			    {
+				case 0:
+                        		SetValue($this->GetIDForIdent($Ident), 0);
+                        	break;
+				case 1:
+                        		SetValue($this->GetIDForIdent($Ident), 1);
+                        	break;
+				case 2:
+                        		SetValue($this->GetIDForIdent($Ident), 2);
+                        	break;
+				case 3:
+                        		SetValue($this->GetIDForIdent($Ident), 3);
+                        	break;
+		default:
+		    throw new Exception("Invalid Ident");
+	    }
+
+	}
 
 	public function AbsenkTemp()
 	{
