@@ -77,7 +77,10 @@ class SingleRoomHeatingControl extends IPSModule
 		$Instance = $this->InstanceID;
 		
 		// Trigger erstellen
-		$this->RegisterTriggerWindow("Fenster", "TriggerFenster", 0, $Instance, 0,"SRHC_AntrZu(\$_IPS['TARGET']);");
+		If ($this->ReadPropertyInteger('WindowID')) > 0
+		{
+			$this->RegisterTriggerWindow("Fenster", "TriggerFenster", 0, $Instance, 0,"SRHC_AntrZu(\$_IPS['TARGET']);");
+		}
 	}
 	
 	private function RegisterTriggerWindow($Name, $Ident, $Typ, $Parent, $Position, $Skript)
