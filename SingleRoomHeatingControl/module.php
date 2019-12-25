@@ -60,7 +60,7 @@ class SingleRoomHeatingControl extends IPSModule
 		IPS_Sleep(50);
 	}
 	
-		public function GrundTemp()
+	public function GrundTemp()
 	{
 		//Letzten Sollwert speichern
 		//$update = $this->SetValue('LastSetTemp', GetValue($this->ReadPropertyInteger('SetTempID')));
