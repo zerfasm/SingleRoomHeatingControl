@@ -47,7 +47,43 @@ class SingleRoomHeatingControl extends IPSModule
 		parent::Destroy();
 	}
 	
-	public function AbsenkTemp()
+	public function ApplyChanges()
+	{
+		//Never delete this line!
+		parent::ApplyChanges();	
+
+		// Variable Heizprogramm erstellen
+		$this->MaintainVariable('HeizProg', 'Heizprogramm', vtInteger, 'Heizungsautomatik', 1, true);
+		
+		// Variable Absenktemperatur erstellen
+		$this->MaintainVariable('AbsenkTemp', 'Absenktemperatur', vtFloat, '~Temperature.Room', 2, true);
+		
+		// Variable Grundwärme erstellen
+		$this->MaintainVariable('GrundTemp', 'Grundwärme', vtFloat, '~Temperature.Room', 3, true);
+		
+		// Variable Heiztemperatur erstellen
+		$this->MaintainVariable('HeizTemp', 'Heiztemperatur', vtFloat, '~Temperature.Room', 4, true);
+		
+		// Variable Letze Solltemperatur erstellen
+		$this->MaintainVariable('LastSetTemp', 'Letzte Solltemperatur', vtFloat, '~Temperature.Room', 5, true);
+		
+		// Variable Stellantrieb Auf erstellen
+		$this->MaintainVariable('AntrAuf', 'STA-Auf', vtFloat, '~Temperature.HM', 6, true);
+		
+		// Variable Stellantrieb Zu erstellen
+		$this->MaintainVariable('AntrZu', 'STA-Zu', vtFloat, '~Temperature.HM', 7, true);	
+		
+		// ID Instanz
+		$Instance = $this->InstanceID;
+		
+		// Trigger erstellen
+		If ($this->ReadPropertyInteger('WindowID') > 0)
+		{
+			$this->RegisterTriggerWindow("Fenster", "TriggerFenster", 0, $Instance, 0,"SRHC_Update(\$_IPS['TARGET']);");
+		};
+	}
+	
+		public function AbsenkTemp()
 	{
 		//Letzten Sollwert speichern
 		//$update = $this->SetValue('LastSetTemp', GetValue($this->ReadPropertyInteger('SetTempID')));
@@ -110,42 +146,6 @@ class SingleRoomHeatingControl extends IPSModule
 		 // Antrieb Aufrin Solltemperatur schreiben
 		RequestAction($this->ReadPropertyInteger('SetTempID'),$AntrZu);
 		IPS_Sleep(50);
-	}
-
-	public function ApplyChanges()
-	{
-		//Never delete this line!
-		parent::ApplyChanges();	
-
-		// Variable Heizprogramm erstellen
-		$this->MaintainVariable('HeizProg', 'Heizprogramm', vtInteger, 'Heizungsautomatik', 1, true);
-		
-		// Variable Absenktemperatur erstellen
-		$this->MaintainVariable('AbsenkTemp', 'Absenktemperatur', vtFloat, '~Temperature.Room', 2, true);
-		
-		// Variable Grundwärme erstellen
-		$this->MaintainVariable('GrundTemp', 'Grundwärme', vtFloat, '~Temperature.Room', 3, true);
-		
-		// Variable Heiztemperatur erstellen
-		$this->MaintainVariable('HeizTemp', 'Heiztemperatur', vtFloat, '~Temperature.Room', 4, true);
-		
-		// Variable Letze Solltemperatur erstellen
-		$this->MaintainVariable('LastSetTemp', 'Letzte Solltemperatur', vtFloat, '~Temperature.Room', 5, true);
-		
-		// Variable Stellantrieb Auf erstellen
-		$this->MaintainVariable('AntrAuf', 'STA-Auf', vtFloat, '~Temperature.HM', 6, true);
-		
-		// Variable Stellantrieb Zu erstellen
-		$this->MaintainVariable('AntrZu', 'STA-Zu', vtFloat, '~Temperature.HM', 7, true);	
-		
-		// ID Instanz
-		$Instance = $this->InstanceID;
-		
-		// Trigger erstellen
-		If ($this->ReadPropertyInteger('WindowID') > 0)
-		{
-			$this->RegisterTriggerWindow("Fenster", "TriggerFenster", 0, $Instance, 0,"SRHC_AntrZu(\$_IPS['TARGET']);");
-		};
 	}
 		
 	public function Update()
