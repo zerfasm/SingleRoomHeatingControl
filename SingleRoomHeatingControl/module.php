@@ -78,7 +78,7 @@ class SingleRoomHeatingControl extends IPSModule
 		
 		// Trigger erstellen
 		$this->RegisterTriggerWindow("Fenster", "TriggerFenster", 0, $Instance, 0);
-		$this->RegisterTriggerPresence("Anwesenheit", "TriggerAnwesenheit", 0, $Instance, 0);
+		$this->RegisterTriggerPrecence("Anwesenheit", "TriggerAnwesenheit", 0, $Instance, 0);
 		$this->RegisterTriggerHeatProgram("Heizprogramm", "TriggerHeizprogramm", 0, $Instance, 0);
 	}
 	
