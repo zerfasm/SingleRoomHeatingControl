@@ -11,10 +11,13 @@ class SingleRoomHeatingControl extends IPSModule
 		$this->RegisterPropertyString('RoomName', "");
 		$this->RegisterPropertyInteger('ModID', 0);
 		$this->RegisterPropertyInteger('SetTempID', 0);
+		
 		// Fensterkontakt
 		$this->RegisterPropertyInteger('WindowID', 0);
+		
 		// Anwesenheit
 		$this->RegisterPropertyInteger('PresenceID', 0);
+		
 		// Update trigger
 		$this->RegisterTimer('UpdateTrigger', 0, "SRHC_Update(\$_IPS['TARGET']);");
 		
@@ -150,10 +153,12 @@ class SingleRoomHeatingControl extends IPSModule
 		$result = 'Ergebnis konnte nicht ermittelt werden!';
 		// Daten lesen
 		 $state = true;
+		
 		// Heizungsprogramm
 		$HeizProgID = $this->GetIDForIdent('HeizProg'); 
 		$HeizProg = GetValue($HeizProgID);
-		 // Letzte Solltemperatur
+		
+		 // Solltemperatur
 		$SetTempID = $this->ReadPropertyInteger('SetTempID'); 
 		$SetTemp = GetValue($SetTempID);
 		 
@@ -166,6 +171,7 @@ class SingleRoomHeatingControl extends IPSModule
 		
 		// Stellantrieb Auf
 		$AntrAuf = GetValue($this->GetIDForIdent('AntrAuf'));
+		
 		// Stellantrieb Zu
 		$AntrZu = GetValue($this->GetIDForIdent('AntrZu')); 
 		 
@@ -176,9 +182,11 @@ class SingleRoomHeatingControl extends IPSModule
 		// Fensterkontakt
 		$WindowID = $this->ReadPropertyInteger('WindowID');
 		$Window = GetValue($WindowID);
+		
 		 // Anwesenheit 
 		$Presence = GetValue($this->ReadPropertyInteger('PresenceID'));
-		 // Steuerungsautomatik
+		 
+		// Steuerungsautomatik
 		If ($HeizProg == 0) //Automatic => Steuerung durch CCU
 		{
 			RequestAction($ModusID,0);
@@ -312,7 +320,7 @@ class SingleRoomHeatingControl extends IPSModule
 		//we need to create one
 		if ($eid == 0) {
 		    $EventID = IPS_CreateEvent($Typ);
-			IPS_SetEventTrigger($EventID, 1, $this->ReadPropertyInteger('HeizProg'));
+			IPS_SetEventTrigger($EventID, 1, $this->ReadPropertyInteger('ModID'));
 			IPS_SetParent($EventID, $Parent);
 			IPS_SetIdent($EventID, $Ident);
 			IPS_SetName($EventID, $Name);
