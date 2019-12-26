@@ -319,7 +319,7 @@ class SingleRoomHeatingControl extends IPSModule
 		}
 	}
 	
-	private function RegisterTriggerProgramm($Name, $Ident, $Typ, $Parent, $Position, $Skript)
+	private function RegisterTriggerProgram($Name, $Ident, $Typ, $Parent, $Position, $Skript)
 	{
 		$eid = @$this->GetIDForIdent($Ident);
 		if($eid === false) {
