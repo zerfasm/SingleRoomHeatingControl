@@ -43,6 +43,7 @@ class SingleRoomHeatingControl extends IPSModule
 	{
 		//Never delete this line!
 		parent::ApplyChanges();	
+		
 		// Variable Heizprogramm erstellen
 		$this->MaintainVariable('SteuerProg', 'Steuerungsmodus', vtInteger, 'Heizungsautomatik', 1, true);
 		
@@ -76,8 +77,8 @@ class SingleRoomHeatingControl extends IPSModule
 		// Trigger Anwesenheit
 		$this->RegisterTriggerPresence("Anwesenheit", "TriggerAnwesenheit", 0, $Instance, 0,"SRHC_Update(\$_IPS['TARGET']);");
 		
-		// Trigger Modus
-		$this->RegisterTriggerMod("Betriebsmodus", "TriggerMod", 0, $Instance, 0,"SRHC_Update(\$_IPS['TARGET']);");
+		// Trigger Steuerungsmodus
+		$this->RegisterTriggerMod("Steuerungsmodus", "TriggerSteuerMod", 0, $Instance, 0,"SRHC_Update(\$_IPS['TARGET']);");
 	}
 	
 	public function AbsenkTemp()
@@ -88,7 +89,7 @@ class SingleRoomHeatingControl extends IPSModule
 		// Absenktemperatur
 		$AbsenkTemp = GetValue($this->GetIDForIdent('AbsenkTemp'));
 		
-		 // Absenktemperatur in Solltemperatur schreiben
+		// Absenktemperatur in Solltemperatur schreiben
 		RequestAction($this->ReadPropertyInteger('SetTempID'),$AbsenkTemp);
 		IPS_Sleep(50);
 	}
@@ -101,7 +102,7 @@ class SingleRoomHeatingControl extends IPSModule
 		// Grundtemperatur
 		$GrundTemp = GetValue($this->GetIDForIdent('GrundTemp'));
 		
-		 // Grundtemperatur in Solltemperatur schreiben
+		// Grundtemperatur in Solltemperatur schreiben
 		RequestAction($this->ReadPropertyInteger('SetTempID'),$GrundTemp);
 		IPS_Sleep(50);
 	}
@@ -114,7 +115,7 @@ class SingleRoomHeatingControl extends IPSModule
 		// Heiztemperatur
 		$HeizTemp = GetValue($this->GetIDForIdent('HeizTemp'));
 		
-		 // Heiztemperatur in Solltemperatur schreiben
+		// Heiztemperatur in Solltemperatur schreiben
 		RequestAction($this->ReadPropertyInteger('SetTempID'),$HeizTemp);
 		IPS_Sleep(50);
 	}
@@ -150,9 +151,11 @@ class SingleRoomHeatingControl extends IPSModule
 		$result = 'Ergebnis konnte nicht ermittelt werden!';
 		// Daten lesen
 		 $state = true;
+		 
 		// Heizungsprogramm
 		$SteuerProgID = $this->GetIDForIdent('SteuerProg'); 
 		$SteuerProg = GetValue($SteuerProgID);
+		
 		 // Letzte Solltemperatur
 		$SetTempID = $this->ReadPropertyInteger('SetTempID'); 
 		$SetTemp = GetValue($SetTempID);
@@ -166,6 +169,7 @@ class SingleRoomHeatingControl extends IPSModule
 		
 		// Stellantrieb Auf
 		$AntrAuf = GetValue($this->GetIDForIdent('AntrAuf'));
+		
 		// Stellantrieb Zu
 		$AntrZu = GetValue($this->GetIDForIdent('AntrZu')); 
 		 
@@ -176,8 +180,10 @@ class SingleRoomHeatingControl extends IPSModule
 		// Fensterkontakt
 		$WindowID = $this->ReadPropertyInteger('WindowID');
 		$Window = GetValue($WindowID);
+		
 		 // Anwesenheit 
 		$Presence = GetValue($this->ReadPropertyInteger('PresenceID'));
+		
 		 // Steuerungsautomatik
 		If ($SteuerProg == 0) //Automatic => Steuerung durch CCU
 		{
@@ -229,11 +235,13 @@ class SingleRoomHeatingControl extends IPSModule
 		{
 			//Letzten Sollwert schreiben
 			$update = $this->SetValue('LastSetTemp', $SetTemp);
+			
 			// Modus auf Manuell stellen
 			If ($Modus == 0)
 			{
 				RequestAction($ModusID,1);
 			}
+			
 			// Stellantrieb Auf
 			RequestAction($SetTempID,$AntrAuf);
 			IPS_Sleep(50);
@@ -242,11 +250,13 @@ class SingleRoomHeatingControl extends IPSModule
 		{
 			//Letzten Sollwert schreiben
 			$update = $this->SetValue('LastSetTemp', $SetTemp);
+			
 			// Modus auf Manuell stellen
 			If ($Modus == 0)
 			{
 				RequestAction($ModusID,1);
 			}
+			
 			// Stellantrieb Zu
 			RequestAction($SetTempID,$AntrZu);
 			IPS_Sleep(50);
@@ -299,7 +309,7 @@ class SingleRoomHeatingControl extends IPSModule
 		}
 	}
 	
-	private function RegisterTriggerMod($Name, $Ident, $Typ, $Parent, $Position, $Skript)
+	private function TriggerSteuerMod($Name, $Ident, $Typ, $Parent, $Position, $Skript)
 	{
 		$eid = @$this->GetIDForIdent($Ident);
 		if($eid === false) {
@@ -312,7 +322,7 @@ class SingleRoomHeatingControl extends IPSModule
 		//we need to create one
 		if ($eid == 0) {
 		    $EventID = IPS_CreateEvent($Typ);
-			IPS_SetEventTrigger($EventID, 1, $this->ReadPropertyInteger('ModID'));
+			IPS_SetEventTrigger($EventID, 1, $this->ReadPropertyInteger('SteuerProg'));
 			IPS_SetParent($EventID, $Parent);
 			IPS_SetIdent($EventID, $Ident);
 			IPS_SetName($EventID, $Name);
