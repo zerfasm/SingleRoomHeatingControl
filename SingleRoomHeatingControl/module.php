@@ -1,27 +1,20 @@
 <?php
 require_once __DIR__.'/../libs/traits.php';  // Allgemeine Funktionen
-
 class SingleRoomHeatingControl extends IPSModule 
 {
-
 	use ProfileHelper, DebugHelper;
-
 	public function Create()
 	{
 		//Never delete this line!
 		parent::Create();
-
 		// Temperatur Parameter
 		$this->RegisterPropertyString('RoomName', "");
 		$this->RegisterPropertyInteger('ModID', 0);
 		$this->RegisterPropertyInteger('SetTempID', 0);
-
 		// Fensterkontakt
 		$this->RegisterPropertyInteger('WindowID', 0);
-
 		// Anwesenheit
 		$this->RegisterPropertyInteger('PresenceID', 0);
-
 		// Update trigger
 		$this->RegisterTimer('UpdateTrigger', 0, "SRHC_Update(\$_IPS['TARGET']);");
 		
@@ -40,7 +33,6 @@ class SingleRoomHeatingControl extends IPSModule
 		// Antrieb Zu trigger
 		$this->RegisterTimer('AntrZuTrigger', 0, "SRHC_AntrZu(\$_IPS['TARGET']);");
 	}
-
 	public function Destroy()
 	{
 		//Never delete this line!
@@ -51,9 +43,8 @@ class SingleRoomHeatingControl extends IPSModule
 	{
 		//Never delete this line!
 		parent::ApplyChanges();	
-
 		// Variable Heizprogramm erstellen
-		$this->MaintainVariable('Prog', 'Programm', vtInteger, 'Heizungsautomatik', 1, true);
+		$this->MaintainVariable('HeizProg', 'Heizprogramm', vtInteger, 'Heizungsautomatik', 1, true);
 		
 		// Variable Absenktemperatur erstellen
 		$this->MaintainVariable('AbsenkTemp', 'Absenktemperatur', vtFloat, '~Temperature.Room', 2, true);
@@ -86,7 +77,7 @@ class SingleRoomHeatingControl extends IPSModule
 		$this->RegisterTriggerPresence("Anwesenheit", "TriggerAnwesenheit", 0, $Instance, 0,"SRHC_Update(\$_IPS['TARGET']);");
 		
 		// Trigger Modus
-		$this->RegisterTriggerProgram("Programm", "TriggerProgramm", 0, $Instance, 0,"SRHC_Update(\$_IPS['TARGET']);");
+		$this->RegisterTriggerMod("Betriebsmodus", "TriggerMod", 0, $Instance, 0,"SRHC_Update(\$_IPS['TARGET']);");
 	}
 	
 	public function AbsenkTemp()
@@ -159,11 +150,9 @@ class SingleRoomHeatingControl extends IPSModule
 		$result = 'Ergebnis konnte nicht ermittelt werden!';
 		// Daten lesen
 		 $state = true;
-
 		// Heizungsprogramm
-		$ProgID = $this->GetIDForIdent('Prog'); 
-		$Prog = GetValue($HeizProgID);
-
+		$HeizProgID = $this->GetIDForIdent('HeizProg'); 
+		$HeizProg = GetValue($HeizProgID);
 		 // Letzte Solltemperatur
 		$SetTempID = $this->ReadPropertyInteger('SetTempID'); 
 		$SetTemp = GetValue($SetTempID);
@@ -177,7 +166,6 @@ class SingleRoomHeatingControl extends IPSModule
 		
 		// Stellantrieb Auf
 		$AntrAuf = GetValue($this->GetIDForIdent('AntrAuf'));
-
 		// Stellantrieb Zu
 		$AntrZu = GetValue($this->GetIDForIdent('AntrZu')); 
 		 
@@ -188,28 +176,24 @@ class SingleRoomHeatingControl extends IPSModule
 		// Fensterkontakt
 		$WindowID = $this->ReadPropertyInteger('WindowID');
 		$Window = GetValue($WindowID);
-
 		 // Anwesenheit 
 		$Presence = GetValue($this->ReadPropertyInteger('PresenceID'));
-
 		 // Steuerungsautomatik
-		If ($Prog == 0) //Automatic => Steuerung durch CCU
+		If ($HeizProg == 0) //Automatic => Steuerung durch CCU
 		{
 			RequestAction($ModusID,0);
 		} 
-		else if ($Prog == 1) // Manuelle Steuerung durch IPS 
+		else if ($HeizProg == 1) // Manuelle Steuerung durch IPS 
 		{
 			If ($Presence == false)
 			{
 				//Letzten Sollwert speichern
 				$update = $this->SetValue('LastSetTemp', $SetTemp);
-
 				// Modus auf Manuell stellen
 				If ($Modus == 0)
 				{
 					RequestAction($ModusID,1);
 				}
-
 				// Auf Absenktemperatur stellen
 				RequestAction($SetTempID,$AbsenkTemp);
 				IPS_Sleep(50);
@@ -236,32 +220,28 @@ class SingleRoomHeatingControl extends IPSModule
 				{
 					RequestAction($ModusID,1);
 				}
-
 				// Auf letzten Sollwert stellen
 				RequestAction($SetTempID,$LastSetTemp);
 				IPS_Sleep(50);
 			}
 		} 
-		else if ($Prog == 2)
+		else if ($HeizProg == 2)
 		{
 			//Letzten Sollwert schreiben
 			$update = $this->SetValue('LastSetTemp', $SetTemp);
-
 			// Modus auf Manuell stellen
 			If ($Modus == 0)
 			{
 				RequestAction($ModusID,1);
 			}
-
 			// Stellantrieb Auf
 			RequestAction($SetTempID,$AntrAuf);
 			IPS_Sleep(50);
 		} 
-		else if ($Prog == 3)
+		else if ($HeizProg == 3)
 		{
 			//Letzten Sollwert schreiben
 			$update = $this->SetValue('LastSetTemp', $SetTemp);
-
 			// Modus auf Manuell stellen
 			If ($Modus == 0)
 			{
@@ -319,7 +299,7 @@ class SingleRoomHeatingControl extends IPSModule
 		}
 	}
 	
-	private function RegisterTriggerProgram($Name, $Ident, $Typ, $Parent, $Position, $Skript)
+	private function RegisterTriggerMod($Name, $Ident, $Typ, $Parent, $Position, $Skript)
 	{
 		$eid = @$this->GetIDForIdent($Ident);
 		if($eid === false) {
@@ -332,7 +312,7 @@ class SingleRoomHeatingControl extends IPSModule
 		//we need to create one
 		if ($eid == 0) {
 		    $EventID = IPS_CreateEvent($Typ);
-			IPS_SetEventTrigger($EventID, 1, $this->ReadPropertyInteger('$HeizProgID'));
+			IPS_SetEventTrigger($EventID, 1, $this->ReadPropertyInteger('HeizProg'));
 			IPS_SetParent($EventID, $Parent);
 			IPS_SetIdent($EventID, $Ident);
 			IPS_SetName($EventID, $Name);
