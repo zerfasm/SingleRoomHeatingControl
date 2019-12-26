@@ -44,7 +44,7 @@ class SingleRoomHeatingControl extends IPSModule
 		//Never delete this line!
 		parent::ApplyChanges();	
 		// Variable Heizprogramm erstellen
-		$this->MaintainVariable('HeizProg', 'Heizprogramm', vtInteger, 'Heizungsautomatik', 1, true);
+		$this->MaintainVariable('SteuerProg', 'Steuerungsmodus', vtInteger, 'Heizungsautomatik', 1, true);
 		
 		// Variable Absenktemperatur erstellen
 		$this->MaintainVariable('AbsenkTemp', 'Absenktemperatur', vtFloat, '~Temperature.Room', 2, true);
@@ -151,8 +151,8 @@ class SingleRoomHeatingControl extends IPSModule
 		// Daten lesen
 		 $state = true;
 		// Heizungsprogramm
-		$HeizProgID = $this->GetIDForIdent('HeizProg'); 
-		$HeizProg = GetValue($HeizProgID);
+		$SteuerProgID = $this->GetIDForIdent('SteuerProg'); 
+		$SteuerProg = GetValue($SteuerProgID);
 		 // Letzte Solltemperatur
 		$SetTempID = $this->ReadPropertyInteger('SetTempID'); 
 		$SetTemp = GetValue($SetTempID);
@@ -179,11 +179,11 @@ class SingleRoomHeatingControl extends IPSModule
 		 // Anwesenheit 
 		$Presence = GetValue($this->ReadPropertyInteger('PresenceID'));
 		 // Steuerungsautomatik
-		If ($HeizProg == 0) //Automatic => Steuerung durch CCU
+		If ($SteuerProg == 0) //Automatic => Steuerung durch CCU
 		{
 			RequestAction($ModusID,0);
 		} 
-		else if ($HeizProg == 1) // Manuelle Steuerung durch IPS 
+		else if ($SteuerProg == 1) // Manuelle Steuerung durch IPS 
 		{
 			If ($Presence == false)
 			{
@@ -225,7 +225,7 @@ class SingleRoomHeatingControl extends IPSModule
 				IPS_Sleep(50);
 			}
 		} 
-		else if ($HeizProg == 2)
+		else if ($SteuerProg == 2)
 		{
 			//Letzten Sollwert schreiben
 			$update = $this->SetValue('LastSetTemp', $SetTemp);
@@ -238,7 +238,7 @@ class SingleRoomHeatingControl extends IPSModule
 			RequestAction($SetTempID,$AntrAuf);
 			IPS_Sleep(50);
 		} 
-		else if ($HeizProg == 3)
+		else if ($SteuerProg == 3)
 		{
 			//Letzten Sollwert schreiben
 			$update = $this->SetValue('LastSetTemp', $SetTemp);
