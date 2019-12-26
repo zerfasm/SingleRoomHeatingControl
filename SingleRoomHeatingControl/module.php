@@ -14,6 +14,7 @@ class SingleRoomHeatingControl extends IPSModule
 		$this->RegisterPropertyInteger('SetTempID', 0);
 		
 		// Fensterkontakt
+		
 		$this->RegisterPropertyInteger('WindowID', 0);
 		
 		// Anwesenheit
