@@ -86,7 +86,7 @@ class SingleRoomHeatingControl extends IPSModule
 		$this->RegisterTriggerPresence("Anwesenheit", "TriggerAnwesenheit", 0, $Instance, 0,"SRHC_Update(\$_IPS['TARGET']);");
 		
 		// Trigger Modus
-		$this->RegisterTriggerMod("Programm", "TriggerProgramm", 0, $Instance, 0,"SRHC_Update(\$_IPS['TARGET']);");
+		$this->RegisterTriggerProgram("Programm", "TriggerProgramm", 0, $Instance, 0,"SRHC_Update(\$_IPS['TARGET']);");
 	}
 	
 	public function AbsenkTemp()
