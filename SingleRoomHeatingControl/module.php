@@ -14,7 +14,6 @@ class SingleRoomHeatingControl extends IPSModule
 		$this->RegisterPropertyInteger('SetTempID', 0);
 		
 		// Fensterkontakt
-		
 		$this->RegisterPropertyInteger('WindowID', 0);
 		
 		// Anwesenheit
@@ -203,11 +202,13 @@ class SingleRoomHeatingControl extends IPSModule
 			{
 				//Letzten Sollwert speichern
 				$update = $this->SetValue('LastSetTemp', $SetTemp);
+				
 				// Modus auf Manuell stellen
 				If ($Modus == 0)
 				{
 					RequestAction($ModusID,1);
 				}
+				
 				// Auf Absenktemperatur stellen
 				RequestAction($SetTempID,$AbsenkTemp);
 				IPS_Sleep(50);
@@ -219,6 +220,7 @@ class SingleRoomHeatingControl extends IPSModule
 				{
 					RequestAction($ModusID,1);
 				}
+				
 				//Letzten Sollwert speichern
 				$update = $this->SetValue('LastSetTemp', $SetTemp);
 				IPS_Sleep(50);
@@ -234,6 +236,7 @@ class SingleRoomHeatingControl extends IPSModule
 				{
 					RequestAction($ModusID,1);
 				}
+				
 				// Auf letzten Sollwert stellen
 				RequestAction($SetTempID,$LastSetTemp);
 				IPS_Sleep(50);
