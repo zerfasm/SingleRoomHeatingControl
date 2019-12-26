@@ -7,6 +7,7 @@ class SingleRoomHeatingControl extends IPSModule
 	{
 		//Never delete this line!
 		parent::Create();
+		
 		// Temperatur Parameter
 		$this->RegisterPropertyString('RoomName', "");
 		$this->RegisterPropertyInteger('ModID', 0);
@@ -46,7 +47,8 @@ class SingleRoomHeatingControl extends IPSModule
 	{
 		//Never delete this line!
 		parent::ApplyChanges();	
-		// Variable Heizprogramm erstellen
+		
+		// Variable Steuerungsmodus erstellen
 		$this->MaintainVariable('Prog', 'Steuerungsmodus', vtInteger, 'Heizungsautomatik', 1, true);
 		
 		// Variable Absenktemperatur erstellen
@@ -187,7 +189,7 @@ class SingleRoomHeatingControl extends IPSModule
 		$Presence = GetValue($this->ReadPropertyInteger('PresenceID'));
 		 
 		// Steuerungsautomatik
-		If ($HeizProg == 0) //Automatic => Steuerung durch CCU
+		If ($Prog == 0) //Automatic => Steuerung durch CCU
 		{
 			RequestAction($ModusID,0);
 		} 
