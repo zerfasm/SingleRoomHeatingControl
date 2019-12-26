@@ -47,7 +47,7 @@ class SingleRoomHeatingControl extends IPSModule
 		//Never delete this line!
 		parent::ApplyChanges();	
 		// Variable Heizprogramm erstellen
-		$this->MaintainVariable('HeizProg', 'Heizprogramm', vtInteger, 'Heizungsautomatik', 1, true);
+		$this->MaintainVariable('Prog', 'Steuerungsmodus', vtInteger, 'Heizungsautomatik', 1, true);
 		
 		// Variable Absenktemperatur erstellen
 		$this->MaintainVariable('AbsenkTemp', 'Absenktemperatur', vtFloat, '~Temperature.Room', 2, true);
@@ -154,9 +154,9 @@ class SingleRoomHeatingControl extends IPSModule
 		// Daten lesen
 		 $state = true;
 		
-		// Heizungsprogramm
-		$HeizProgID = $this->GetIDForIdent('HeizProg'); 
-		$HeizProg = GetValue($HeizProgID);
+		// Steuerungsprogramm
+		$ProgID = $this->GetIDForIdent('Prog'); 
+		$Prog = GetValue($ProgID);
 		
 		 // Solltemperatur
 		$SetTempID = $this->ReadPropertyInteger('SetTempID'); 
@@ -191,7 +191,7 @@ class SingleRoomHeatingControl extends IPSModule
 		{
 			RequestAction($ModusID,0);
 		} 
-		else if ($HeizProg == 1) // Manuelle Steuerung durch IPS 
+		else if ($Prog == 1) // Manuelle Steuerung durch IPS 
 		{
 			If ($Presence == false)
 			{
@@ -233,7 +233,7 @@ class SingleRoomHeatingControl extends IPSModule
 				IPS_Sleep(50);
 			}
 		} 
-		else if ($HeizProg == 2)
+		else if ($Prog == 2)
 		{
 			//Letzten Sollwert schreiben
 			$update = $this->SetValue('LastSetTemp', $SetTemp);
@@ -246,7 +246,7 @@ class SingleRoomHeatingControl extends IPSModule
 			RequestAction($SetTempID,$AntrAuf);
 			IPS_Sleep(50);
 		} 
-		else if ($HeizProg == 3)
+		else if ($Prog == 3)
 		{
 			//Letzten Sollwert schreiben
 			$update = $this->SetValue('LastSetTemp', $SetTemp);
@@ -320,7 +320,7 @@ class SingleRoomHeatingControl extends IPSModule
 		//we need to create one
 		if ($eid == 0) {
 		    $EventID = IPS_CreateEvent($Typ);
-			IPS_SetEventTrigger($EventID, 1, $this->ReadPropertyInteger('ModID'));
+			IPS_SetEventTrigger($EventID, 1, $this->ReadPropertyInteger('Prog'));
 			IPS_SetParent($EventID, $Parent);
 			IPS_SetIdent($EventID, $Ident);
 			IPS_SetName($EventID, $Name);
