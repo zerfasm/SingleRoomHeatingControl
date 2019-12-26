@@ -7,14 +7,18 @@ class SingleRoomHeatingControl extends IPSModule
 	{
 		//Never delete this line!
 		parent::Create();
+		
 		// Temperatur Parameter
 		$this->RegisterPropertyString('RoomName', "");
 		$this->RegisterPropertyInteger('ModID', 0);
 		$this->RegisterPropertyInteger('SetTempID', 0);
+		
 		// Fensterkontakt
 		$this->RegisterPropertyInteger('WindowID', 0);
+		
 		// Anwesenheit
 		$this->RegisterPropertyInteger('PresenceID', 0);
+		
 		// Update trigger
 		$this->RegisterTimer('UpdateTrigger', 0, "SRHC_Update(\$_IPS['TARGET']);");
 		
@@ -32,6 +36,9 @@ class SingleRoomHeatingControl extends IPSModule
 		
 		// Antrieb Zu trigger
 		$this->RegisterTimer('AntrZuTrigger', 0, "SRHC_AntrZu(\$_IPS['TARGET']);");
+		
+		// Steuerungsmodus
+		$this->RegisterPropertyInteger('SteuerProg', 0);
 	}
 	public function Destroy()
 	{
@@ -152,7 +159,7 @@ class SingleRoomHeatingControl extends IPSModule
 		// Daten lesen
 		 $state = true;
 		 
-		// Heizungsprogramm
+		// Steuerungsmodus
 		$SteuerProgID = $this->GetIDForIdent('SteuerProg'); 
 		$SteuerProg = GetValue($SteuerProgID);
 		
@@ -173,7 +180,7 @@ class SingleRoomHeatingControl extends IPSModule
 		// Stellantrieb Zu
 		$AntrZu = GetValue($this->GetIDForIdent('AntrZu')); 
 		 
-		// Modus
+		// Betriebsmodus
 		$ModusID = $this->ReadPropertyInteger('ModID');
 		$Modus = GetValue($ModusID);
  		
