@@ -49,7 +49,7 @@ class SingleRoomHeatingControl extends IPSModule
 		parent::ApplyChanges();	
 		
 		// Variable Steuerungsmodus erstellen
-		$this->MaintainVariable('Prog', 'Steuerungsmodus', vtInteger, 'Heizungsautomatik', 1, true);
+		$this->MaintainVariable('SteuerMod', 'Steuerungsmodus', vtInteger, 'Heizungsautomatik', 1, true);
 		
 		// Variable Absenktemperatur erstellen
 		$this->MaintainVariable('AbsenkTemp', 'Absenktemperatur', vtFloat, '~Temperature.Room', 2, true);
@@ -157,7 +157,7 @@ class SingleRoomHeatingControl extends IPSModule
 		 $state = true;
 		
 		// Steuerungsprogramm
-		$ProgID = $this->GetIDForIdent('Prog'); 
+		$ProgID = $this->GetIDForIdent('SteuerMod'); 
 		$Prog = GetValue($ProgID);
 		
 		 // Solltemperatur
@@ -322,7 +322,7 @@ class SingleRoomHeatingControl extends IPSModule
 		//we need to create one
 		if ($eid == 0) {
 		    $EventID = IPS_CreateEvent($Typ);
-			IPS_SetEventTrigger($EventID, 1, $this->ReadPropertyInteger('Prog'));
+			IPS_SetEventTrigger($EventID, 1, $this->ReadPropertyInteger('SteuerMod'));
 			IPS_SetParent($EventID, $Parent);
 			IPS_SetIdent($EventID, $Ident);
 			IPS_SetName($EventID, $Name);
