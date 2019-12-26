@@ -38,7 +38,7 @@ class SingleRoomHeatingControl extends IPSModule
 		$this->RegisterTimer('AntrZuTrigger', 0, "SRHC_AntrZu(\$_IPS['TARGET']);");
 		
 		// Steuerungsmodus
-		$this->RegisterPropertyInteger('SteuerProg', 0);
+		//$this->RegisterPropertyInteger('SteuerProg', 0);
 	}
 	public function Destroy()
 	{
