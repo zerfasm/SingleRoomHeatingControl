@@ -89,7 +89,7 @@ class SingleRoomHeatingControl extends IPSModule
 		$this->RegisterTriggerSteuerMod("Steuerungsmodus", "TriggerSteuerMod", 0, $Instance, 0,"SRHC_Update(\$_IPS['TARGET']);");
 		
 		//Wochenplan erstellen
-		$this->RegisterEvent("Wochenplan Normal", "EventWochenplan_Normal", 2, $Instance, 8);
+		$this->RegisterEvent("Wochenplan Normal", "EventWochenplan_Normal", 2, $Instance, 8,"SRHC_Update(\$_IPS['TARGET']);");
 		//$this->RegisterEvent("Wochenplan Feiertag", "EventWochenplan_Feiertag", 2, $Instance, 9);
         	
 		// Anlegen der Daten für den Wochenplan Normal
@@ -365,7 +365,7 @@ class SingleRoomHeatingControl extends IPSModule
 		}
 	}
 	
-	private function RegisterEvent($Name, $Ident, $Typ, $Parent, $Position)
+	private function RegisterEvent($Name, $Ident, $Typ, $Parent, $Position, $Skript)
 	{
 		$eid = @$this->GetIDForIdent($Ident);
 		if($eid === false) {
