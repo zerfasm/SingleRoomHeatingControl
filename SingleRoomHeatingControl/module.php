@@ -94,6 +94,10 @@ class SingleRoomHeatingControl extends IPSModule
 		// Anlegen der Daten für den Wochenplan Normal
         	IPS_SetEventScheduleGroup($this->GetIDForIdent("EventWochenplan_Normal"), 0, 31); //Mo - Fr (1 + 2 + 4 + 8 + 16)
 		IPS_SetEventScheduleGroup($this->GetIDForIdent("EventWochenplan_Normal"), 1, 96); //Sa + So (32 + 64)
+		
+		IPS_SetEventScheduleAction($this->GetIDForIdent("EventWochenplan_Normal"), 1, "Absenken", 0x000FF, "SRHC_AbsenkTemp(\$_IPS['TARGET']");  
+        	IPS_SetEventScheduleAction($this->GetIDForIdent("EventWochenplan_Normal"), 2, "Grundwärme", 0xFF9900 , "SRHC_GrundTemp(\$_IPS['TARGET']");  
+        	IPS_SetEventScheduleAction($this->GetIDForIdent("EventWochenplan_Normal"), 3, "Heizen", 0xFF0000, "SRHC_HeizTemp(\$_IPS['TARGET']");
 	}
 	
 	public function AbsenkTemp()
@@ -364,9 +368,6 @@ class SingleRoomHeatingControl extends IPSModule
 		//we need to create one
 		if ($eid == 0) {
 		    $EventID = IPS_CreateEvent($Typ);
-			IPS_SetEventScheduleAction($this->GetIDForIdent("EventWochenplan_Normal"), 1, "Absenken", 0x000FF, "SRHC_AbsenkTemp(\$_IPS['TARGET']");  
-        		IPS_SetEventScheduleAction($this->GetIDForIdent("EventWochenplan_Normal"), 2, "Grundwärme", 0xFF9900 , "SRHC_GrundTemp(\$_IPS['TARGET']");  
-        		IPS_SetEventScheduleAction($this->GetIDForIdent("EventWochenplan_Normal"), 3, "Heizen", 0xFF0000, "SRHC_HeizTemp(\$_IPS['TARGET']");
 			IPS_SetParent($EventID, $Parent);
 			IPS_SetIdent($EventID, $Ident);
 			IPS_SetName($EventID, $Name);
