@@ -39,6 +39,10 @@ class SingleRoomHeatingControl extends IPSModule
 		
 		// Steuerungsmodus
 		$this->RegisterPropertyInteger('SteuerMod', 0);
+		
+		$this->RegisterPropertyString('Absenken', ""); 
+		$this->RegisterPropertyString('Grundwärme', ""); 
+		$this->RegisterPropertyString('heizen', ""); 
 	}
 	
 	public function Destroy()
