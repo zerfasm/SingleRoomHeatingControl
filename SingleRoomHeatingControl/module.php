@@ -41,7 +41,7 @@ class SingleRoomHeatingControl extends IPSModule
 		$this->RegisterPropertyInteger('SteuerMod', 0);
 		
 		// Wochenplan Normal
-		$this->RegisterEvent("Wochenplan Normal", "EventWochenplan_Normal", 2, $Instance, 8);
+		$this->RegisterEventNormal("Wochenplan Normal", "EventWochenplan_Normal", 2, $Instance, 8);
 	}
 	
 	public function Destroy()
