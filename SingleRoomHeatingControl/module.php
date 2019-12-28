@@ -39,6 +39,9 @@ class SingleRoomHeatingControl extends IPSModule
 		
 		// Steuerungsmodus
 		$this->RegisterPropertyInteger('SteuerMod', 0);
+		
+		// Wochenplan Normal
+		$this->RegisterEvent("Wochenplan Normal", "EventWochenplan_Normal", 2, $Instance, 8);
 	}
 	
 	public function Destroy()
@@ -87,6 +90,10 @@ class SingleRoomHeatingControl extends IPSModule
 		
 		// Trigger Steuerungsmodus
 		$this->RegisterTriggerSteuerMod("Steuerungsmodus", "TriggerSteuerMod", 0, $Instance, 0,"SRHC_Update(\$_IPS['TARGET']);");
+		
+		// Anlegen der Daten für den Wochenplan Normal
+        	IPS_SetEventScheduleGroup($this->GetIDForIdent("EventWochenplan_Normal"), 0, 31); //Mo - Fr (1 + 2 + 4 + 8 + 16)
+		IPS_SetEventScheduleGroup($this->GetIDForIdent("EventWochenplan_Normal"), 1, 96); //Sa + So (32 + 64)
 	}
 	
 	public function AbsenkTemp()
@@ -340,6 +347,30 @@ class SingleRoomHeatingControl extends IPSModule
 			IPS_SetName($EventID, $Name);
 			IPS_SetPosition($EventID, $Position);
 			IPS_SetEventScript($EventID, $Skript); 
+			IPS_SetEventActive($EventID, true);  
+		}
+	}
+	
+	private function RegisterEventNormal($Name, $Ident, $Typ, $Parent, $Position)
+	{
+		$eid = @$this->GetIDForIdent($Ident);
+		if($eid === false) {
+			$eid = 0;
+		} elseif(IPS_GetEvent($eid)['EventType'] <> $Typ) {
+			IPS_DeleteEvent($eid);
+			$eid = 0;
+		}
+		
+		//we need to create one
+		if ($eid == 0) {
+		    $EventID = IPS_CreateEvent($Typ);
+			IPS_SetEventScheduleAction($this->GetIDForIdent("EventWochenplan_Normal"), 1, "Absenken", 0x000FF, "SRHC_AbsenkTemp(\$_IPS['TARGET']");  
+        		IPS_SetEventScheduleAction($this->GetIDForIdent("EventWochenplan_Normal"), 2, "Grundwärme", 0xFF9900 , "SRHC_GrundTemp(\$_IPS['TARGET']");  
+        		IPS_SetEventScheduleAction($this->GetIDForIdent("EventWochenplan_Normal"), 3, "Heizen", 0xFF0000, "SRHC_HeizTemp(\$_IPS['TARGET']");
+			IPS_SetParent($EventID, $Parent);
+			IPS_SetIdent($EventID, $Ident);
+			IPS_SetName($EventID, $Name);
+			IPS_SetPosition($EventID, $Position);
 			IPS_SetEventActive($EventID, true);  
 		}
 	}
