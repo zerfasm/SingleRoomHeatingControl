@@ -17,7 +17,7 @@ class SingleRoomHeatingControl extends IPSModule
 		$this->RegisterPropertyInteger('WindowID', 0);
 		
 		// Anwesenheit
-		$this->RegisterPropertyBoolean('PresenceID', false);
+		$this->RegisterPropertyInteger('PresenceID', 0);
 		
 		// Update trigger
 		$this->RegisterTimer('UpdateTrigger', 0, "SRHC_Update(\$_IPS['TARGET']);");
@@ -190,7 +190,7 @@ class SingleRoomHeatingControl extends IPSModule
 		$Window = GetValue($WindowID);
 		
 		 // Anwesenheit 
-		$PresenceID = $this->ReadPropertyBoolean('PresenceID');
+		$PresenceID = $this->ReadPropertyInteger('PresenceID');
 		$Presence = GetValue($PresenceID);
 		
 		 // Steuerungsautomatik
@@ -312,7 +312,7 @@ class SingleRoomHeatingControl extends IPSModule
 		//we need to create one
 		if ($eid == 0) {
 		    $EventID = IPS_CreateEvent($Typ);
-			IPS_SetEventTrigger($EventID, 1, $this->ReadPropertyBoolean('PresenceID'));
+			IPS_SetEventTrigger($EventID, 1, $this->ReadPropertyInteger('PrecenceID'));
 			IPS_SetParent($EventID, $Parent);
 			IPS_SetIdent($EventID, $Ident);
 			IPS_SetName($EventID, $Name);
