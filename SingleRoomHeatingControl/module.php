@@ -190,7 +190,8 @@ class SingleRoomHeatingControl extends IPSModule
 		$Window = GetValue($WindowID);
 		
 		 // Anwesenheit 
-		$Presence = $this->ReadPropertyBoolean('PresenceID');
+		$PresenceID = $this->ReadPropertyBoolean('PresenceID');
+		$Presence = GetValue($PresenceID);
 		
 		 // Steuerungsautomatik
 		If ($SteuerMod == 0) //Automatic => Steuerung durch CCU
