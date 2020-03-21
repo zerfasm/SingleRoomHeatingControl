@@ -12,6 +12,7 @@ class SingleRoomHeatingControl extends IPSModule
 		$this->RegisterPropertyString('RoomName', "");
 		$this->RegisterPropertyInteger('ModID', 0);
 		$this->RegisterPropertyInteger('SetTempID', 0);
+		$this->RegisterPropertyInteger('SteuerMod', 1);
 		
 		// Fensterkontakt
 		$this->RegisterPropertyInteger('WindowID', 0);
