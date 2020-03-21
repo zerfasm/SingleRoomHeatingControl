@@ -17,7 +17,7 @@ class SingleRoomHeatingControl extends IPSModule
 		$this->RegisterPropertyInteger('WindowID', 0);
 		
 		// Anwesenheit
-		$this->RegisterPropertyBoolean('PresenceID', true);
+		$this->RegisterPropertyBoolean('PresenceID', "");
 		
 		// Update trigger
 		$this->RegisterTimer('UpdateTrigger', 0, "SRHC_Update(\$_IPS['TARGET']);");
