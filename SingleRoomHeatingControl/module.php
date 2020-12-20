@@ -19,6 +19,9 @@ class SingleRoomHeatingControl extends IPSModule
 		// Anwesenheit
 		$this->RegisterPropertyInteger('PresenceID', 0);
 		
+		// Anwesenheit
+		$this->RegisterPropertyInteger('HolidayID', 0);
+		
 		// Wochenplan Normal
 		$this->RegisterPropertyInteger('WeekplanID', 0);
 		
