@@ -11,6 +11,8 @@
             "Presence": "Anwesenheit",
             "Presence ID:": "Anwesenheit ID:",
             
+            "Holiday ID:": "Feiertag ID:",
+            
             "Weekplan ID:": "Wochenplan Normal ID:",
             "Weekplan Holiday ID:": "Wochenplan Feiertag ID:"
         }
