@@ -9,7 +9,10 @@
             "Window ID:": "Fensterkontakt ID:",
             
             "Presence": "Anwesenheit",
-            "Presence ID:": "Anwesenheit ID:"
+            "Presence ID:": "Anwesenheit ID:",
+            
+            "Weekplan ID:": "Wochenplan Normal ID:",
+            "Weekplan Holiday ID:": "Wochenplan Feiertag ID:"
         }
     }
 }
