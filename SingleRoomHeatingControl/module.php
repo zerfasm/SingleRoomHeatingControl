@@ -19,6 +19,12 @@ class SingleRoomHeatingControl extends IPSModule
 		// Anwesenheit
 		$this->RegisterPropertyInteger('PresenceID', 0);
 		
+		// Wochenplan Normal
+		$this->RegisterPropertyInteger('WeekplanID', 0);
+		
+		// Wochenplan Feiertag
+		$this->RegisterPropertyInteger('WeekplanHolidayID', 0);
+		
 		// Update trigger
 		$this->RegisterTimer('UpdateTrigger', 0, "SRHC_Update(\$_IPS['TARGET']);");
 		
