@@ -4,6 +4,7 @@
 	{"type": "SelectVariable", "name": "SetTempID", "caption": "Set Temperature ID:" }, 
         {"type": "SelectVariable", "name": "WindowID", "caption": "Window ID:" },  
         {"type": "SelectVariable", "name": "PresenceID", "caption": "Presence ID:" },
+        {"type": "SelectVariable", "name": "HolidayID", "caption": "Holiday ID:" },	  
 	{"type": "SelectEvent", "name": "WeekplanID", "caption": "Weekplan ID:" },
 	{"type": "SelectEvent", "name": "WeekplanHolidayID", "caption": "Weekplan Holiday ID:" }	  
   ],
