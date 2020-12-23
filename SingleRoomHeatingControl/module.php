@@ -32,13 +32,13 @@ class SingleRoomHeatingControl extends IPSModule
 		$this->RegisterTimer('UpdateTrigger', 0, "SRHC_Update(\$_IPS['TARGET']);");
 		
 		// Absenkentemperatur trigger
-		$this->RegisterTimer('AbsenkTempTrigger', 0, "SRHC_AbsenkTemp(\$_IPS['TARGET']);");
+		$this->RegisterTimer('AbsenkTempTrigger', 0, "SRHC_AbsenkTemp(\$_IPS['TARGET']);"20");
 		
 		// Grundtemperatur trigger
-		$this->RegisterTimer('GrundTempTrigger', 0, "SRHC_GrundTemp(\$_IPS['TARGET']);");
+		$this->RegisterTimer('GrundTempTrigger', 0, "SRHC_GrundTemp(\$_IPS['TARGET']);"21");
 		
 		// Heiztemperatur trigger
-		$this->RegisterTimer('HeizTempTrigger', 0, "SRHC_HeizTemp(\$_IPS['TARGET']);");
+		$this->RegisterTimer('HeizTempTrigger', 0, "SRHC_HeizTemp(\$_IPS['TARGET']);"22");
 		
 		// Antrieb Auf trigger
 		$this->RegisterTimer('AntrAufTrigger', 0, "SRHC_AntrAuf(\$_IPS['TARGET']);");
@@ -140,7 +140,7 @@ class SingleRoomHeatingControl extends IPSModule
 	public function AntrAuf()
 	{
 		//Letzten Sollwert speichern
-		$update = $this->SetValue('LastSetTemp', GetValue($this->ReadPropertyInteger('SetTempID')));
+		//$update = $this->SetValue('LastSetTemp', GetValue($this->ReadPropertyInteger('SetTempID')));
 		
 		// Antrieb Auf
 		$AntrAuf = GetValue($this->GetIDForIdent('AntrAuf'));
@@ -153,7 +153,7 @@ class SingleRoomHeatingControl extends IPSModule
 	public function AntrZu()
 	{
 		//Letzten Sollwert speichern
-		$update = $this->SetValue('LastSetTemp', GetValue($this->ReadPropertyInteger('SetTempID')));
+		//$update = $this->SetValue('LastSetTemp', GetValue($this->ReadPropertyInteger('SetTempID')));
 		
 		// Antrieb Auf
 		$AntrZu = GetValue($this->GetIDForIdent('AntrZu'));
@@ -173,7 +173,7 @@ class SingleRoomHeatingControl extends IPSModule
 		$SteuerModID = $this->GetIDForIdent('SteuerMod'); 
 		$SteuerMod = GetValue($SteuerModID);
 		
-		 // Letzte Solltemperatur
+		 // Solltemperatur
 		$SetTempID = $this->ReadPropertyInteger('SetTempID'); 
 		$SetTemp = GetValue($SetTempID);
 		 
