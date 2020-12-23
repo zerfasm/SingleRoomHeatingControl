@@ -665,7 +665,7 @@ class SingleRoomHeatingControl extends IPSModule
 		$WeekplanNormalID = $this->GetIDForIdent('WeekplanID'); 
 		
 		// Wochenplan Feiertag
-		$WeekplanHolidayID $this->GetIDForIdent('WeekplanHolidayID');
+		$WeekplanHolidayID = $this->GetIDForIdent('WeekplanHolidayID');
 		
 		 // Steuerungsautomatik
 		If ($SteuerMod == 0) //Automatic => Steuerung durch CCU
