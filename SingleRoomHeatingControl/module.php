@@ -195,7 +195,7 @@ class SingleRoomHeatingControl extends IPSModule
 	   daher jetzt gesondert pruefen ==> DayFound
 	*****************************************************************************/
 
-	public function GetWeekplanState($ID, $SysTimePoint=NULL, $CheckOnlySlot=false)
+	private function GetWeekplanState($ID, $SysTimePoint=NULL, $CheckOnlySlot=false)
 	 {
 	   if($SysTimePoint == NULL)
 	     {
