@@ -19,7 +19,7 @@ class SingleRoomHeatingControl extends IPSModule
 		// Anwesenheit
 		$this->RegisterPropertyInteger('PresenceID', 0);
 		
-		// Anwesenheit
+		// Ferien
 		$this->RegisterPropertyInteger('HolidayID', 0);
 		
 		// Wochenplan Normal
@@ -185,6 +185,9 @@ class SingleRoomHeatingControl extends IPSModule
 		 // Anwesenheit 
 		$Presence = GetValue($this->ReadPropertyInteger('PresenceID'));
 		
+		// Ferien
+		$Holiday = GetValue($this->ReadPropertyInteger('HolidayID'));
+		
 		 // Steuerungsautomatik
 		If ($SteuerMod == 0) //Automatic => Steuerung durch CCU
 		{
@@ -224,56 +227,6 @@ class SingleRoomHeatingControl extends IPSModule
 					RequestAction($ModusID,1);
 				}
 				
-				/****************************************************************************
-				GetWeekplanState,
-				  liest den Zustand eines gewünschten Wochenplanereignisses aus
-
-				  GetWeekplanStateGetWeekplanState(WochenplanID,[Abfragezeitpunkt_als_Systemzeit])
-
-				Example: $Zustand = GetWeekplanState(1234);
-					 oder
-					 $Zustand = GetWeekplanStateGetWeekplanState(1234,time()-24*3600)
-
-				[ActionID] => 4                          ==> Aktiver Zustand zum Abfragezeitpunkt
-				[ActionName] => FREI                     ==> Zustandsbezeichnung zum Abfragezeitpunkt
-				[CheckSysTime] => 1423986592             ==> Zeitpunkt fuer den die Ueberprufung gestartet wurde
-				[CheckTime] => 15.02.2015 08:49:52       ==> Formatierter Ueberpruefungszeitpunkt
-				[StartSysTime] => 1423861200             ==> Schaltpunkt wo der AKTIVE ZUSTAND aktiv wurde
-				[StartTime] => 13.02.2015 22:00:00       ==> Formatierter Startpunkt
-				[EndSysTime] => 1424034000               ==> Schaltpunkt wo der AKTIVE ZUSTAND verlassen wird
-				[EndTime] => 15.02.2015 22:00:00         ==> Formatierter Endpunkt
-				[Periode] => 172800                      ==> Zeitdauer des aktiven Zustand ins Sekunden
-				[PeriodeHours] => 48                     ==> Formatierte Zeitdauer STUNDEN
-				[PeriodeMinutes] => 0                    ==> Formatierte Zeitdauer MINUTEN
-				[PeriodeSeconds] => 0                    ==> Formatierte Zeitdauer SEKUNDEN
-				[PreviousActionID] => 2                  ==> Zustand der VOR dem aktuellen Zustand
-				[PreviousActionName] => 2-Mittelschicht  ==> Zustandsbezeichung vorherigen Zustand
-				[NextActionID] => 3                      ==> Zustand der den aktuellen Zustand beloest wird
-				[NextActionName] => 3-Nachtschicht       ==> Zustandsbezeichung zukuenftiges Zustandes
-				[WeekPlanID] => 15405                    ==> ID des Wochenplans
-				[WeekPlanName] => SCHICHTPLANTEST        ==> Name des Wochenplans
-				[WeekPlanActiv] => 1                     ==> Zustand ob der Wochenplan aktiv ist oder nicht 
-
-				ReleaseNotes:
-				15.02.2015 tgusi74
-				 + Function erstellt und geprüft
-				14.05.2015 tgusi74 #1
-				 + Fehler beseitigt mit Schaltpunkt um 00:00:00 am aktuellen Tag
-				15.05.2015 tgusi74 #2
-				 + Fehler beseitigt mit Schaltpunkt um 00:00:00 am Folgetag
-				28.12.2015 tgusi74 #3
-				 + Variablen frueher initialisiert
-				 + Wenn kein Tagesevent vorhanden, dann default 0
-				31.12.2015 tgusi74 #4
-				 + Diverse Aenderungen wegen ID=0 im Wochenplan
-				 + WeekPlanName, WeekPlanID, WeekPlanName hinzugefuegt
-				02.01.2016 tgusi74 #5
-				 + Komplettumbau der Funktion wegen diverser Fehler mit ID=0
-				06.01.2015 tgusi74 #6
-				 + Ausgeblendete Tage (Luecken) haben nicht funktioniert, 
-				   daher jetzt gesondert pruefen ==> DayFound
-				*****************************************************************************/
-
 				function GetWeekplanState($ID, $SysTimePoint=NULL, $CheckOnlySlot=false)
 				 {
 				   if($SysTimePoint == NULL)
@@ -700,12 +653,19 @@ class SingleRoomHeatingControl extends IPSModule
 				
 				//Wochenplan auslesen		
 				// Wochenplan Normal
-				$WeekplanNormalID = $this->ReadPropertyInteger('WeekplanID'); 
+				//$WeekplanNormalID = $this->ReadPropertyInteger('WeekplanID'); 
 		
 				// Wochenplan Feiertag
-				$WeekplanHolidayID = $this->ReadPropertyInteger('WeekplanHolidayID');
+				//$WeekplanHolidayID = $this->ReadPropertyInteger('WeekplanHolidayID');
 				
-				$WeekplanState = GetWeekplanState($WeekplanNormalID);
+				If ($Holiday == false)
+				{
+					$WeekplanState = GetWeekplanState($this->ReadPropertyInteger('WeekplanID'));
+				}
+				Else
+				{
+					$WeekplanState = GetWeekplanState($this->ReadPropertyInteger('WeekplanHolidayID'));
+				}
 
 				//Absenktemperatur
 				If (($WeekplanState['ActionID']) == "1")
