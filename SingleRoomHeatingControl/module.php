@@ -74,7 +74,7 @@ class SingleRoomHeatingControl extends IPSModule
 		$this->MaintainVariable('HeizTemp', 'Heiztemperatur', vtFloat, '~Temperature.Room', 4, true);
 		
 		// Variable Letze Solltemperatur erstellen
-		$this->MaintainVariable('LastSetTemp', 'Letzte Solltemperatur', vtFloat, '~Temperature.Room', 5, true);
+		//$this->MaintainVariable('LastSetTemp', 'Letzte Solltemperatur', vtFloat, '~Temperature.Room', 5, true);
 		
 		// Variable Stellantrieb Auf erstellen
 		$this->MaintainVariable('AntrAuf', 'STA-Auf', vtFloat, '~Temperature.HM', 6, true);
@@ -100,9 +100,6 @@ class SingleRoomHeatingControl extends IPSModule
 	
 	public function AbsenkTemp()
 	{
-		//Letzten Sollwert speichern
-		//$update = $this->SetValue('LastSetTemp', GetValue($this->ReadPropertyInteger('SetTempID')));
-		
 		// Absenktemperatur
 		$AbsenkTemp = GetValue($this->GetIDForIdent('AbsenkTemp'));
 		
@@ -113,9 +110,6 @@ class SingleRoomHeatingControl extends IPSModule
 	
 	public function GrundTemp()
 	{
-		//Letzten Sollwert speichern
-		//$update = $this->SetValue('LastSetTemp', GetValue($this->ReadPropertyInteger('SetTempID')));
-		
 		// Grundtemperatur
 		$GrundTemp = GetValue($this->GetIDForIdent('GrundTemp'));
 		
@@ -126,9 +120,6 @@ class SingleRoomHeatingControl extends IPSModule
 	
 	public function HeizTemp()
 	{
-		//Letzten Sollwert speichern
-		//$update = $this->SetValue('LastSetTemp', GetValue($this->ReadPropertyInteger('SetTempID')));
-		
 		// Heiztemperatur
 		$HeizTemp = GetValue($this->GetIDForIdent('HeizTemp'));
 		
@@ -138,10 +129,7 @@ class SingleRoomHeatingControl extends IPSModule
 	}
 	
 	public function AntrAuf()
-	{
-		//Letzten Sollwert speichern
-		//$update = $this->SetValue('LastSetTemp', GetValue($this->ReadPropertyInteger('SetTempID')));
-		
+	{	
 		// Antrieb Auf
 		$AntrAuf = GetValue($this->GetIDForIdent('AntrAuf'));
 		
@@ -151,10 +139,7 @@ class SingleRoomHeatingControl extends IPSModule
 	}
 	
 	public function AntrZu()
-	{
-		//Letzten Sollwert speichern
-		//$update = $this->SetValue('LastSetTemp', GetValue($this->ReadPropertyInteger('SetTempID')));
-		
+	{	
 		// Antrieb Auf
 		$AntrZu = GetValue($this->GetIDForIdent('AntrZu'));
 		
@@ -210,9 +195,6 @@ class SingleRoomHeatingControl extends IPSModule
 		{
 			If ($Presence == false)
 			{
-				//Letzten Sollwert speichern
-				$update = $this->SetValue('LastSetTemp', $SetTemp);
-				
 				// Modus auf Manuell stellen
 				If ($Modus == 0)
 				{
@@ -230,11 +212,7 @@ class SingleRoomHeatingControl extends IPSModule
 				{
 					RequestAction($ModusID,1);
 				}
-				
-				//Letzten Sollwert speichern
-				$update = $this->SetValue('LastSetTemp', $SetTemp);
-				IPS_Sleep(50);
-				
+			
 				// Auf Sollwert Antrieb Zu stellen
 				RequestAction($SetTempID,$AntrZu);
 				IPS_Sleep(50);
@@ -254,9 +232,6 @@ class SingleRoomHeatingControl extends IPSModule
 		} 
 		else if ($SteuerMod == 2)
 		{
-			//Letzten Sollwert schreiben
-			$update = $this->SetValue('LastSetTemp', $SetTemp);
-			
 			// Modus auf Manuell stellen
 			If ($Modus == 0)
 			{
@@ -269,9 +244,6 @@ class SingleRoomHeatingControl extends IPSModule
 		} 
 		else if ($SteuerMod == 3)
 		{
-			//Letzten Sollwert schreiben
-			$update = $this->SetValue('LastSetTemp', $SetTemp);
-			
 			// Modus auf Manuell stellen
 			If ($Modus == 0)
 			{
