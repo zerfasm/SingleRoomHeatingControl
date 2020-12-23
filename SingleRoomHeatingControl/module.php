@@ -661,6 +661,12 @@ class SingleRoomHeatingControl extends IPSModule
 		 // Anwesenheit 
 		$Presence = GetValue($this->ReadPropertyInteger('PresenceID'));
 		
+		// Wochenplan Normal
+		$WeekplanNormalID = $this->GetIDForIdent('WeekplanID'); 
+		
+		// Wochenplan Feiertag
+		$WeekplanHolidayID $this->GetIDForIdent('WeekplanHolidayID');
+		
 		 // Steuerungsautomatik
 		If ($SteuerMod == 0) //Automatic => Steuerung durch CCU
 		{
@@ -701,7 +707,7 @@ class SingleRoomHeatingControl extends IPSModule
 				}
 				
 				//Wochenplan auslesen
-				$WeekplanState = GetWeekplanState(57610);
+				$WeekplanState = GetWeekplanState($WeekplanNormalID);
 
 				//Absenktemperatur
 				If (($WeekplanState['ActionID']) == "1")
