@@ -130,17 +130,17 @@ class SingleRoomHeatingControl extends IPSModule
 		// Antrieb Auf
 		$AntrAuf = GetValue($this->GetIDForIdent('AntrAuf'));
 		
-		 // Antrieb Aufrin Solltemperatur schreiben
+		 // Antrieb Auf in Solltemperatur schreiben
 		RequestAction($this->ReadPropertyInteger('SetTempID'),$AntrAuf);
 		IPS_Sleep(50);
 	}
 	
 	public function AntrZu()
 	{	
-		// Antrieb Auf
+		// Antrieb Zu
 		$AntrZu = GetValue($this->GetIDForIdent('AntrZu'));
 		
-		 // Antrieb Aufrin Solltemperatur schreiben
+		 // Antrieb Zu in Solltemperatur schreiben
 		RequestAction($this->ReadPropertyInteger('SetTempID'),$AntrZu);
 		IPS_Sleep(50);
 	}
@@ -195,7 +195,7 @@ class SingleRoomHeatingControl extends IPSModule
 	   daher jetzt gesondert pruefen ==> DayFound
 	*****************************************************************************/
 
-	function GetWeekplanState($ID, $SysTimePoint=NULL, $CheckOnlySlot=false)
+	public function GetWeekplanState($ID, $SysTimePoint=NULL, $CheckOnlySlot=false)
 	 {
 	   if($SysTimePoint == NULL)
 	     {
@@ -707,7 +707,7 @@ class SingleRoomHeatingControl extends IPSModule
 				}
 				
 				//Wochenplan auslesen
-				$WeekplanState = GetWeekplanState($this->ReadPropertyInteger('WeekplanID'));
+				$WeekplanState = GetWeekplanState($WeekplanNormalID);
 
 				//Absenktemperatur
 				If (($WeekplanState['ActionID']) == "1")
