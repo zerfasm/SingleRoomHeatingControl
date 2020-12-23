@@ -73,9 +73,6 @@ class SingleRoomHeatingControl extends IPSModule
 		// Variable Heiztemperatur erstellen
 		$this->MaintainVariable('HeizTemp', 'Heiztemperatur', vtFloat, '~Temperature.Room', 4, true);
 		
-		// Variable Letze Solltemperatur erstellen
-		//$this->MaintainVariable('LastSetTemp', 'Letzte Solltemperatur', vtFloat, '~Temperature.Room', 5, true);
-		
 		// Variable Stellantrieb Auf erstellen
 		$this->MaintainVariable('AntrAuf', 'STA-Auf', vtFloat, '~Temperature.HM', 6, true);
 		
@@ -162,12 +159,14 @@ class SingleRoomHeatingControl extends IPSModule
 		$SetTempID = $this->ReadPropertyInteger('SetTempID'); 
 		$SetTemp = GetValue($SetTempID);
 		 
-		// Letzte SollTemperatur 
-		$LastSetTempID = $this->GetIDForIdent('LastSetTemp');
-		$LastSetTemp = GetValue($LastSetTempID);
-		 
 		// Absenktemperatur
 		$AbsenkTemp = GetValue($this->GetIDForIdent('AbsenkTemp'));
+		
+		// Grundtemperatur
+		$GrundTemp = GetValue($this->GetIDForIdent('GrundTemp'));
+		
+		// Heiztemperatur
+		$HeizTemp = GetValue($this->GetIDForIdent('HeizTemp'));
 		
 		// Stellantrieb Auf
 		$AntrAuf = GetValue($this->GetIDForIdent('AntrAuf'));
@@ -225,9 +224,30 @@ class SingleRoomHeatingControl extends IPSModule
 					RequestAction($ModusID,1);
 				}
 				
-				// Auf letzten Sollwert stellen
-				RequestAction($SetTempID,$LastSetTemp);
-				IPS_Sleep(50);
+				//Wochenplan auslesen
+				$WeekplanState = GetWeekplanState(57610);
+
+				//Absenktemperatur
+				If (($WeekplanState['ActionID']) == "1")
+				{
+					RequestAction($SetTempID,$AbsenkTemp);
+					IPS_Sleep(50);
+				}
+
+				//Grundwärme
+				If (($WeekplanState['ActionID']) == "2")
+				{
+					RequestAction($SetTempID,$GrundTemp);
+					IPS_Sleep(50);
+				}
+
+				//Heizen
+				If (($WeekplanState['ActionID']) == "3")
+				{
+				    	RequestAction($SetTempID,$HeizTemp);
+					IPS_Sleep(50);
+				}
+				
 			}
 		} 
 		else if ($SteuerMod == 2)
