@@ -144,206 +144,6 @@ class SingleRoomHeatingControl extends IPSModule
 		RequestAction($this->ReadPropertyInteger('SetTempID'),$AntrZu);
 		IPS_Sleep(50);
 	}
-		
-	public function Update()
-	{
-		$result = 'Ergebnis konnte nicht ermittelt werden!';
-		// Daten lesen
-		 $state = true;
-		 
-		// Steuerungsmodus
-		$SteuerModID = $this->GetIDForIdent('SteuerMod'); 
-		$SteuerMod = GetValue($SteuerModID);
-		
-		 // Solltemperatur
-		$SetTempID = $this->ReadPropertyInteger('SetTempID'); 
-		$SetTemp = GetValue($SetTempID);
-		 
-		// Absenktemperatur
-		$AbsenkTemp = GetValue($this->GetIDForIdent('AbsenkTemp'));
-		
-		// Grundtemperatur
-		$GrundTemp = GetValue($this->GetIDForIdent('GrundTemp'));
-		
-		// Heiztemperatur
-		$HeizTemp = GetValue($this->GetIDForIdent('HeizTemp'));
-		
-		// Stellantrieb Auf
-		$AntrAuf = GetValue($this->GetIDForIdent('AntrAuf'));
-		
-		// Stellantrieb Zu
-		$AntrZu = GetValue($this->GetIDForIdent('AntrZu')); 
-		 
-		// Betriebsmodus
-		$ModusID = $this->ReadPropertyInteger('ModID');
-		$Modus = GetValue($ModusID);
- 		
-		// Fensterkontakt
-		$WindowID = $this->ReadPropertyInteger('WindowID');
-		$Window = GetValue($WindowID);
-		
-		 // Anwesenheit 
-		$Presence = GetValue($this->ReadPropertyInteger('PresenceID'));
-		
-		 // Steuerungsautomatik
-		If ($SteuerMod == 0) //Automatic => Steuerung durch CCU
-		{
-			RequestAction($ModusID,0);
-		} 
-		else if ($SteuerMod == 1) // Manuelle Steuerung durch IPS 
-		{
-			If ($Presence == false)
-			{
-				// Modus auf Manuell stellen
-				If ($Modus == 0)
-				{
-					RequestAction($ModusID,1);
-				}
-				
-				// Auf Absenktemperatur stellen
-				RequestAction($SetTempID,$AbsenkTemp);
-				IPS_Sleep(50);
-			}
-			Else if (($Presence == true) and ($Window == true))
-			{
-				// Modus auf Manuell stellen
-				If ($Modus == 0)
-				{
-					RequestAction($ModusID,1);
-				}
-			
-				// Auf Sollwert Antrieb Zu stellen
-				RequestAction($SetTempID,$AntrZu);
-				IPS_Sleep(50);
-			}
-			Else if (($Presence == true) and ($Window == false))
-			{
-				// Modus auf Manuell stellen
-				If ($Modus == 0)
-				{
-					RequestAction($ModusID,1);
-				}
-				
-				//Wochenplan auslesen
-				$WeekplanState = GetWeekplanState(57610);
-
-				//Absenktemperatur
-				If (($WeekplanState['ActionID']) == "1")
-				{
-					RequestAction($SetTempID,$AbsenkTemp);
-					IPS_Sleep(50);
-				}
-
-				//Grundwärme
-				If (($WeekplanState['ActionID']) == "2")
-				{
-					RequestAction($SetTempID,$GrundTemp);
-					IPS_Sleep(50);
-				}
-
-				//Heizen
-				If (($WeekplanState['ActionID']) == "3")
-				{
-				    	RequestAction($SetTempID,$HeizTemp);
-					IPS_Sleep(50);
-				}
-				
-			}
-		} 
-		else if ($SteuerMod == 2)
-		{
-			// Modus auf Manuell stellen
-			If ($Modus == 0)
-			{
-				RequestAction($ModusID,1);
-			}
-			
-			// Stellantrieb Auf
-			RequestAction($SetTempID,$AntrAuf);
-			IPS_Sleep(50);
-		} 
-		else if ($SteuerMod == 3)
-		{
-			// Modus auf Manuell stellen
-			If ($Modus == 0)
-			{
-				RequestAction($ModusID,1);
-			}
-			
-			// Stellantrieb Zu
-			RequestAction($SetTempID,$AntrZu);
-			IPS_Sleep(50);
-		} 
-	}
-	
-	private function RegisterTriggerWindow($Name, $Ident, $Typ, $Parent, $Position, $Skript)
-	{
-		$eid = @$this->GetIDForIdent($Ident);
-		if($eid === false) {
-			$eid = 0;
-		} elseif(IPS_GetEvent($eid)['EventType'] <> $Typ) {
-			IPS_DeleteEvent($eid);
-			$eid = 0;
-		}
-		
-		//we need to create one
-		if ($eid == 0) {
-		    $EventID = IPS_CreateEvent($Typ);
-			IPS_SetEventTrigger($EventID, 1, $this->ReadPropertyInteger('WindowID'));
-			IPS_SetParent($EventID, $Parent);
-			IPS_SetIdent($EventID, $Ident);
-			IPS_SetName($EventID, $Name);
-			IPS_SetPosition($EventID, $Position);
-			IPS_SetEventScript($EventID, $Skript); 
-			IPS_SetEventActive($EventID, true);  
-		}
-	}
-	
-	private function RegisterTriggerPresence($Name, $Ident, $Typ, $Parent, $Position, $Skript)
-	{
-		$eid = @$this->GetIDForIdent($Ident);
-		if($eid === false) {
-			$eid = 0;
-		} elseif(IPS_GetEvent($eid)['EventType'] <> $Typ) {
-			IPS_DeleteEvent($eid);
-			$eid = 0;
-		}
-		
-		//we need to create one
-		if ($eid == 0) {
-		    $EventID = IPS_CreateEvent($Typ);
-			IPS_SetEventTrigger($EventID, 1, $this->ReadPropertyInteger('PresenceID'));
-			IPS_SetParent($EventID, $Parent);
-			IPS_SetIdent($EventID, $Ident);
-			IPS_SetName($EventID, $Name);
-			IPS_SetPosition($EventID, $Position);
-			IPS_SetEventScript($EventID, $Skript); 
-			IPS_SetEventActive($EventID, true);  
-		}
-	}
-	
-	private function RegisterTriggerSteuerMod($Name, $Ident, $Typ, $Parent, $Position, $Skript)
-	{
-		$eid = @$this->GetIDForIdent($Ident);
-		if($eid === false) {
-			$eid = 0;
-		} elseif(IPS_GetEvent($eid)['EventType'] <> $Typ) {
-			IPS_DeleteEvent($eid);
-			$eid = 0;
-		}
-		
-		//we need to create one
-		if ($eid == 0) {
-		    $EventID = IPS_CreateEvent($Typ);
-			IPS_SetEventTrigger($EventID, 1, $this->GetIDForIdent('SteuerMod'));
-			IPS_SetParent($EventID, $Parent);
-			IPS_SetIdent($EventID, $Ident);
-			IPS_SetName($EventID, $Name);
-			IPS_SetPosition($EventID, $Position);
-			IPS_SetEventScript($EventID, $Skript); 
-			IPS_SetEventActive($EventID, true);  
-		}
-	}
 	
 	/****************************************************************************
 	GetWeekplanState,
@@ -820,5 +620,205 @@ class SingleRoomHeatingControl extends IPSModule
 
 	   return($State);
 	 }
+		
+	public function Update()
+	{
+		$result = 'Ergebnis konnte nicht ermittelt werden!';
+		// Daten lesen
+		 $state = true;
+		 
+		// Steuerungsmodus
+		$SteuerModID = $this->GetIDForIdent('SteuerMod'); 
+		$SteuerMod = GetValue($SteuerModID);
+		
+		 // Solltemperatur
+		$SetTempID = $this->ReadPropertyInteger('SetTempID'); 
+		$SetTemp = GetValue($SetTempID);
+		 
+		// Absenktemperatur
+		$AbsenkTemp = GetValue($this->GetIDForIdent('AbsenkTemp'));
+		
+		// Grundtemperatur
+		$GrundTemp = GetValue($this->GetIDForIdent('GrundTemp'));
+		
+		// Heiztemperatur
+		$HeizTemp = GetValue($this->GetIDForIdent('HeizTemp'));
+		
+		// Stellantrieb Auf
+		$AntrAuf = GetValue($this->GetIDForIdent('AntrAuf'));
+		
+		// Stellantrieb Zu
+		$AntrZu = GetValue($this->GetIDForIdent('AntrZu')); 
+		 
+		// Betriebsmodus
+		$ModusID = $this->ReadPropertyInteger('ModID');
+		$Modus = GetValue($ModusID);
+ 		
+		// Fensterkontakt
+		$WindowID = $this->ReadPropertyInteger('WindowID');
+		$Window = GetValue($WindowID);
+		
+		 // Anwesenheit 
+		$Presence = GetValue($this->ReadPropertyInteger('PresenceID'));
+		
+		 // Steuerungsautomatik
+		If ($SteuerMod == 0) //Automatic => Steuerung durch CCU
+		{
+			RequestAction($ModusID,0);
+		} 
+		else if ($SteuerMod == 1) // Manuelle Steuerung durch IPS 
+		{
+			If ($Presence == false)
+			{
+				// Modus auf Manuell stellen
+				If ($Modus == 0)
+				{
+					RequestAction($ModusID,1);
+				}
+				
+				// Auf Absenktemperatur stellen
+				RequestAction($SetTempID,$AbsenkTemp);
+				IPS_Sleep(50);
+			}
+			Else if (($Presence == true) and ($Window == true))
+			{
+				// Modus auf Manuell stellen
+				If ($Modus == 0)
+				{
+					RequestAction($ModusID,1);
+				}
+			
+				// Auf Sollwert Antrieb Zu stellen
+				RequestAction($SetTempID,$AntrZu);
+				IPS_Sleep(50);
+			}
+			Else if (($Presence == true) and ($Window == false))
+			{
+				// Modus auf Manuell stellen
+				If ($Modus == 0)
+				{
+					RequestAction($ModusID,1);
+				}
+				
+				//Wochenplan auslesen
+				$WeekplanState = GetWeekplanState(57610);
+
+				//Absenktemperatur
+				If (($WeekplanState['ActionID']) == "1")
+				{
+					RequestAction($SetTempID,$AbsenkTemp);
+					IPS_Sleep(50);
+				}
+
+				//Grundwärme
+				If (($WeekplanState['ActionID']) == "2")
+				{
+					RequestAction($SetTempID,$GrundTemp);
+					IPS_Sleep(50);
+				}
+
+				//Heizen
+				If (($WeekplanState['ActionID']) == "3")
+				{
+				    	RequestAction($SetTempID,$HeizTemp);
+					IPS_Sleep(50);
+				}
+				
+			}
+		} 
+		else if ($SteuerMod == 2)
+		{
+			// Modus auf Manuell stellen
+			If ($Modus == 0)
+			{
+				RequestAction($ModusID,1);
+			}
+			
+			// Stellantrieb Auf
+			RequestAction($SetTempID,$AntrAuf);
+			IPS_Sleep(50);
+		} 
+		else if ($SteuerMod == 3)
+		{
+			// Modus auf Manuell stellen
+			If ($Modus == 0)
+			{
+				RequestAction($ModusID,1);
+			}
+			
+			// Stellantrieb Zu
+			RequestAction($SetTempID,$AntrZu);
+			IPS_Sleep(50);
+		} 
+	}
+	
+	private function RegisterTriggerWindow($Name, $Ident, $Typ, $Parent, $Position, $Skript)
+	{
+		$eid = @$this->GetIDForIdent($Ident);
+		if($eid === false) {
+			$eid = 0;
+		} elseif(IPS_GetEvent($eid)['EventType'] <> $Typ) {
+			IPS_DeleteEvent($eid);
+			$eid = 0;
+		}
+		
+		//we need to create one
+		if ($eid == 0) {
+		    $EventID = IPS_CreateEvent($Typ);
+			IPS_SetEventTrigger($EventID, 1, $this->ReadPropertyInteger('WindowID'));
+			IPS_SetParent($EventID, $Parent);
+			IPS_SetIdent($EventID, $Ident);
+			IPS_SetName($EventID, $Name);
+			IPS_SetPosition($EventID, $Position);
+			IPS_SetEventScript($EventID, $Skript); 
+			IPS_SetEventActive($EventID, true);  
+		}
+	}
+	
+	private function RegisterTriggerPresence($Name, $Ident, $Typ, $Parent, $Position, $Skript)
+	{
+		$eid = @$this->GetIDForIdent($Ident);
+		if($eid === false) {
+			$eid = 0;
+		} elseif(IPS_GetEvent($eid)['EventType'] <> $Typ) {
+			IPS_DeleteEvent($eid);
+			$eid = 0;
+		}
+		
+		//we need to create one
+		if ($eid == 0) {
+		    $EventID = IPS_CreateEvent($Typ);
+			IPS_SetEventTrigger($EventID, 1, $this->ReadPropertyInteger('PresenceID'));
+			IPS_SetParent($EventID, $Parent);
+			IPS_SetIdent($EventID, $Ident);
+			IPS_SetName($EventID, $Name);
+			IPS_SetPosition($EventID, $Position);
+			IPS_SetEventScript($EventID, $Skript); 
+			IPS_SetEventActive($EventID, true);  
+		}
+	}
+	
+	private function RegisterTriggerSteuerMod($Name, $Ident, $Typ, $Parent, $Position, $Skript)
+	{
+		$eid = @$this->GetIDForIdent($Ident);
+		if($eid === false) {
+			$eid = 0;
+		} elseif(IPS_GetEvent($eid)['EventType'] <> $Typ) {
+			IPS_DeleteEvent($eid);
+			$eid = 0;
+		}
+		
+		//we need to create one
+		if ($eid == 0) {
+		    $EventID = IPS_CreateEvent($Typ);
+			IPS_SetEventTrigger($EventID, 1, $this->GetIDForIdent('SteuerMod'));
+			IPS_SetParent($EventID, $Parent);
+			IPS_SetIdent($EventID, $Ident);
+			IPS_SetName($EventID, $Name);
+			IPS_SetPosition($EventID, $Position);
+			IPS_SetEventScript($EventID, $Skript); 
+			IPS_SetEventActive($EventID, true);  
+		}
+	}
 }
 ?>
