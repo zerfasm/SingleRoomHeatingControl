@@ -707,7 +707,7 @@ class SingleRoomHeatingControl extends IPSModule
 				}
 				
 				//Wochenplan auslesen
-				$WeekplanState = GetWeekplanState($WeekplanNormalID);
+				$WeekplanState = GetWeekplanState($this->ReadPropertyInteger('WeekplanID'));
 
 				//Absenktemperatur
 				If (($WeekplanState['ActionID']) == "1")
